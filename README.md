@@ -1,7 +1,7 @@
 # CSN - Collection Space Navigator: 
 Interactive Visualization Interface for Multidimensional Datasets
 
-[Project Page: https://github.com/CulturalDataTools/CSN](https://github.com/CulturalDataTools/CSN)  
+[Project Page: https://github.com/Collection-Space-Navigator/CSN](https://github.com/Collection-Space-Navigator/CSN)  
 
 ![CSN: Collection Space Navigation](./screenshot.png) 
 
@@ -14,7 +14,7 @@ Demos here: []
 
 ## Getting Started
 
-We recommend to use our Setup Guide (`CSN_setup.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CulturalDataTools/CSN/blob/main/CSN_setup.ipynb)) to prepare datasets and build a customized version of the Collection Space Navigator. 
+We recommend to use our Setup Guide (`CSN_setup.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Collection-Space-Navigator/CSN/blob/main/CSN_setup.ipynb)) to prepare datasets and build a customized version of the Collection Space Navigator. 
 
 
 
