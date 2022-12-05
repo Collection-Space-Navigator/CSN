@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #000;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #adadad;
+  font-feature-settings: 'tnum';
+  overflow: hidden;
+}
+
+code {
+  font-size: 0.9em;
+  padding: 0 0.3em;
+}
+
+.info {
+  font-size: 0.8em;
+  line-height: 1.5em;
+}
+
+a {
+  color: #adadad;
+}
+
+.hover-555:hover {
+  background: #555;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+img {
+  max-width: 100%;
+}
+
+canvas {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+/**
+ * Reset button styles.
+ * It takes a bit of work to achieve a neutral look.
+ */
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted lightgrey;
+}
+
+.tooltip .tooltiptext {
+  /* visibility: hidden; */
+  width: 240px;
+  background-color: lightgrey;
+  color: #000;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 10;
+  top: 150%;
+  left: 50%;
+  margin-left: -120px;
+  padding: 5px;
+  word-wrap: break-word;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent lightgrey transparent;
+}
+
+/* .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+  display: block;
+}
+
+.Select-menu-outer {
+  position: relative;
+  } */
