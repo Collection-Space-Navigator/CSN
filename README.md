@@ -14,14 +14,14 @@ Demos here: []
 
 ## Getting Started
 
-We recommend to use our Setup Guide (`CSN_setup.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Collection-Space-Navigator/CSN/blob/main/CSN_setup.ipynb)) to prepare datasets and build a customized version of the Collection Space Navigator. 
+We recommend using the setup notebook (`CSN_setup.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Collection-Space-Navigator/CSN/blob/main/CSN_setup.ipynb)) to prepare datasets and build a customized version of the Collection Space Navigator. 
 
 
 
 ## Installation
 ### Running the app locally
 
-Place your prepared dataset folders in the `public/datasets` directory and modify `public/datasets/datasets_config.json`.
+Place your prepared dataset folders in the `public/datasets` directory and modify `public/datasets/datasets_config.json`. We recommend using the setup notebook `CSN_setup.ipynb` to format your data correctly.
 
 ```
 npm install
