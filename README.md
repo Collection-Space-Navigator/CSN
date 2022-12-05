@@ -21,7 +21,7 @@ We recommend to use our Setup Guide (`CSN_setup.ipynb` [![Open In Colab](https:/
 ## Installation
 ### Running the app locally
 
-Place your prepared dataset folders in the `public/datasets` directory and modify `public/datasets.json`.
+Place your prepared dataset folders in the `public/datasets` directory and modify `public/datasets/datasets_config.json`.
 
 ```
 npm install
