@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { CSVLink } from "react-csv";
 import PreviewPane from './PreviewPane'
 import SliderPane from './SliderPane'
 import FilterPane from './FilterPane'
@@ -26,12 +27,13 @@ class Layout extends Component {
       show_about: null,
       algorithm_choice: 0,
       allFilter: {},
-      currentProjection: new Float32Array(total),
+      currentProjection: new Float32Array(total).fill(0),
       currentFilter: new Float32Array(total).fill(0),
       currentSearch: new Float32Array(total).fill(0),
       scaleMin: 14,
       scaleMax: 50,
-      clusterTypeSelected:'-'
+      clusterTypeSelected:'-',
+      filterDataToExportCSV:[]
     }
     this.previewPane_ctx = null
     this.setSize = _.debounce(this.setSize.bind(this), 200)
@@ -43,7 +45,6 @@ class Layout extends Component {
     this.refProjection = React.createRef()
     this.selectAlgorithm(this.props.algorithm_name);
   }
-
 
   handleChangeScale(e,val) {
     this.setState({ scaleMin: val})
@@ -62,6 +63,7 @@ class Layout extends Component {
   }
 
   calculateProjection=(newArr,type, update)=>{
+    
     let A, B, arr;
     if(type==="filter"){
       this.setState({currentFilter: newArr})
@@ -82,6 +84,8 @@ class Layout extends Component {
     try{
       this.refProjection.current.updateProjection(arr);
     } catch(error) {}
+    // Release memory of export filter metadata
+    if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
   }
 
   selectAlgorithm(v) {
@@ -145,6 +149,7 @@ class Layout extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.setSize);
   }
+  
 
   render() {
     let {
@@ -164,7 +169,8 @@ class Layout extends Component {
       hover_index,
       algorithm_choice,
       currentProjection,
-      allFilter
+      allFilter,
+      filterDataToExportCSV
     } = this.state;
     let displayNumb = 0;
     for(let i=0;i<settings["total"];i++){
@@ -303,6 +309,27 @@ class Layout extends Component {
                     allFilter={allFilter}
                   />
                 </MenuItem>
+              </SubMenu>
+              <SubMenu title="Export" defaultOpen="True">
+              <CSVLink 
+                data={filterDataToExportCSV} 
+                filename={"CSN_filtered_metadata.csv"} 
+                className="btn-csv-download" 
+                target="_blank"
+                onClick={() => {
+                  let filteredMetadata = [];
+                  for (let i=0;i<metadata.length;i++) {
+                    if(currentProjection[i]===0){
+                      var obj = metadata[i];
+                      filteredMetadata.push(obj)
+                    }
+                  }
+                  this.setState({filterDataToExportCSV: filteredMetadata});
+                  console.log(filterDataToExportCSV); 
+                }}
+              >
+                Download CSV filter metadata
+              </CSVLink>
               </SubMenu>
             </Menu>
           </ProSidebar>
