@@ -644,8 +644,15 @@ class Projection extends Component {
     this.renderer.render(this.scene, this.camera);
   }
 
+  componentWillMount() {
+    console.log("########## MOUNTING ###########")
+  }
+
   componentDidMount() {
+    console.log("@@@@@@@@@@@ STARTING INIT @@@@@@@@@@@@@@@@@")
     this.init();
+    console.log("#################DONE#################")
+
   }
 
   componentDidUpdate(prevProps) {
