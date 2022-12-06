@@ -37,7 +37,7 @@ class MappingsPane extends Component {
             Mapping:
           </Grid>
           <Grid item xs={6}>
-            <select class="full-width"
+            <select className="full-width"
               onChange={this.handleSelectDataset}
               value={selectedDataset}
             >
@@ -49,7 +49,7 @@ class MappingsPane extends Component {
             </select>
           </Grid>
           <Grid item xs={6}>
-            <select class="full-width"
+            <select className="full-width"
               onChange={this.handleSelectAlgorithm}
               value={algorithm_options[algorithm_choice]}
             >
@@ -61,7 +61,7 @@ class MappingsPane extends Component {
             </select>
           </Grid>
           <Grid item xs={12}>
-          <p class="info">{datasetInfo}</p>
+          <p className="info">{datasetInfo}</p>
           </Grid>
       </Grid>
     )

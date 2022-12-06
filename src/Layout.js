@@ -35,15 +35,22 @@ class Layout extends Component {
       clusterTypeSelected:'-',
       filterDataToExportCSV:[]
     }
-    this.previewPane_ctx = null
-    this.setSize = _.debounce(this.setSize.bind(this), 200)
-    this.checkHash = this.checkHash.bind(this)
-    this.setPreviewPaneCanvas = this.setPreviewPaneCanvas.bind(this)
-    this.toggleAbout = this.toggleAbout.bind(this)
-    this.selectAlgorithm = this.selectAlgorithm.bind(this)
-    this.selectDataset = this.selectDataset.bind(this)
-    this.refProjection = React.createRef()
+    this.previewPane_ctx = null;
+    this.setSize = _.debounce(this.setSize.bind(this), 200);
+    this.checkHash = this.checkHash.bind(this);
+    this.setPreviewPaneCanvas = this.setPreviewPaneCanvas.bind(this);
+    this.toggleAbout = this.toggleAbout.bind(this);
+    this.selectAlgorithm = this.selectAlgorithm.bind(this);
+    this.selectDataset = this.selectDataset.bind(this);
+    this.refProjection = React.createRef();
+  }
+
+  componentDidMount() {
     this.selectAlgorithm(this.props.algorithm_name);
+    this.setSize();
+    this.checkHash();
+    window.addEventListener('resize', this.setSize);
+    window.addEventListener('popstate', this.checkHash);
   }
 
   handleChangeScale(e,val) {
@@ -139,12 +146,7 @@ class Layout extends Component {
     }
   }
 
-  componentDidMount() {
-    this.setSize();
-    this.checkHash();
-    window.addEventListener('resize', this.setSize);
-    window.addEventListener('popstate', this.checkHash);
-  }
+
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setSize);

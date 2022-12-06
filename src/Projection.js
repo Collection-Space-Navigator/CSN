@@ -78,7 +78,7 @@ class Projection extends Component {
         )
         points.geometry.attributes.position.needsUpdate = true // required after the first render
       })
-      tween.start()
+      tween.start();
     }
   }
 
@@ -87,23 +87,23 @@ class Projection extends Component {
     .scaleLinear()
     .domain([20,0])
     .range([this.props.scaleMin, this.props.scaleMax])
-    .clamp(true)
-    return scaleProj(input)
+    .clamp(true);
+    return scaleProj(input);
   }
 
   getZFromScale(scale) {
-    let rvFOV = THREE.Math.degToRad(this.camera.fov)
-    let scale_height = this.props.height / scale
-    let camera_z_position = scale_height / (2 * Math.tan(rvFOV / 2))
-    return camera_z_position
+    let rvFOV = THREE.Math.degToRad(this.camera.fov);
+    let scale_height = this.props.height / scale;
+    let camera_z_position = scale_height / (2 * Math.tan(rvFOV / 2));
+    return camera_z_position;
   }
 
   getScaleFromZ(camera_z_position) {
-    let rvFOV = THREE.Math.degToRad(this.camera.fov)
-    let half_fov_height = Math.tan(rvFOV / 2) * camera_z_position
-    let fov_height = half_fov_height * 2
-    let scale = this.props.height / fov_height
-    return scale
+    let rvFOV = THREE.Math.degToRad(this.camera.fov);
+    let half_fov_height = Math.tan(rvFOV / 2) * camera_z_position;
+    let fov_height = half_fov_height * 2;
+    let scale = this.props.height / fov_height;
+    return scale;
   }
 
   handleResize = (width, height) => {
@@ -186,74 +186,74 @@ class Projection extends Component {
   }
 
   addPoints() {
-    let { embeddings_data,metadata } = this.props
+    let { embeddings_data,metadata } = this.props;
 
     // split embeddings and labels into chunks to match sprites
-    let ranges = []
+    let ranges = [];
     for (let i = 0; i < this.props.settings.sprite_number; i++) {
-      let start = i * this.sprite_size
-      let end = (i + 1) * this.sprite_size
-      if (i === this.props.settings.sprite_number - 1) end = this.props.settings.sprite_number * this.sprite_size
-      ranges.push([start, end])
+      let start = i * this.sprite_size;
+      let end = (i + 1) * this.sprite_size;
+      if (i === this.props.settings.sprite_number - 1) end = this.props.settings.sprite_number * this.sprite_size;
+      ranges.push([start, end]);
     }
     let embedding_chunks = ranges.map(range =>
       embeddings_data.slice(range[0], range[1])
-    )
+    );
 
     // load the textures
-    let loader = new THREE.TextureLoader()
+    let loader = new THREE.TextureLoader();
     this.textures = this.tile_locations.map(l => {
       let t = loader.load(l)
       t.flipY = false
       t.magFilter = THREE.NearestFilter
       return t
-    })
+    });
     let geometry;
-    let point_group = new THREE.Group()
+    let point_group = new THREE.Group();
     for (let c = 0; c < this.props.settings.sprite_number; c++) {
-      let echunk = embedding_chunks[c]
+      let echunk = embedding_chunks[c];
       //let lchunk = label_chunks[c]
 
-      let vertices = []
+      let vertices = [];
       for (let v = 0; v < echunk.length; v++) {
-        let embedding = echunk[v]
-        let vert = new THREE.Vector3(embedding[0], embedding[1], 0)
-        vertices[v] = vert
+        let embedding = echunk[v];
+        let vert = new THREE.Vector3(embedding[0], embedding[1], 0);
+        vertices[v] = vert;
       }
 
-      geometry = new THREE.BufferGeometry()
+      geometry = new THREE.BufferGeometry();
 
-      let numVertices = vertices.length
-      let positions = new Float32Array(numVertices * 3)
-      let offsets = new Float32Array(numVertices * 2)
-      let clusters = new Float32Array(numVertices * 3)
-      let colors = new Float32Array(numVertices )
-      let clustersActive = new Float32Array(numVertices )
-      geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3))
-      geometry.addAttribute('offset', new THREE.BufferAttribute(offsets, 2))
-      geometry.addAttribute('color', new THREE.BufferAttribute(colors, 1))
-      geometry.addAttribute('cluster', new THREE.BufferAttribute(clusters, 3))
-      geometry.addAttribute('clusterActive', new THREE.BufferAttribute(clustersActive, 1))
+      let numVertices = vertices.length;
+      let positions = new Float32Array(numVertices * 3);
+      let offsets = new Float32Array(numVertices * 2);
+      let clusters = new Float32Array(numVertices * 3);
+      let colors = new Float32Array(numVertices );
+      let clustersActive = new Float32Array(numVertices );
+      geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.addAttribute('offset', new THREE.BufferAttribute(offsets, 2));
+      geometry.addAttribute('color', new THREE.BufferAttribute(colors, 1));
+      geometry.addAttribute('cluster', new THREE.BufferAttribute(clusters, 3));
+      geometry.addAttribute('clusterActive', new THREE.BufferAttribute(clustersActive, 1));
 
       for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 3) {
-        let x = echunk[i][0]
-        let y = echunk[i][1]
-        let z = 0
-        positions[index] = x
-        positions[index + 1] = y
-        positions[index + 2] = z
+        let x = echunk[i][0];
+        let y = echunk[i][1];
+        let z = 0;
+        positions[index] = x;
+        positions[index + 1] = y;
+        positions[index + 2] = z;
       }
 
       // geometry.attributes.position.copyVector3sArray(vertices)
 
-      let texture_subsize = 1 / this.props.settings.sprite_side
+      let texture_subsize = 1 / this.props.settings.sprite_side;
 
       for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 2) {
         let x = ((i % this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / this.props.settings.sprite_actual_size
         let y =
           (Math.floor(i / this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / this.props.settings.sprite_actual_size
-        offsets[index] = x
-        offsets[index + 1] = y
+        offsets[index] = x;
+        offsets[index + 1] = y;
       }
       // Todo: connect cluster the array
       let clusterSelected = this.props.clusterTypeSelected;
@@ -289,7 +289,7 @@ class Projection extends Component {
         texture: { value: this.textures[c] },
         repeat: { value: new THREE.Vector2(texture_subsize, texture_subsize) },
         size: { value: this.props.settings.sprite_image_size },
-      }
+      };
 
       let vertex_shader = `
         attribute vec2 offset;
@@ -308,7 +308,7 @@ class Projection extends Component {
           vClusterActive = clusterActive;
           gl_PointSize = size;
           gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-        }`
+        }`;
 
       let fragment_shader = `
         uniform sampler2D texture;
@@ -344,7 +344,7 @@ class Projection extends Component {
           //tex.g = 1.0;
           //tex.b = 1.0;
           gl_FragColor = tex; //* vec4(vColor, 1.0);
-        }`
+        }`;
 
       // material
       let material = new THREE.ShaderMaterial({
@@ -352,41 +352,41 @@ class Projection extends Component {
         vertexShader: vertex_shader,
         fragmentShader: fragment_shader,
         transparent: true
-      })
+      });
 
       // point cloud
-      let point_cloud = new THREE.Points(geometry, material)
-      point_cloud.userData = { sprite_index: c }
-      this.pointsAr.push(point_cloud)
+      let point_cloud = new THREE.Points(geometry, material);
+      point_cloud.userData = { sprite_index: c };
+      this.pointsAr.push(point_cloud);
       // console.log("new points")
-      point_group.add(point_cloud)
+      point_group.add(point_cloud);
     }
     //this.geometry = geometry;
-    this.scene.add(point_group)
+    this.scene.add(point_group);
   }
 
   addBlankHighlightPoints() {
-    let hover_container = new THREE.Group()
-    this.scene.add(hover_container)
+    let hover_container = new THREE.Group();
+    this.scene.add(hover_container);
 
-    let vert = new THREE.Vector3(0, 0, 0)
-    let vertices = [vert]
-    let geometry = new THREE.BufferGeometry()
-    let numVertices = vertices.length
-    var positions = new Float32Array(numVertices * 3) // 3 coordinates per point
-    var offsets = new Float32Array(numVertices * 2) // 2 coordinates per point
-    geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geometry.addAttribute('offset', new THREE.BufferAttribute(offsets, 2))
+    let vert = new THREE.Vector3(0, 0, 0);
+    let vertices = [vert];
+    let geometry = new THREE.BufferGeometry();
+    let numVertices = vertices.length;
+    var positions = new Float32Array(numVertices * 3); // 3 coordinates per point
+    var offsets = new Float32Array(numVertices * 2); // 2 coordinates per point
+    geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.addAttribute('offset', new THREE.BufferAttribute(offsets, 2));
 
     // all the attributes will be filled on hover
-    let texture_subsize = 1 / this.props.settings.sprite_side
+    let texture_subsize = 1 / this.props.settings.sprite_side;
 
     // uniforms
     let uniforms = {
       texture: { value: this.textures[0] },
       repeat: { value: new THREE.Vector2(texture_subsize, texture_subsize) },
       size: { value: 84.0 }, //56
-    }
+    };
 
     let vertex_shader = `
         attribute vec2 offset;
@@ -396,7 +396,7 @@ class Projection extends Component {
           vOffset = offset;
           gl_PointSize = size;
           gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-        }`
+        }`;
 
     let fragment_shader = `
         uniform sampler2D texture;
@@ -410,7 +410,7 @@ class Projection extends Component {
           //tex.g = 1.0;
           //tex.b = 1.0;
           gl_FragColor = tex;
-        }`
+        }`;
 
     // material
     var material = new THREE.ShaderMaterial({
@@ -418,13 +418,13 @@ class Projection extends Component {
       vertexShader: vertex_shader,
       fragmentShader: fragment_shader,
       transparent: true,
-    })
+    });
 
-    let point = new THREE.Points(geometry, material)
-    point.frustumCulled = false
+    let point = new THREE.Points(geometry, material);
+    point.frustumCulled = false;
 
-    this.scene.children[1].visible = false
-    this.scene.children[1].add(point)
+    this.scene.children[1].visible = false;
+    this.scene.children[1].add(point);
   }
   // filter images - update color of images to get inactive (grey) or active images
   updateProjection=(ar)=>{
@@ -444,26 +444,25 @@ class Projection extends Component {
       points.geometry.attributes.color = new THREE.BufferAttribute(
         ar_sliced[c],
         1
-      )
+      );
       points.geometry.attributes.color.needsUpdate = true;
     }
     let point = this.scene.children[0].children[0]
-    console.log(point.geometry)
-
+    console.log(point.geometry);
   }
 
   updateClusterColors=(clusterSelected)=>{
-    console.log('updateClusterColors',clusterSelected)
+    console.log('updateClusterColors',clusterSelected);
     
     let numVertices = this.props.settings.sprite_number * this.sprite_size;
     let clusters = new Float32Array(numVertices * 3);
     let clustersActive = new Float32Array(numVertices );
-    let clusterColors = this.props.settings.clusters.clusterColors
-    console.log(numVertices,clusterSelected !=="-",this.props.settings.total,clusterColors)
+    let clusterColors = this.props.settings.clusters.clusterColors;
+    console.log(numVertices,clusterSelected !=="-",this.props.settings.total,clusterColors);
     for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
       if( clusterSelected !=="-" && i<this.props.settings.total){
         clustersActive[index] = 1.0;
-        console.log(clustersActive[index])
+        console.log(clustersActive[index]);
         let clusterId = this.props.metadata[index][clusterSelected];
         if(clusterId>=clusterColors.length){
           clusters[index*3] = 1.0;
@@ -497,88 +496,88 @@ class Projection extends Component {
       points.geometry.attributes.clusters = new THREE.BufferAttribute(
         clustersAr_sliced[c],
         3
-      )
+      );
       points.geometry.attributes.clusters.needsUpdate = true;
       
       points.geometry.attributes.clustersActive = new THREE.BufferAttribute(
         clustersActiveAr_sliced[c],
         1
-      )
+      );
       points.geometry.attributes.clustersActive.needsUpdate = true;
     }
     
   }
 
   highlightPoint(sprite_index, digit_index, full_index) {    
-    let { algorithm_choice, mappings } = this.props
+    let { algorithm_choice, mappings } = this.props;
 
-    let point = this.scene.children[1].children[0]
+    let point = this.scene.children[1].children[0];
 
     // console.log(mappings[algorithm_choice][full_index]);
-    let embedding = mappings[algorithm_choice][full_index]
+    let embedding = mappings[algorithm_choice][full_index];
 
-    let vert = new THREE.Vector3(embedding[0], embedding[1], 0)
-    let vertices = [vert]
+    let vert = new THREE.Vector3(embedding[0], embedding[1], 0);
+    let vertices = [vert];
 
-    var offsets = new Float32Array(2) // 2 coordinates per point
+    var offsets = new Float32Array(2); // 2 coordinates per point
 
-    let x = ((digit_index % this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / 2048
-    let y = (Math.floor(digit_index / this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / 2048
-    offsets[0] = x
-    offsets[1] = y
+    let x = ((digit_index % this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / 2048;
+    let y = (Math.floor(digit_index / this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / 2048;
+    offsets[0] = x;
+    offsets[1] = y;
 
-    point.geometry.attributes.position.copyVector3sArray(vertices)
-    point.geometry.attributes.position.needsUpdate = true // required after the first render
-    point.geometry.attributes.offset.array = offsets
-    point.geometry.attributes.offset.needsUpdate = true // required after the first render
+    point.geometry.attributes.position.copyVector3sArray(vertices);
+    point.geometry.attributes.position.needsUpdate = true; // required after the first render
+    point.geometry.attributes.offset.array = offsets;
+    point.geometry.attributes.offset.needsUpdate = true; // required after the first render
 
     // need to set attributes on geometry and uniforms on material
-    point.material.uniforms.texture.value = this.textures[sprite_index]
+    point.material.uniforms.texture.value = this.textures[sprite_index];
   }
 
   removeHighlights() {
-    let highlight_container = this.scene.children[1]
-    let highlights = highlight_container.children
-    highlight_container.remove(...highlights)
+    let highlight_container = this.scene.children[1];
+    let highlights = highlight_container.children;
+    highlight_container.remove(...highlights);
   }
 
 
   checkIntersects(mouse_position) {
-    let { width, height, previewPane_ctx, previewPane_image_size } = this.props
+    let { width, height, previewPane_ctx, previewPane_image_size } = this.props;
 
     function mouseToThree([mouseX, mouseY]) {
       return new THREE.Vector3(
         (mouseX / width) * 2 - 1,
         -(mouseY / height) * 2 + 1,
         1
-      )
+      );
     }
 
     function sortIntersectsByDistanceToRay(intersects) {
-      return _.sortBy(intersects, 'distanceToRay')
+      return _.sortBy(intersects, 'distanceToRay');
     }
 
-    let mouse_vector = mouseToThree(mouse_position)
-    this.raycaster.setFromCamera(mouse_vector, this.camera)
-    this.raycaster.params.Points.threshold = 0.25
+    let mouse_vector = mouseToThree(mouse_position);
+    this.raycaster.setFromCamera(mouse_vector, this.camera);
+    this.raycaster.params.Points.threshold = 0.25;
     let intersects = this.raycaster.intersectObjects(
       this.scene.children[0].children
-    )
+    );
     if (intersects[0]) {
-      let sorted_intersects = sortIntersectsByDistanceToRay(intersects)
-      let intersect = sorted_intersects[0]
-      let sprite_index = intersect.object.userData.sprite_index
-      let digit_index = intersect.index
-      let full_index = sprite_index * this.sprite_size + digit_index
+      let sorted_intersects = sortIntersectsByDistanceToRay(intersects);
+      let intersect = sorted_intersects[0];
+      let sprite_index = intersect.object.userData.sprite_index;
+      let digit_index = intersect.index;
+      let full_index = sprite_index * this.sprite_size + digit_index;
       // if filter is null then allow selected all, then when filter is defined only allow visible image to be selected
       if( this.filterAr===undefined || this.filterAr[full_index]<1.0){
-        this.props.setHoverIndex(full_index)
+        this.props.setHoverIndex(full_index);
         // console.log(full_index)
-        this.highlightPoint(sprite_index, digit_index, full_index)
-        this.scene.children[1].visible = true
-        previewPane_ctx.clearRect(0, 0,  previewPane_image_size, previewPane_image_size)
-        previewPane_ctx.fillRect(0, 0, previewPane_image_size, previewPane_image_size)
-        previewPane_ctx.fillStyle = "transparent"
+        this.highlightPoint(sprite_index, digit_index, full_index);
+        this.scene.children[1].visible = true;
+        previewPane_ctx.clearRect(0, 0,  previewPane_image_size, previewPane_image_size);
+        previewPane_ctx.fillRect(0, 0, previewPane_image_size, previewPane_image_size);
+        previewPane_ctx.fillStyle = "transparent";
         try{
           previewPane_ctx.drawImage(
             this.datasetIMG[sprite_index],
@@ -598,79 +597,79 @@ class Projection extends Component {
         }
       }
     } else {
-      this.props.setHoverIndex(null)
-      this.scene.children[1].visible = false
-      previewPane_ctx.fillRect(0, 0, previewPane_image_size, previewPane_image_size)
-      previewPane_ctx.fillStyle = "transparent"
+      this.props.setHoverIndex(null);
+      this.scene.children[1].visible = false;
+      previewPane_ctx.fillRect(0, 0, previewPane_image_size, previewPane_image_size);
+      previewPane_ctx.fillStyle = "transparent";
     }
   }
 
   handleMouse() {
-    let view = d3.select(this.renderer.domElement)
+    let view = d3.select(this.renderer.domElement);
 
-    this.raycaster = new THREE.Raycaster()
+    this.raycaster = new THREE.Raycaster();
 
     view.on('mousemove', () => {
-      let [mouseX, mouseY] = d3.mouse(view.node())
-      let mouse_position = [mouseX, mouseY]
-      this.checkIntersects(mouse_position)
+      let [mouseX, mouseY] = d3.mouse(view.node());
+      let mouse_position = [mouseX, mouseY];
+      this.checkIntersects(mouse_position);
     })
   }
 
   init() {
-    let { width, height } = this.props
-    this.scene = new THREE.Scene()
-    let vFOV = 75
-    let aspect = width / height
-    let near = 0.01
-    let far = 1000
+    let { width, height } = this.props;
+    this.scene = new THREE.Scene();
+    let vFOV = 75;
+    let aspect = width / height;
+    let near = 0.01;
+    let far = 1000;
 
-    this.camera = new THREE.PerspectiveCamera(vFOV, aspect, near, far)
+    this.camera = new THREE.PerspectiveCamera(vFOV, aspect, near, far);
 
-    this.renderer = new THREE.WebGLRenderer()
-    this.renderer.setClearColor(0x111111, 1)
-    this.renderer.setSize(width, height)
-    this.mount.appendChild(this.renderer.domElement)
+    this.renderer = new THREE.WebGLRenderer();
+    this.renderer.setClearColor(0x111111, 1);
+    this.renderer.setSize(width, height);
+    this.mount.appendChild(this.renderer.domElement);
 
-    this.addPoints()
-    this.addBlankHighlightPoints()
-    this.setupCamera()
-    this.animate()
-    this.handleMouse()
+    this.addPoints();
+    this.addBlankHighlightPoints();
+    this.setupCamera();
+    this.animate();
+    this.handleMouse();
   }
 
   animate() {
-    requestAnimationFrame(this.animate)
-    TWEEN.update()
-    this.renderer.render(this.scene, this.camera)
+    requestAnimationFrame(this.animate);
+    TWEEN.update();
+    this.renderer.render(this.scene, this.camera);
   }
 
   componentDidMount() {
-    this.init()
+    this.init();
   }
 
   componentDidUpdate(prevProps) {
-    let { width, height } = this.props
+    let { width, height } = this.props;
     if (width !== prevProps.width || height !== prevProps.height) {
-      this.handleResize(width, height)
+      this.handleResize(width, height);
     }
     if (prevProps.algorithm_choice !== this.props.algorithm_choice) {
       this.changeEmbeddings(
         prevProps.algorithm_choice,
         this.props.algorithm_choice,
-      )
+      );
     }
     if (this.props.scaleMin !== prevProps.scaleMin || this.props.scaleMax !== prevProps.scaleMax){
-      this.handleResize(width, height)
+      this.handleResize(width, height);
     }
   }
 
   componentWillUnmount() {
-    this.mount.removeChild(this.renderer.domElement)
+    this.mount.removeChild(this.renderer.domElement);
   }
 
   render() {
-    let { width, height } = this.props
+    let { width, height } = this.props;
     return (
       <div
         style={{ width: width, height: height, overflow: 'hidden' }}

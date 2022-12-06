@@ -10,14 +10,13 @@ class PreviewPane extends Component {
     this.onImgLoad = this.onImgLoad.bind(this);
   }
 
+  componentDidMount() {
+    this.props.setPreviewPaneCanvas(this.side_canvas);
+  }
 
   onImgLoad({target:img}) {
     this.setState({dimensions:{height:img.offsetHeight,
                                width:img.offsetWidth}});
-  }
-
-  componentDidMount() {
-    this.props.setPreviewPaneCanvas(this.side_canvas);
   }
 
   componentWillUpdate(nextState) {
@@ -31,8 +30,6 @@ class PreviewPane extends Component {
       }, 10)
     }
   }
-
-
 
   render() {
     let {

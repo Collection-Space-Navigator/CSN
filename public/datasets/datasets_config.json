@@ -2,8 +2,8 @@
     "default": 0,
     "data": [
         {
-            "name": "dataset-name",
-            "directory": "dataset-directory"
+            "name": "basic_concepts",
+            "directory": "basic_concepts"
         }
     ]
 }
