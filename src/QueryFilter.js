@@ -50,8 +50,6 @@ class Filterbox extends Component {
             arr[element["index"]] = 0;
         });     
         this.props.calculateProjection(arr, "search", true);
-        console.log('this.state.query',this.state.query)
-        console.log('this.state.query2',this.state.query2)
     }
 
     resetFilter() {
@@ -72,7 +70,6 @@ class Filterbox extends Component {
     onParseOk(expressions) {
         this.setState({ parseOK: false });
         this.setState({ query2: expressions });
-        console.log(expressions)
         // this.applyFilter(expressions);
     }
 
