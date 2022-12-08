@@ -6,12 +6,11 @@ import FilterPane from './FilterPane'
 import InfoPane from './InfoPane'
 import ViewPane from './ViewPane'
 import MappingsPane from './MappingsPane'
-
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import './scss/Menu.scss';
-
 import Projection from './Projection'
 import * as _ from 'lodash'
+import { CircularProgress } from "@material-ui/core";
 
 class Layout extends Component {
   constructor(props) {
@@ -53,6 +52,7 @@ class Layout extends Component {
     window.addEventListener('popstate', this.checkHash);
   }
 
+
   handleChangeScale(e,val) {
     this.setState({ scaleMin: val})
   }
@@ -70,7 +70,6 @@ class Layout extends Component {
   }
 
   calculateProjection=(newArr,type, update)=>{
-    
     let A, B, arr;
     if(type==="filter"){
       this.setState({currentFilter: newArr})
@@ -145,8 +144,6 @@ class Layout extends Component {
       this.setState({ show_about: false });
     }
   }
-
-
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setSize);
@@ -398,6 +395,7 @@ class Layout extends Component {
             initPath={this.props.initPath}
             scaleMin={this.state.scaleMin}
             scaleMax={this.state.scaleMax}
+            // tiles={this.tiles}
           />
           <div style={{fontSize: '13px', bottom: '2px', left: '8px', position: 'absolute'}}>
             showing {displayNumb} / {settings["total"]}
@@ -409,9 +407,12 @@ class Layout extends Component {
       </div>
       
     ) : (
-      <div style={{ padding: '10rem' }}>Loading layout...</div>
+      <div className="loading" ><CircularProgress color="inherit"/><div>loading layout...</div></div>
     )
   }
 }
 
 export default Layout
+
+
+

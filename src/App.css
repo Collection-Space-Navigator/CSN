@@ -139,3 +139,14 @@ button {
 	top:1px;
   color:#191919;
 }
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
