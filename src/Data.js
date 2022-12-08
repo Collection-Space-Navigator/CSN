@@ -78,13 +78,13 @@ class Data extends Component {
           let scaled_embeddings = embeddings_data;
           // this.scaleEmbeddings(embeddings_data);
           mappings[i] = scaled_embeddings;
-          if (embeddings[i].name === "UMAP") {
-            this.setState({ embeddings_data: scaled_embeddings})
-          }
-        });
-    }
-    this.setState({ mappings: mappings });
+        }
+        )
+        .then(() => {
+          this.setState({ mappings: mappings, embeddings_data: mappings[0] })
+        })
   }
+}
 
   // loadTiles(){ 
   //   const tile_locations = [...Array(this.state.settings.sprite_number)].map(
@@ -216,8 +216,6 @@ class Data extends Component {
       )
   }
 
-  
-
 
   render() {
     return this.state.embeddings_data && this.state.metadata ? (
@@ -236,7 +234,7 @@ class Data extends Component {
       />
 
     ) : (
-      <div class="loading" ><CircularProgress color="inherit"/><div>loading datasets... </div></div>
+      <div className="loading" ><CircularProgress color="inherit"/><div>loading datasets... </div></div>
       
     )
   }

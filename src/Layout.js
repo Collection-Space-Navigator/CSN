@@ -407,7 +407,7 @@ class Layout extends Component {
       </div>
       
     ) : (
-      <div class="loading" ><CircularProgress color="inherit"/><div>loading layout...</div></div>
+      <div className="loading" ><CircularProgress color="inherit"/><div>loading layout...</div></div>
     )
   }
 }

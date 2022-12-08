@@ -675,7 +675,7 @@ class Projection extends Component {
     const tileProgress = this.state.tilesLoaded;
     return (
       <><div>
-        {tileProgress < 1 ? <div class="loading"><><CircularProgress color="inherit" /><div>loading image tiles... </div></></div> : ''}
+        {tileProgress < 1 ? <div className="loading"><><CircularProgress color="inherit" /><div>loading image tiles... </div></></div> : ''}
       </div><div
           style={{ width: width, height: height, overflow: 'hidden' }}
           ref={mount => {
