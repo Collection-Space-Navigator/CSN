@@ -2,8 +2,8 @@
     "default": 0,
     "data": [
         {
-            "name": "basic_concepts",
-            "directory": "basic_concepts"
+            "name": "Testset",
+            "directory": "testset"
         }
     ]
 }
