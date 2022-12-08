@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import FilterSelect from './FilterSelect'
 import { Grid } from "@material-ui/core";
 //import _ from "lodash";
 import Filterbox from "./QueryFilter";

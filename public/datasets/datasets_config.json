@@ -1,1 +1,9 @@
-{"default": 0, "data": [{"name": "Testset", "directory": "testset"}]}
+{
+    "default": 0,
+    "data": [
+        {
+            "name": "basic_concepts",
+            "directory": "basic_concepts"
+        }
+    ]
+}
