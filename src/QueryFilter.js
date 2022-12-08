@@ -32,24 +32,32 @@ class Filterbox extends Component {
         super(props);
         this.state = {
             parseOK: true,
-            query2: ""
+            query2: {}
         };
-        this.applyFilter = applyFilter.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
         this.options = this.props.settings.search;
         this.customAutoComplete = new CustomAutoComplete(this.props.metadata,this.options);
-        this.editorConfig = {
-            direction: "rtl"
-        };
+        // this.editorConfig = {
+        //     direction: "rtl"
+        // };
+    }
 
-        function applyFilter() {
-            var newData = new CustomResultProcessing(this.options).process(this.props.metadata, this.state.query2);
-            // var test = newData.map(obj => obj["index"]);
-            var arr = new Float32Array(this.props.settings["total"]).fill(1);
-            newData.forEach(element => {
-                arr[element["index"]] = 0;
-            });     
-            this.props.calculateProjection(arr, "search", true);
-        }
+    applyFilter() {
+        var newData = new CustomResultProcessing(this.options).process(this.props.metadata, this.state.query2);
+        var arr = new Float32Array(this.props.settings["total"]).fill(1);
+        newData.forEach(element => {
+            arr[element["index"]] = 0;
+        });     
+        this.props.calculateProjection(arr, "search", true);
+        console.log('this.state.query',this.state.query)
+        console.log('this.state.query2',this.state.query2)
+    }
+
+    resetFilter() {
+        this.setState({ query: null, query2: '' });
+        var arr = new Float32Array(this.props.settings["total"]).fill(0);
+        this.props.calculateProjection(arr, "search", true);
     }
 
     //Customer your rendering item in auto complete
@@ -64,6 +72,7 @@ class Filterbox extends Component {
     onParseOk(expressions) {
         this.setState({ parseOK: false });
         this.setState({ query2: expressions });
+        console.log(expressions)
         // this.applyFilter(expressions);
     }
 
@@ -86,6 +95,9 @@ class Filterbox extends Component {
             <Button variant="contained" disabled={this.state.parseOK}
             onClick={this.applyFilter}
               >apply</Button>
+            <Button variant="contained"
+            onClick={this.resetFilter}
+              >reset</Button>
         </div>
     }
 }
