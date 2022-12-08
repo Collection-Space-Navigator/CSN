@@ -1,3 +1,3 @@
-Place your prepared dataset(s) in this folder. To prepare your collection, follow this instruction:
+Delete the `testset` folder and place your prepared dataset(s) here. To prepare your collection, follow this instruction:
 
-[https://github.com/CulturalDataTools/CSN/CSN_setup.ipynb](https://github.com/CulturalDataTools/CSN/CSN_setup.ipynb)
+[https://github.com/Collection-Space-Navigator/CSN/CSN_setup.ipynb](https://github.com/Collection-Space-Navigator/CSN/CSN_setup.ipynb)
