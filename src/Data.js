@@ -4,6 +4,8 @@ import Layout from './Layout'
 import * as _ from 'lodash'
 import * as d3 from 'd3'
 import color from 'color'
+// import * as THREE from 'three'
+import { CircularProgress } from "@material-ui/core";
 
 
 function withRouter(Component) {
@@ -11,10 +13,10 @@ function withRouter(Component) {
 }
 
 class Data extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
+      // tilesLoaded: 0,
       algorithm_options: null,
       dataset_options: null,
       dataset_dirs: null,
@@ -46,9 +48,8 @@ class Data extends Component {
     const urlParams = new URLSearchParams(queryString);
     this.setState({ selectedDataset: urlParams.get('dataset')});
     if(urlParams.get('projection')!==undefined) this.setState({algorithm_name:urlParams.get('projection')});
-
     // Load embeddings
-    this.loadInit('datasets/datasets_config.json');
+    this.loadInit('datasets/datasets_config.json')
   }
 
   loadConfig(path){
@@ -80,21 +81,28 @@ class Data extends Component {
           if (embeddings[i].name === "UMAP") {
             this.setState({ embeddings_data: scaled_embeddings})
           }
-          // this.setState({
-          //   [this.state.settings.embeddings[i].key]: scaled_embeddings,
-          // })
         });
     }
     this.setState({ mappings: mappings });
-    console.log(this.state);
-
-    //console.log('metadata from settings:',`${process.env.PUBLIC_URL}/`+this.state.settings.metadata)
-    // fetch(`${process.env.PUBLIC_URL}/`+this.state.settings.metadata)
-    //     .then(response => response.json())
-    //     // .then(metadata => this.processMetadata(metadata)
-    //     .then(metadata => this.setState({ metadata: metadata })
-    // )
   }
+
+  // loadTiles(){ 
+  //   const tile_locations = [...Array(this.state.settings.sprite_number)].map(
+  //     (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.state.datasetDir}/tile_${i}.png`
+  //   )
+  //   let loader = new THREE.TextureLoader();
+  //   this.tiles = tile_locations.map(l => {
+  //     let t = loader.load(l,
+  //       function ( texture ) {
+  //         this.setState({ tilesLoaded: this.state.tilesLoaded+1 });
+  //       }.bind(this)
+  //     )
+  //     t.flipY = false
+  //     t.magFilter = THREE.NearestFilter
+  //     return t
+  //   })    
+  // }
+
 
   addToUrl(paramName,value){
     const queryString = window.location.search;
@@ -159,6 +167,7 @@ class Data extends Component {
       )
       .then(()=> 
       this.loadConfig(this.state.datasetDir))
+
   }
 
   loadSettings(file){
@@ -183,6 +192,8 @@ class Data extends Component {
       this.prepareMappings(0))
       .then(()=> 
       this.loadDataset(0))
+      // .then(()=> 
+      // this.loadTiles())
   }
 
   loadMetadata(file){
@@ -205,8 +216,12 @@ class Data extends Component {
       )
   }
 
+  
+
+
   render() {
-    return this.state.embeddings_data && this.state.metadata ? ( 
+    return this.state.embeddings_data && this.state.metadata ? (
+
       <Layout
         {...this.state}
         addToUrl={this.addToUrl.bind(this)}
@@ -217,9 +232,12 @@ class Data extends Component {
         changeDataset={this.changeDataset.bind(this)}
         selectedDataset={this.state.selectedDataset}
         datasetDir={this.state.datasetDir}
+        // tiles={this.tiles}
       />
+
     ) : (
-      <div style={{ padding: '10rem' }}>Loading dataset...</div>
+      <div class="loading" ><CircularProgress color="inherit"/><div>loading datasets... </div></div>
+      
     )
   }
 }

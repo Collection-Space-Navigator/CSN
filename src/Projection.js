@@ -3,12 +3,14 @@ import * as THREE from 'three'
 import * as _ from 'lodash'
 import * as d3 from 'd3'
 import * as TWEEN from '@tweenjs/tween.js'
+import { CircularProgress } from "@material-ui/core";
 
 class Projection extends Component {
   constructor(props) {
     super(props)
-    this.loadDataset()
+    this.loadTiles()
     this.state = {
+      tilesLoaded: 0,
       view: null
     }
     this.init = this.init.bind(this)
@@ -22,18 +24,14 @@ class Projection extends Component {
     this.changeEmbeddings = this.changeEmbeddings.bind(this)
   }
 
-  loadDataset(){
-    // Constants for sprite sheets
+
+  loadTiles(){ 
     this.sprite_size = this.props.settings.sprite_side * this.props.settings.sprite_side
     this.tile_locations = [...Array(this.props.settings.sprite_number)].map(
       (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.props.datasetDir}/tile_${i}.png`
-    )
-    this.datasetIMG = this.tile_locations.map(src => {
-      let img = document.createElement('img')
-      img.src = src
-      return img
-    })
+    )  
   }
+
 
   changeEmbeddings(prev_choice, new_choice) {
     let ranges = []
@@ -203,11 +201,15 @@ class Projection extends Component {
     // load the textures
     let loader = new THREE.TextureLoader();
     this.textures = this.tile_locations.map(l => {
-      let t = loader.load(l)
+      let t = loader.load(l,
+        function ( w ) {
+          this.setState({ tilesLoaded: this.state.tilesLoaded+1 });
+        }.bind(this)
+      )
       t.flipY = false
       t.magFilter = THREE.NearestFilter
       return t
-    });
+    })  
     let geometry;
     let point_group = new THREE.Group();
     for (let c = 0; c < this.props.settings.sprite_number; c++) {
@@ -644,15 +646,8 @@ class Projection extends Component {
     this.renderer.render(this.scene, this.camera);
   }
 
-  componentWillMount() {
-    console.log("########## MOUNTING ###########")
-  }
-
   componentDidMount() {
-    console.log("@@@@@@@@@@@ STARTING INIT @@@@@@@@@@@@@@@@@")
     this.init();
-    console.log("#################DONE#################")
-
   }
 
   componentDidUpdate(prevProps) {
@@ -677,14 +672,18 @@ class Projection extends Component {
 
   render() {
     let { width, height } = this.props;
+    const tileProgress = this.state.tilesLoaded;
     return (
-      <div
-        style={{ width: width, height: height, overflow: 'hidden' }}
-        ref={mount => {
-          this.mount = mount
-        }}
-      />
-    )
+      <><div class="loading">
+        {tileProgress < 1 ?
+          <><CircularProgress color="inherit"/><div>loading image tiles... </div></> : ''}
+      </div><div
+          style={{ width: width, height: height, overflow: 'hidden' }}
+          ref={mount => {
+            this.mount = mount
+          } } /></>
+    ) 
   }
 }
+
 export default React.memo(Projection)
