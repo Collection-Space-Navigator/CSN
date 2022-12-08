@@ -27,10 +27,11 @@ class RangeSlider extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(e) {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
     }));
+    e.stopPropagation();
   }
 
   changeSlider(values) {
@@ -155,7 +156,7 @@ class RangeSlider extends React.Component {
               <Grid item xs={4} style={{ textAlign: "center",  marginTop:"6px"}}>
               <div className="tooltip">
               <button onClick={this.handleClick}>
-                <a href=""
+                <a href="#"
                 style={{
                   color: "#00cc55",
                   cursor: "help",
