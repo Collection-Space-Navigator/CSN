@@ -1,1 +1,119 @@
-{"title": "basic_concepts", "datasetInfo": "Stable Diffusion v1.4 prompts of 48 bascic concepts from []. Feature extraction with ResNet50.", "metadata": "metadata.json", "embeddings": [{"name": "UMAP", "file": "UMAP.json"}, {"name": "t-SNE", "file": "tSNE.json"}], "clusters": {"clusterList": ["Class"], "clusterColors": ["rgb(155, 196, 154)", "rgb(0, 196, 154)", "rgb(255, 0, 20)", "rgb(0, 30, 154)", "rgb(0, 196, 40)", "rgb(50, 255, 00)", "rgb(60, 130, 54)", "rgb(0, 116, 255)", "rgb(200, 196, 0)", "rgb(0, 255, 200)", "rgb(155, 196, 154)", "rgb(0, 196, 154)", "rgb(255, 0, 20)", "rgb(0, 30, 154)", "rgb(0, 196, 40)", "rgb(50, 255, 00)", "rgb(60, 130, 54)", "rgb(0, 116, 255)", "rgb(200, 196, 0)", "rgb(0, 255, 200)", "rgb(155, 196, 154)", "rgb(0, 196, 154)", "rgb(255, 0, 20)", "rgb(0, 30, 154)", "rgb(0, 196, 40)", "rgb(50, 255, 00)", "rgb(60, 130, 54)", "rgb(0, 116, 255)", "rgb(200, 196, 0)", "rgb(0, 255, 200)", "rgb(155, 196, 154)", "rgb(0, 196, 154)", "rgb(255, 0, 20)", "rgb(0, 30, 154)", "rgb(0, 196, 40)", "rgb(50, 255, 00)", "rgb(60, 130, 54)", "rgb(0, 116, 255)", "rgb(200, 196, 0)", "rgb(0, 255, 200)", "rgb(155, 196, 154)", "rgb(0, 196, 154)", "rgb(255, 0, 20)", "rgb(0, 30, 154)", "rgb(0, 196, 40)", "rgb(50, 255, 00)", "rgb(60, 130, 54)", "rgb(0, 116, 255)"]}, "total": 4800, "sprite_side": 32, "sprite_number": 5, "sprite_image_size": 64, "sprite_actual_size": 2048, "sliders": [{"id": "Colorfulness", "title": "Colorfulness", "info": "Hasler & S\u00fcsstrunk -> hasler2003measuring: https://doi.org/10.1117/12.477378", "typeNumber": "float", "color": "rgb(21, 96, 100)"}, {"id": "Colors", "title": "Colors", "info": "Number of unique colors", "typeNumber": "float", "color": "rgb(248, 225, 108)"}, {"id": "Contrast", "title": "Contrast", "info": "RMS Contrast -> https://en.wikipedia.org/wiki/Contrast_(vision)#RMS_contrast", "typeNumber": "float", "color": "rgb(0, 196, 154)"}, {"id": "File Size", "title": "File Size", "info": "Filesize of image in bytes", "typeNumber": "float", "color": "rgb(251, 143, 103"}], "info": ["Prompt", "id", "Colorfulness", "Colors", "Contrast", "File Size"], "search": [{"columnField": "Prompt", "type": "selection"}]}
+{
+    "title": "basic_concepts",
+    "datasetInfo": "Stable Diffusion v1.4 prompts of 48 bascic concepts from []. Feature extraction with ResNet50.",
+    "metadata": "metadata.json",
+    "embeddings": [
+        {
+            "name": "UMAP",
+            "file": "UMAP.json"
+        },
+        {
+            "name": "t-SNE",
+            "file": "tSNE.json"
+        }
+    ],
+    "clusters": {
+        "clusterList": [
+            "Class"
+        ],
+        "clusterColors": [
+            "rgb(155, 196, 154)",
+            "rgb(0, 196, 154)",
+            "rgb(255, 0, 20)",
+            "rgb(0, 30, 154)",
+            "rgb(0, 196, 40)",
+            "rgb(50, 255, 00)",
+            "rgb(60, 130, 54)",
+            "rgb(0, 116, 255)",
+            "rgb(200, 196, 0)",
+            "rgb(0, 255, 200)",
+            "rgb(155, 196, 154)",
+            "rgb(0, 196, 154)",
+            "rgb(255, 0, 20)",
+            "rgb(0, 30, 154)",
+            "rgb(0, 196, 40)",
+            "rgb(50, 255, 00)",
+            "rgb(60, 130, 54)",
+            "rgb(0, 116, 255)",
+            "rgb(200, 196, 0)",
+            "rgb(0, 255, 200)",
+            "rgb(155, 196, 154)",
+            "rgb(0, 196, 154)",
+            "rgb(255, 0, 20)",
+            "rgb(0, 30, 154)",
+            "rgb(0, 196, 40)",
+            "rgb(50, 255, 00)",
+            "rgb(60, 130, 54)",
+            "rgb(0, 116, 255)",
+            "rgb(200, 196, 0)",
+            "rgb(0, 255, 200)",
+            "rgb(155, 196, 154)",
+            "rgb(0, 196, 154)",
+            "rgb(255, 0, 20)",
+            "rgb(0, 30, 154)",
+            "rgb(0, 196, 40)",
+            "rgb(50, 255, 00)",
+            "rgb(60, 130, 54)",
+            "rgb(0, 116, 255)",
+            "rgb(200, 196, 0)",
+            "rgb(0, 255, 200)",
+            "rgb(155, 196, 154)",
+            "rgb(0, 196, 154)",
+            "rgb(255, 0, 20)",
+            "rgb(0, 30, 154)",
+            "rgb(0, 196, 40)",
+            "rgb(50, 255, 00)",
+            "rgb(60, 130, 54)",
+            "rgb(0, 116, 255)"
+        ]
+    },
+    "total": 4800,
+    "sprite_side": 32,
+    "sprite_number": 5,
+    "sprite_image_size": 64,
+    "sprite_actual_size": 2048,
+    "sliders": [
+        {
+            "id": "Colorfulness",
+            "title": "Colorfulness",
+            "info": "Hasler & S\u00fcsstrunk -> hasler2003measuring: https://doi.org/10.1117/12.477378",
+            "typeNumber": "float",
+            "color": "rgb(21, 96, 100)"
+        },
+        {
+            "id": "Colors",
+            "title": "Colors",
+            "info": "Number of unique colors",
+            "typeNumber": "float",
+            "color": "rgb(248, 225, 108)"
+        },
+        {
+            "id": "Contrast",
+            "title": "Contrast",
+            "info": "RMS Contrast -> https://en.wikipedia.org/wiki/Contrast_(vision)#RMS_contrast",
+            "typeNumber": "float",
+            "color": "rgb(0, 196, 154)"
+        },
+        {
+            "id": "File Size",
+            "title": "File Size",
+            "info": "Filesize of image in bytes",
+            "typeNumber": "float",
+            "color": "rgb(251, 143, 103"
+        }
+    ],
+    "info": [
+        "Prompt",
+        "id",
+        "Colorfulness",
+        "Colors",
+        "Contrast",
+        "File Size"
+    ],
+    "search": [
+        {
+            "columnField": "Prompt",
+            "type": "selection"
+        }
+    ]
+}
