@@ -674,9 +674,8 @@ class Projection extends Component {
     let { width, height } = this.props;
     const tileProgress = this.state.tilesLoaded;
     return (
-      <><div class="loading">
-        {tileProgress < 1 ?
-          <><CircularProgress color="inherit"/><div>loading image tiles... </div></> : ''}
+      <><div>
+        {tileProgress < 1 ? <div class="loading"><><CircularProgress color="inherit" /><div>loading image tiles... </div></></div> : ''}
       </div><div
           style={{ width: width, height: height, overflow: 'hidden' }}
           ref={mount => {
@@ -687,3 +686,5 @@ class Projection extends Component {
 }
 
 export default React.memo(Projection)
+
+
