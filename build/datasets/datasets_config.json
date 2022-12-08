@@ -1,9 +1,1 @@
-{
-    "default": 0,
-    "data": [
-        {
-            "name": "basic_concepts",
-            "directory": "basic_concepts"
-        }
-    ]
-}
+{"default": 0, "data": [{"name": "Testset", "directory": "testset"}]}
