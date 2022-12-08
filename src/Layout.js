@@ -309,7 +309,7 @@ class Layout extends Component {
                   />
                 </MenuItem>
               </SubMenu>
-              <SubMenu title="Export" defaultOpen="True">
+              <SubMenu title="Export">
               <CSVLink 
                 data={filterDataToExportCSV} 
                 filename={"CSN_filtered_metadata.csv"} 
