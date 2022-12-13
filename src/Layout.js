@@ -91,6 +91,8 @@ class Layout extends Component {
       this.refProjection.current.updateProjection(arr);
     } catch(error) {}
     // Release memory of export filter metadata
+
+
     if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
   }
 
@@ -401,7 +403,7 @@ class Layout extends Component {
             showing {displayNumb} / {settings["total"]}
           </div>
           <div style={{fontSize: '13px', bottom: '2px', right: '8px', position: 'absolute'}}>
-            <a href="https://github.com/CulturalDataTools/CSN" target="blank">Collection Space Navigator</a>
+            <a href="https://github.com/Collection-Space-Navigator/CSN" target="blank">Collection Space Navigator</a>
           </div>
         </div>
       </div>

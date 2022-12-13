@@ -30,6 +30,11 @@ class Projection extends Component {
     this.tile_locations = [...Array(this.props.settings.sprite_number)].map(
       (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.props.datasetDir}/tile_${i}.png`
     )  
+    this.datasetIMG = this.tile_locations.map(src => {
+      let img = document.createElement('img')
+      img.src = src
+      return img
+    })
   }
 
 
