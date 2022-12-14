@@ -2,6 +2,22 @@
     "default": 0,
     "data": [
         {
+            "name": "WikiArt2k",
+            "directory": "wikiart2k"
+        },
+        {
+            "name": "WikiArt20k",
+            "directory": "wikiart20k"
+        },
+        {
+            "name": "WikiArt60k",
+            "directory": "wikiart60k"
+        },
+        {
+            "name": "Basic Concepts",
+            "directory": "basic_concepts"
+        },
+        {
             "name": "Testset",
             "directory": "testset"
         }
