@@ -30,7 +30,7 @@ class Layout extends Component {
       currentFilter: new Float32Array(total).fill(0),
       currentSearch: new Float32Array(total).fill(0),
       scaleMin: 14,
-      scaleMax: 50,
+      scaleMax: 70,
       clusterTypeSelected:'-',
       filterDataToExportCSV:[]
     }
@@ -50,8 +50,16 @@ class Layout extends Component {
     this.checkHash();
     window.addEventListener('resize', this.setSize);
     window.addEventListener('popstate', this.checkHash);
+    this.calcDefaultScale();
   }
 
+
+  calcDefaultScale(){
+    if (this.props.settings["total"] < 10000) {
+      this.setState( { scaleMin: 15 } )} else {
+      this.setState( { scaleMin: 5 } )
+      }
+  }
 
   handleChangeScale(e,val) {
     this.setState({ scaleMin: val})
@@ -372,6 +380,7 @@ class Layout extends Component {
                   handleChangeScale = {this.handleChangeScale.bind(this)}
                   handleChangeZoom = {this.handleChangeZoom.bind(this)}
                   handleChangeCluster = {this.handleChangeCluster.bind(this)}
+                  total = {settings.total}
                 />
                 </MenuItem>
               </SubMenu>

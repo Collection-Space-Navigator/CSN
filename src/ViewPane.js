@@ -36,7 +36,7 @@ class ViewPane extends Component {
           <Box height={10}>
           <Slider
             size="small"
-            defaultValue={14}
+            defaultValue={this.props.scaleMin}
             min={3}
             max={60}
             onChange={this.props.handleChangeScale}
@@ -50,7 +50,7 @@ class ViewPane extends Component {
           <Box height={10}>
           <Slider
             size="small"
-            defaultValue={50}
+            defaultValue={this.props.scaleMax}
             min={3}
             max={120}
             onChange={this.props.handleChangeZoom}
