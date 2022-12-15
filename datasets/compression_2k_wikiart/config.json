@@ -1,0 +1,149 @@
+{
+    "title": "Compression 2k WikiArt",
+    "datasetInfo": "2k subset of WikiArt using Compression Ensembles [arXiv:2205.10271] for encoding aesthetic complexity.",
+    "metadata": "metadata.json",
+    "embeddings": [
+        {
+            "name": "UMAP",
+            "file": "UMAP.json"
+        },
+        {
+            "name": "t-SNE",
+            "file": "tSNE.json"
+        },
+        {
+            "name": "PCA",
+            "file": "PC1_PC2.json"
+        },
+        {
+            "name": "PC1_Colorfulness",
+            "file": "PC1_Colorfulness.json"
+        },
+        {
+            "name": "PC1_FileSize",
+            "file": "PC1_FileSize.json"
+        },
+        {
+            "name": "PC1_Colors",
+            "file": "PC1_Colors.json"
+        },
+        {
+            "name": "Year_PC1",
+            "file": "Year_PC1.json"
+        },
+        {
+            "name": "Year_PC2",
+            "file": "Year_PC2.json"
+        },
+        {
+            "name": "Year_Colorfulness",
+            "file": "Year_Colorfulness.json"
+        },
+        {
+            "name": "Year_Contrast",
+            "file": "Year_Contrast.json"
+        },
+        {
+            "name": "Year_FileSize",
+            "file": "Year_FileSize.json"
+        },
+        {
+            "name": "Year_Colors",
+            "file": "Year_Colors.json"
+        },
+        {
+            "name": "Colorfulness_Colors",
+            "file": "Colorfulness_Colors.json"
+        },
+        {
+            "name": "Colorfulness_FileSize",
+            "file": "Colorfulness_FileSize.json"
+        },
+        {
+            "name": "Colors_FileSize",
+            "file": "Colors_FileSize.json"
+        }
+    ],
+    "clusters": {
+        "clusterList": [],
+        "clusterColors": []
+    },
+    "total": 2049,
+    "sprite_side": 32,
+    "sprite_number": 3,
+    "sprite_image_size": 64,
+    "sprite_actual_size": 2048,
+    "sliders": [
+        {
+            "id": "Year",
+            "title": "Year",
+            "info": "Creation of artwork (from WikiArt)",
+            "typeNumber": "int",
+            "color": "#ffffff"
+        },
+        {
+            "id": "Colorfulness",
+            "title": "Colorfulness",
+            "info": "Hasler & Süsstrunk [hasler2003measuring]",
+            "typeNumber": "float",
+            "color": "#ee81f9"
+        },
+        {
+            "id": "Colors",
+            "title": "Colors",
+            "info": "Number of unique colors",
+            "typeNumber": "int",
+            "color": "#7e6349"
+        },
+        {
+            "id": "Contrast",
+            "title": "Contrast",
+            "info": "RMS contrast",
+            "typeNumber": "float",
+            "color": "#87fca3"
+        },
+        {
+            "id": "PC1",
+            "title": "PC1",
+            "info": "First Principal Component",
+            "typeNumber": "float",
+            "color": "#6b7fe6"
+        },
+        {
+            "id": "PC2",
+            "title": "PC2",
+            "info": "Second Principal Component",
+            "typeNumber": "float",
+            "color": "#9ffafa"
+        },
+        {
+            "id": "FileSize",
+            "title": "FileSize",
+            "info": "PNG file size in bytes",
+            "typeNumber": "int",
+            "color": "#f9c182"
+        }
+    ],
+    "info": [
+        "Artist",
+        "Title",
+        "Date",
+        "Genre",
+        "Style"
+    ],
+    "search": [
+        {
+            "columnField": "Artist",
+            "type": "selection"
+        },
+        {
+            "columnField": "Genre",
+            "type": "selection"
+        },
+        {
+            "columnField": "Style",
+            "type": "selection"
+        }
+    ],
+    "url_prefix": "/"
+}
