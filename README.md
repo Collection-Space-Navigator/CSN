@@ -10,7 +10,7 @@ The Collection Space Navigator (CSN) is an explorative visualization tool for re
 
 ## Demos
 
-Demos here: []
+Demo [here](https://collection-space-navigator.github.io/CSN)
 
 ## Getting Started
 

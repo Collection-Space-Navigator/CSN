@@ -1,11 +1,21 @@
-import React, { Component } from 'react'
+import React from "react";
+import {
+  BrowserRouter, Routes, Route
+} from "react-router-dom";
+
+// Area components
 import './App.css'
-import Data from './Data'
+import WithRouter from './Data'
 
-class App extends Component {
-  render() {
-    return <Data />
-  }
+export default function App() {
+  
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<WithRouter/>} />
+        <Route exact path="/CSN" element={<WithRouter/>}/> 
+      </Routes>
+    </BrowserRouter>
+  );
+
 }
-
-export default App
