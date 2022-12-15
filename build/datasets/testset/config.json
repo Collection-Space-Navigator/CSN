@@ -2,6 +2,7 @@
     "title": "Testset",
     "datasetInfo": "This testset is a subset of 1k generated imaged using Stable Diffusion v1.5 and basic concepts. Feature Extraction with ResNet50.",
     "metadata": "metadata.json",
+    "url_prefix": "https://github.com/Collection-Space-Navigator/CSN/raw/main/example_data/testset_images/",
     "embeddings": [
         {
             "name": "UMAP",
