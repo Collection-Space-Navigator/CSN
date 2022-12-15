@@ -2,6 +2,7 @@
   "name": "CSN",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://collection-space-navigator.github.io/CSN",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -31,7 +32,8 @@
     "remarkable": "^1.7.1",
     "rheostat": "^4.1.1",
     "three": "^0.100.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "gh-pages": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
