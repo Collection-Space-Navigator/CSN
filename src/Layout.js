@@ -351,7 +351,7 @@ class Layout extends Component {
                 <PreviewPane
                   previewPane_image_size={previewPane_image_size}
                   setPreviewPaneCanvas={this.setPreviewPaneCanvas}
-                  prevURL={metadata[hover_index].URL}
+                  prevURL={settings.url_prefix + metadata[hover_index].URL}
                 />
               </SubMenu>
               <SubMenu title="Info" defaultOpen="True" >
