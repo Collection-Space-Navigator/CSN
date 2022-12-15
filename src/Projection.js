@@ -262,35 +262,36 @@ class Projection extends Component {
         offsets[index] = x;
         offsets[index + 1] = y;
       }
-      // Todo: connect cluster the array
-      let clusterSelected = this.props.clusterTypeSelected;
-      let clusterColors = this.props.settings.clusters.clusterColors;
-      console.log("clusterSelected",clusterSelected)
-      for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
-        // Images disable when are not visible
-        colors[index] = 0.0;// default value to show all images
+      if (this.props.settings.clusters.clusterList) {
+        // Todo: connect cluster the array
+        let clusterSelected = this.props.clusterTypeSelected;
+        let clusterColors = this.props.settings.clusters.clusterColors;
+        console.log("clusterSelected",clusterSelected)
+        for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
+          // Images disable when are not visible
+          colors[index] = 0.0;// default value to show all images
 
-        // Clusters visualization
+          // Clusters visualization
 
-        if( clusterSelected !=="-" && this.props.settings.clusters.clusterList.includes(clusterSelected) ){ 
-          //try{
-            clustersActive[index] = 1.0;
-            let clusterId = metadata[index][clusterSelected];
-            if(clusterId >= clusterColors.length){
-              clusters[index*3] = 1.0;
-              clusters[index*3 + 1] = 1.0;
-              clusters[index*3 + 2] = 1.0;
-            }else{
-              clusters[index*3] = clusterColors[clusterId][0];
-              clusters[index*3 + 1] = clusterColors[clusterId][1];
-              clusters[index*3 + 2] = clusterColors[clusterId][2];
-            }
-          //}catch(err){clustersActive[index] = 0.0;}
-        }else{
-          clustersActive[index] = 0.0;
-        }
+          if( clusterSelected !== "-" && this.props.settings.clusters.clusterList.includes(clusterSelected) ){ 
+            //try{
+              clustersActive[index] = 1.0;
+              let clusterId = metadata[index][clusterSelected];
+              if(clusterId >= clusterColors.length){
+                clusters[index*3] = 1.0;
+                clusters[index*3 + 1] = 1.0;
+                clusters[index*3 + 2] = 1.0;
+              }else{
+                clusters[index*3] = clusterColors[clusterId][0];
+                clusters[index*3 + 1] = clusterColors[clusterId][1];
+                clusters[index*3 + 2] = clusterColors[clusterId][2];
+              }
+            //}catch(err){clustersActive[index] = 0.0;}
+          }else{
+            clustersActive[index] = 0.0;
+          }
       }
-
+    }
       // uniforms
       let uniforms = {
         texture: { value: this.textures[c] },

@@ -27,7 +27,7 @@ class ViewPane extends Component {
                   {option}
             </option>
               ))}
-            </select>
+            </select> 
           </Grid>
           <Grid item xs={4}>
             size (out):

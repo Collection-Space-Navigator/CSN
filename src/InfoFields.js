@@ -17,10 +17,10 @@ class InfoFields extends Component {
 
         const InfoList = infos.map((info) => 
             <Fragment>
-                <Grid key={uuid()} item xs={6}>
+                <Grid key={uuid()} item xs={4}>
                     {info}:
                 </Grid>
-                <Grid key={uuid()} item xs={6}>   
+                <Grid key={uuid()} item xs={8}>   
                     {metadata[hover_index][info]}
                 </Grid>
             </Fragment>
