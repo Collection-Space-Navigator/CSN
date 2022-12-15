@@ -11,6 +11,7 @@
     "@tweenjs/tween.js": "^17.2.0",
     "chart.js": "^3.5.1",
     "d3": "^5.7.0",
+    "gh-pages": "^4.0.0",
     "lodash": "^4.17.11",
     "node-sass": "^6.0.1",
     "papaparse": "^5.3.1",
@@ -32,8 +33,7 @@
     "remarkable": "^1.7.1",
     "rheostat": "^4.1.1",
     "three": "^0.100.0",
-    "web-vitals": "^1.1.2",
-    "gh-pages": "^2.0.1"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
