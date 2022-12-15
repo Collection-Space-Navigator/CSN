@@ -2,8 +2,16 @@
     "default": 0,
     "data": [
         {
-            "name": "Testset",
-            "directory": "testset"
+            "name": "Compression 2k WikiArt",
+            "directory": "compression_2k_wikiart"
+        },
+        {
+            "name": "Compression 15k WikiArt",
+            "directory": "compression_15k_wikiart"
+        },
+        {
+            "name": "Compression 60k WikiArt",
+            "directory": "compression_60k_wikiart"
         }
     ]
 }
