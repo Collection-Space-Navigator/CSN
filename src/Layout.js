@@ -24,7 +24,7 @@ class Layout extends Component {
       controlPane_height: null,
       filterPane_height: null,
       show_about: null,
-      algorithm_choice: 0,
+      algorithm_choice: null,
       allFilter: {},
       currentProjection: new Float32Array(total).fill(0),
       currentFilter: new Float32Array(total).fill(0),
@@ -74,7 +74,7 @@ class Layout extends Component {
     this.setState({ clusterTypeSelected: value})
     try{
       this.refProjection.current.updateClusterColors(value)
-    } catch(error) {console.log("error projector")}
+    } catch(error) {console.log("error updateClusterColors")}
   }
 
   calculateProjection=(newArr,type, update)=>{
@@ -98,9 +98,8 @@ class Layout extends Component {
     try{
       this.refProjection.current.updateProjection(arr);
     } catch(error) {}
+    
     // Release memory of export filter metadata
-
-
     if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
   }
 
@@ -187,6 +186,7 @@ class Layout extends Component {
         displayNumb++;
       }
     }
+
     let previewPane_ctx = this.previewPane_ctx;
     
     let line_height = 1.5;

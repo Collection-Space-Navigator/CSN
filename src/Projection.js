@@ -22,6 +22,8 @@ class Projection extends Component {
     this.getScaleFromZ = this.getScaleFromZ.bind(this)
     this.getZFromScale = this.getZFromScale.bind(this)
     this.changeEmbeddings = this.changeEmbeddings.bind(this)
+
+   
   }
 
 
@@ -38,7 +40,8 @@ class Projection extends Component {
   }
 
 
-  changeEmbeddings(prev_choice, new_choice) {
+  //changeEmbeddings(prev_choice, new_choice) {
+  changeEmbeddings(new_choice) {
     let ranges = []
     for (let i = 0; i < this.props.settings.sprite_number; i++) {
       let start = i * this.sprite_size
@@ -231,6 +234,7 @@ class Projection extends Component {
       geometry = new THREE.BufferGeometry();
 
       let numVertices = vertices.length;
+      console.log("numVertices -->",numVertices)
       let positions = new Float32Array(numVertices * 3);
       let offsets = new Float32Array(numVertices * 2);
       let clusters = new Float32Array(numVertices * 3);
@@ -462,13 +466,14 @@ class Projection extends Component {
   updateClusterColors=(clusterSelected)=>{
     console.log('updateClusterColors',clusterSelected);
     
-    let numVertices = this.props.settings.sprite_number * this.sprite_size;
+    let numVertices =  this.props.metadata.length;//this.props.settings.sprite_number * this.sprite_size;
+    console.log("numVertices Update -->",numVertices, ' metadata.length:', this.props.metadata.length)
     let clusters = new Float32Array(numVertices * 3);
     let clustersActive = new Float32Array(numVertices );
     let clusterColors = this.props.settings.clusters.clusterColors;
     console.log(numVertices,clusterSelected !=="-",this.props.settings.total,clusterColors);
     for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
-      if( clusterSelected !=="-" && i<this.props.settings.total){
+      if( clusterSelected !=="-" ){//&& i<this.props.settings.total){
         clustersActive[index] = 1.0;
         console.log(clustersActive[index]);
         let clusterId = this.props.metadata[index][clusterSelected];
@@ -483,6 +488,7 @@ class Projection extends Component {
         }
       }else{
         clustersActive[index] = 0.0;
+        console.log(clustersActive[index]);
       }
     }
 
@@ -548,7 +554,6 @@ class Projection extends Component {
     let highlights = highlight_container.children;
     highlight_container.remove(...highlights);
   }
-
 
   checkIntersects(mouse_position) {
     let { width, height, previewPane_ctx, previewPane_image_size } = this.props;
@@ -644,6 +649,8 @@ class Projection extends Component {
     this.setupCamera();
     this.animate();
     this.handleMouse();
+
+    this.changeEmbeddings(this.props.algorithm_choice);
   }
 
   animate() {
@@ -661,12 +668,14 @@ class Projection extends Component {
     if (width !== prevProps.width || height !== prevProps.height) {
       this.handleResize(width, height);
     }
+    
     if (prevProps.algorithm_choice !== this.props.algorithm_choice) {
       this.changeEmbeddings(
-        prevProps.algorithm_choice,
+        //prevProps.algorithm_choice,
         this.props.algorithm_choice,
       );
     }
+    
     if (this.props.scaleMin !== prevProps.scaleMin || this.props.scaleMax !== prevProps.scaleMax){
       this.handleResize(width, height);
     }
