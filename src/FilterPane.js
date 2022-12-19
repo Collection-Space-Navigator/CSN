@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Grid } from "@material-ui/core";
 //import _ from "lodash";
 import Filterbox from "./QueryFilter";
-import "./react-filter-box.css";
 
 class FilterPane extends Component {
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import  _ from "lodash";
-import { Button } from "@material-ui/core";
+import { Button, ButtonGroup } from "@material-ui/core";
 import ReactFilterBox, {SimpleResultProcessing, GridDataAutoCompleteHandler} from "react-filter-box";
+import "./react-filter-box.css";
+import { CSVLink } from "react-csv";
 
 //Extend this class to add your custom operator
 class CustomAutoComplete extends GridDataAutoCompleteHandler {
@@ -32,10 +34,12 @@ class Filterbox extends Component {
         super(props);
         this.state = {
             parseOK: true,
+            filterDataToExportCSV: [],
             query2: {}
         };
         this.applyFilter = this.applyFilter.bind(this);
         this.resetFilter = this.resetFilter.bind(this);
+        this.exportMetadata = this.exportMetadata.bind(this);
         this.options = this.props.settings.search;
         this.customAutoComplete = new CustomAutoComplete(this.props.metadata,this.options);
         // this.editorConfig = {
@@ -76,9 +80,32 @@ class Filterbox extends Component {
     onParseError(expressions) {
         this.setState({ parseOK: true });
     }
+    
+    exportMetadata = () => {
+        var filteredMetadata = [];
+        for (let i = 0; i < this.props.metadata.length; i++) {
+          if (this.props.currentProjection[i] === 0) {
+            var obj = this.props.metadata[i];
+            filteredMetadata.push(obj);
+          }
+        }
+        this.setState(
+          { filterDataToExportCSV: filteredMetadata },
+          () => {
+            document.getElementsByClassName('hidden')[0].click();
+          }
+        );
+      };
+      
 
     render() {
         return <div className="main-container">
+            <CSVLink 
+                data={this.state.filterDataToExportCSV} 
+                filename={"CSN_filtered_metadata.csv"} 
+                target="_blank"
+                className='hidden'
+            />
             <ReactFilterBox
                 autoCompleteHandler = {this.customAutoComplete}
                 customRenderCompletionItem = {this.customRenderCompletionItem.bind(this) }
@@ -89,12 +116,17 @@ class Filterbox extends Component {
                 onParseError={this.onParseError.bind(this) }
                 editorConfig={{ lineWrapping: true }}
             />
-            <Button variant="contained" disabled={this.state.parseOK}
-            onClick={this.applyFilter}
-              >apply</Button>
-            <Button variant="contained"
-            onClick={this.resetFilter}
-              >reset</Button>
+
+            <ButtonGroup variant="contained">
+            <Button onClick={this.applyFilter}>apply</Button>
+            <Button onClick={this.resetFilter}>reset</Button>
+            </ButtonGroup>
+            <div style={{height: "6px"}}></div>
+            <ButtonGroup variant="contained" fullWidth>
+            <Button onClick={this.exportMetadata}>download filtered metadata</Button>
+            </ButtonGroup>
+
+
         </div>
     }
 }

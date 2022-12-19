@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { CSVLink } from "react-csv";
 import PreviewPane from './PreviewPane'
 import SliderPane from './SliderPane'
 import FilterPane from './FilterPane'
@@ -11,6 +10,7 @@ import './scss/Menu.scss';
 import Projection from './Projection'
 import * as _ from 'lodash'
 import { CircularProgress } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 class Layout extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class Layout extends Component {
       previewPane_height: null,
       controlPane_height: null,
       filterPane_height: null,
-      show_about: null,
       algorithm_choice: null,
       allFilter: {},
       currentProjection: new Float32Array(total).fill(0),
@@ -32,13 +31,11 @@ class Layout extends Component {
       scaleMin: 14,
       scaleMax: 70,
       clusterTypeSelected:'-',
-      filterDataToExportCSV:[]
+      // filterDataToExportCSV:[]
     }
     this.previewPane_ctx = null;
     this.setSize = _.debounce(this.setSize.bind(this), 200);
-    this.checkHash = this.checkHash.bind(this);
     this.setPreviewPaneCanvas = this.setPreviewPaneCanvas.bind(this);
-    this.toggleAbout = this.toggleAbout.bind(this);
     this.selectAlgorithm = this.selectAlgorithm.bind(this);
     this.selectDataset = this.selectDataset.bind(this);
     this.refProjection = React.createRef();
@@ -47,9 +44,7 @@ class Layout extends Component {
   componentDidMount() {
     this.selectAlgorithm(this.props.algorithm_name);
     this.setSize();
-    this.checkHash();
     window.addEventListener('resize', this.setSize);
-    window.addEventListener('popstate', this.checkHash);
     this.calcDefaultScale();
   }
 
@@ -99,8 +94,8 @@ class Layout extends Component {
       this.refProjection.current.updateProjection(arr);
     } catch(error) {}
     
-    // Release memory of export filter metadata
-    if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
+    // // Release memory of export filter metadata
+    // if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
   }
 
   selectAlgorithm(v) {
@@ -129,28 +124,10 @@ class Layout extends Component {
     this.previewPane_ctx = ctx;
     console.log(ctx);
   }
-
-  toggleAbout(state) {
-    if (state === true) {
-      window.history.pushState(null, 'About Collection Space Navigator', '#about');
-      this.setState({ show_about: true });
-    } else if (state === false) {
-      window.history.pushState(null, 'Collection Space Navigator', window.location.pathname);
-      this.setState({ show_about: false });
-    }
-  }
   
   setHoverIndex(hover_index) {
     if (hover_index){
       this.setState({ hover_index: hover_index });
-    }
-  }
-
-  checkHash() {
-    if (window.location.hash && window.location.hash === '#about') {
-      this.setState({ show_about: true });
-    } else {
-      this.setState({ show_about: false });
     }
   }
 
@@ -178,7 +155,7 @@ class Layout extends Component {
       algorithm_choice,
       currentProjection,
       allFilter,
-      filterDataToExportCSV
+      // filterDataToExportCSV
     } = this.state;
     let displayNumb = 0;
     for(let i=0;i<settings["total"];i++){
@@ -295,7 +272,6 @@ class Layout extends Component {
                 <MenuItem>
                 <SliderPane
                 grem={grem}
-                toggleAbout={this.toggleAbout}
                 metadata={metadata}
                 hover_index={hover_index}
                 settings={settings}
@@ -306,7 +282,7 @@ class Layout extends Component {
               />
                 </MenuItem>
                 </SubMenu>
-                <SubMenu title="Advanced Search & Filter" style={{overflow:"visible"}}>
+                <SubMenu title="Advanced Filters" style={{overflow:"visible"}}>
                 <MenuItem>
                   <FilterPane
                     grem={grem}
@@ -316,29 +292,9 @@ class Layout extends Component {
                     metadata={metadata}
                     currentProjection={currentProjection}
                     allFilter={allFilter}
+                    // filterDataToExportCSV={filterDataToExportCSV}
                   />
                 </MenuItem>
-              </SubMenu>
-              <SubMenu title="Export">
-              <CSVLink 
-                data={filterDataToExportCSV} 
-                filename={"CSN_filtered_metadata.csv"} 
-                className="btn-csv-download" 
-                target="_blank"
-                onClick={() => {
-                  let filteredMetadata = [];
-                  for (let i=0;i<metadata.length;i++) {
-                    if(currentProjection[i]===0){
-                      var obj = metadata[i];
-                      filteredMetadata.push(obj)
-                    }
-                  }
-                  this.setState({filterDataToExportCSV: filteredMetadata});
-                  console.log(filterDataToExportCSV); 
-                }}
-              >
-                Download CSV filter metadata
-              </CSVLink>
               </SubMenu>
             </Menu>
           </ProSidebar>
@@ -354,6 +310,16 @@ class Layout extends Component {
           <ProSidebar
             width={previewPane_image_size}>
             <Menu iconShape="square">
+            <SubMenu title="Collection Space Navigator" 
+              >
+              <div className='about'>
+                <h3>Interactive Visualization Interface for Multidimensional Datasets</h3>
+                The Collection Space Navigator (CSN) is an explorative visualization tool for researching collections and their multidimensional representations. 
+                We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. 
+                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="blank">[more on GitHub...]</a>
+                
+              </div>
+              </SubMenu>
               <SubMenu title="Preview" defaultOpen="True" 
               >
                 <PreviewPane
@@ -410,9 +376,6 @@ class Layout extends Component {
           />
           <div style={{fontSize: '13px', bottom: '2px', left: '8px', position: 'absolute'}}>
             showing {displayNumb} / {settings["total"]}
-          </div>
-          <div style={{fontSize: '13px', bottom: '2px', right: '8px', position: 'absolute'}}>
-            <a href="https://github.com/Collection-Space-Navigator/CSN" target="blank">Collection Space Navigator</a>
           </div>
         </div>
       </div>
