@@ -157,12 +157,6 @@ class Layout extends Component {
       allFilter,
       // filterDataToExportCSV
     } = this.state;
-    let displayNumb = 0;
-    for(let i=0;i<settings["total"];i++){
-      if(currentProjection[i]===0){
-        displayNumb++;
-      }
-    }
 
     let previewPane_ctx = this.previewPane_ctx;
     
@@ -372,11 +366,9 @@ class Layout extends Component {
             initPath={this.props.initPath}
             scaleMin={this.state.scaleMin}
             scaleMax={this.state.scaleMax}
+            currentProjection={currentProjection}
             // tiles={this.tiles}
           />
-          <div style={{fontSize: '13px', bottom: '2px', left: '8px', position: 'absolute'}}>
-            showing {displayNumb} / {settings["total"]}
-          </div>
         </div>
       </div>
       
