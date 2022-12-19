@@ -117,6 +117,14 @@ button {
   text-align: center;
 }
 
+
+.loading-small {
+  position: absolute;
+  bottom: 4px;
+  left: 12px;
+  text-align: center;
+}
+
 .CodeMirror {
   height: 125px;
 }
