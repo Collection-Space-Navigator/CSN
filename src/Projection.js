@@ -689,21 +689,11 @@ class Projection extends Component {
     let { width, height } = this.props;
     const tileProgress = this.state.tilesLoaded;
     const allTiles = this.props.settings.sprite_number;
-    const total = this.props.settings.total;
-    let displayNumb = 0;
-    for(let i=0;i<total;i++){
-      if(this.props.currentProjection[i]===0){
-        displayNumb++;
-      }
-    }
-
     return (
       <><div>
         {tileProgress < 1 ? <div className="loading"><CircularProgress color="inherit"/><div>loading tiles...</div></div> : 
         tileProgress < allTiles-1 ? <div className="loading-small"><CircularProgress color="inherit"/><div>loading...</div></div> : 
-        <div style={{fontSize: '13px', bottom: '2px', left: '8px', position: 'absolute'}}>
-        showing {displayNumb} / {total}
-      </div>
+        ''
       }
       </div><div
           style={{ width: width, height: height, overflow: 'hidden' }}

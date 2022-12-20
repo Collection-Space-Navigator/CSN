@@ -10,7 +10,7 @@ import './scss/Menu.scss';
 import Projection from './Projection'
 import * as _ from 'lodash'
 import { CircularProgress } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
+import { CSVLink } from "react-csv";
 
 class Layout extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Layout extends Component {
       scaleMin: 14,
       scaleMax: 70,
       clusterTypeSelected:'-',
-      // filterDataToExportCSV:[]
+      filterDataToExportCSV:[]
     }
     this.previewPane_ctx = null;
     this.setSize = _.debounce(this.setSize.bind(this), 200);
@@ -94,8 +94,8 @@ class Layout extends Component {
       this.refProjection.current.updateProjection(arr);
     } catch(error) {}
     
-    // // Release memory of export filter metadata
-    // if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
+    // Release memory of export filter metadata
+    if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
   }
 
   selectAlgorithm(v) {
@@ -155,7 +155,7 @@ class Layout extends Component {
       algorithm_choice,
       currentProjection,
       allFilter,
-      // filterDataToExportCSV
+      filterDataToExportCSV
     } = this.state;
 
     let previewPane_ctx = this.previewPane_ctx;
@@ -237,6 +237,14 @@ class Layout extends Component {
       lineHeight: line_height,
     };
 
+
+    let displayNumb = 0;
+    for(let i=0;i<settings.total;i++){
+      if(currentProjection[i]===0){
+        displayNumb++;
+      }
+    }
+
     return ww !== null ? (
       <div style={general_style}>
         <div
@@ -290,6 +298,31 @@ class Layout extends Component {
                   />
                 </MenuItem>
               </SubMenu>
+              <MenuItem>
+            <CSVLink 
+                data={this.state.filterDataToExportCSV} 
+                filename={"CSN_filtered_metadata.csv"} 
+                target="_blank"
+
+                onClick={() => {
+                  let filteredMetadata = [];
+                  for (let i=0;i<metadata.length;i++) {
+                    if(currentProjection[i]===0){
+                      var obj = metadata[i];
+                      filteredMetadata.push(obj)
+                    }
+                  }
+                  this.setState({filterDataToExportCSV: filteredMetadata});
+                  console.log(filterDataToExportCSV); 
+                }}                
+            >
+              <h3>Download filtered metadata as CSV</h3>
+              <div className='info'>showing {displayNumb} / {settings.total}</div>
+              {/* <Button variant="contained" size="small" >export as CSV</Button> */}
+            </CSVLink>
+            </MenuItem>
+            <MenuItem>
+            </MenuItem>
             </Menu>
           </ProSidebar>
           </div>
