@@ -28,6 +28,7 @@ a {
 .about {
   margin-left: 22px;
   margin-right: 10px;
+  
  }
 
 .hover-555:hover {
@@ -55,10 +56,7 @@ canvas {
   margin: 0;
   padding: 0;
 }
-/**
- * Reset button styles.
- * It takes a bit of work to achieve a neutral look.
- */
+
 button {
   padding: 0;
   border: none;

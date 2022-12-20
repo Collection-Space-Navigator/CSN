@@ -70,16 +70,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Authors
 
-[Tillmann Ohm](https://tillmannohm.com/) [1][2][3][4]   
-[Mar Canet Solà](https://var-mar.info/) [1][2][3][4]  
-[Andres Karjus](https://andreskarjus.github.io/) [2][3]  
-[Mila Oiva](https://milaoiva.fi/) [4]  
+[Tillmann Ohm](https://tillmannohm.com/) [1][2]  
+[Mar Canet Solà](https://var-mar.info/) [1][2]
+[Andres Karjus](https://andreskarjus.github.io/) [2]
 [Maximilian Schich](https://cudan.tlu.ee/team/max/) [2]   
 
 [1] Software development  
-[2] Compression Ensables Demo  
-[3] Text2Image Demo  
-[4] Soviet Newsreels Demo  
+[2] Compression Ensables Demo
 
 ## Acknowledgements
 All mentioned authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).

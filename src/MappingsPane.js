@@ -30,13 +30,10 @@ class MappingsPane extends Component {
     return (
       
       <Grid container spacing={1}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             Dataset:
           </Grid>
-          <Grid item xs={6}>
-            Mapping:
-          </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <select className="full-width"
               onChange={this.handleSelectDataset}
               value={selectedDataset}
@@ -48,7 +45,11 @@ class MappingsPane extends Component {
               ))}
             </select>
           </Grid>
-          <Grid item xs={6}>
+
+          <Grid item xs={4}>
+            Projection:
+          </Grid>
+          <Grid item xs={8}>
             <select className="full-width"
               onChange={this.handleSelectAlgorithm}
               value={algorithm_options[algorithm_choice]}

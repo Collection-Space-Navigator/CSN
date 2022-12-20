@@ -256,7 +256,7 @@ class Layout extends Component {
           <div>
           <ProSidebar>
             <Menu iconShape="square">
-              <SubMenu title="Data & Mapping" defaultOpen="True">
+              <SubMenu title="Data & Projections" defaultOpen="True">
               <MenuItem>
               <MappingsPane
                 grem={grem}
@@ -270,7 +270,7 @@ class Layout extends Component {
               />
               </MenuItem>
               </SubMenu>
-              <SubMenu title="Range Sliders" defaultOpen="True">
+              <SubMenu title="Dimension Filters" defaultOpen="True">
                 <MenuItem>
                 <SliderPane
                 grem={grem}
@@ -337,17 +337,20 @@ class Layout extends Component {
           <ProSidebar
             width={previewPane_image_size}>
             <Menu iconShape="square">
-            <SubMenu title="Collection Space Navigator" 
+            <MenuItem>
+            <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank"><h3>Collection Space Navigator</h3></a>
+            </MenuItem>
+            <SubMenu title="About" 
               >
               <div className='about'>
-                <h3>Interactive Visualization Interface for Multidimensional Datasets</h3>
-                The Collection Space Navigator (CSN) is an explorative visualization tool for researching collections and their multidimensional representations. 
+                The Collection Space Navigator (CSN) is an <strong>interactive visualization interface for multidimensional datasets</strong>.
+                It functions as an explorative visualization tool for researching collections and their multidimensional representations. 
                 We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. 
-                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" >[more on GitHub...]</a>
+                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" ><strong>[more on GitHub...]</strong></a>
                 
               </div>
               </SubMenu>
-              <SubMenu title="Preview" defaultOpen="True" 
+              <SubMenu title="Object Preview" defaultOpen="True" 
               >
                 <PreviewPane
                   previewPane_image_size={previewPane_image_size}
@@ -355,7 +358,7 @@ class Layout extends Component {
                   prevURL={settings.url_prefix + metadata[hover_index].URL}
                 />
               </SubMenu>
-              <SubMenu title="Info" defaultOpen="True" >
+              <SubMenu title="Object Info" defaultOpen="True" >
                 <MenuItem>
                 <InfoPane
                   hover_index={hover_index}
@@ -364,7 +367,7 @@ class Layout extends Component {
                 />
                 </MenuItem>
               </SubMenu>
-              <SubMenu title="View Settings" >
+              <SubMenu title="Object View Settings" >
                 <MenuItem>
                 <ViewPane
                   clusters={settings.clusters}
