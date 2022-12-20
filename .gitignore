@@ -2,11 +2,7 @@ package-lock.json
 node_modules/
 node/
 .DS_Store
-public/datasets/.DS_Store
+public/datasets/
 .ipynb_checkpoints/CSN_setup-checkpoint.ipynb
-public/datasets/.DS_Store
-public/datasets/.DS_Store
-public/datasets/.DS_Store
-public/datasets/.DS_Store
-public/datasets/.DS_Store
-public/datasets/.DS_Store
+build/
+
