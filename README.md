@@ -70,10 +70,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Authors
 
-[Tillmann Ohm](https://tillmannohm.com/) [1][2]  
-[Mar Canet Solà](https://var-mar.info/) [1][2]
-[Andres Karjus](https://andreskarjus.github.io/) [2]
-[Maximilian Schich](https://cudan.tlu.ee/team/max/) [2]   
+[Tillmann Ohm](https://tillmannohm.com/) [1][2]   
+[Mar Canet Solà](https://var-mar.info/) [1][2]   
+[Andres Karjus](https://andreskarjus.github.io/) [2]    
+[Maximilian Schich](https://cudan.tlu.ee/team/max/) [2]    
 
 [1] Software development  
 [2] Compression Ensables Demo
