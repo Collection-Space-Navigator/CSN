@@ -168,7 +168,7 @@ class Layout extends Component {
       top: 0,
       background: '#222',
       flexDirection: 'column',
-      zIndex: 10
+      zIndex: 9
     };
     let controlMenu_style = {
       position: 'absolute',
@@ -178,7 +178,7 @@ class Layout extends Component {
       maxHeight: '100vh',
       overflow: 'auto',
       background: '#222',
-      zIndex: 11
+      zIndex: 9
     };
 
     let main_style = {
@@ -338,7 +338,7 @@ class Layout extends Component {
             width={previewPane_image_size}>
             <Menu iconShape="square">
             <MenuItem>
-            <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank"><h3>Collection Space Navigator</h3></a>
+            <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer"><h3>Collection Space Navigator</h3></a>
             </MenuItem>
             <SubMenu title="About" 
               >
@@ -346,7 +346,7 @@ class Layout extends Component {
                 The Collection Space Navigator (CSN) is an <strong>interactive visualization interface for multidimensional datasets</strong>.
                 It functions as an explorative visualization tool for researching collections and their multidimensional representations. 
                 We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. 
-                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" ><strong>[more on GitHub...]</strong></a>
+                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer" ><strong>[more on GitHub...]</strong></a>
                 
               </div>
               </SubMenu>
