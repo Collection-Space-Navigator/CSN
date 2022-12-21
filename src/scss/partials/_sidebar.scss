@@ -32,12 +32,12 @@
   text-align: left;
   transition: width, left, right, 0.3s;
   position: relative;
-  z-index: 1009;
+  z-index: 9;
   > .pro-sidebar-inner {
     background: $sidebar-bg-color;
     height: 100%;
     position: relative;
-    z-index: 101;
+    z-index: 2;
 
     > img.sidebar-bg {
       width: 100%;
@@ -48,7 +48,7 @@
       opacity: 0.3;
       left: 0;
       top: 0;
-      z-index: 100;
+      z-index: 1;
     }
 
     > .pro-sidebar-layout {
@@ -58,7 +58,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      z-index: 101;
+      z-index: 2;
 
       .pro-sidebar-header {
         border-bottom: 1px solid rgba($sidebar-color, 0.2);
@@ -84,7 +84,7 @@
     bottom: 0;
     left: 0;
     background-color: rgba(#000, 0.3);
-    z-index: 100;
+    z-index: 1;
     display: none;
   }
 
