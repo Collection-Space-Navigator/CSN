@@ -237,7 +237,7 @@
           }
           > .pro-inner-list-item {
             background-color: $submenu-bg-color-collapsed;
-            z-index: 111;
+            z-index: 5;
           }
           position: relative;
           &::before {
