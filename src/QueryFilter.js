@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import  _ from "lodash";
 import { Button, ButtonGroup } from "@material-ui/core";
 import ReactFilterBox, {SimpleResultProcessing, GridDataAutoCompleteHandler} from "react-filter-box";
-import "./react-filter-box.css";
+import "./filter-box.css";
 
 //Extend this class to add your custom operator
 class CustomAutoComplete extends GridDataAutoCompleteHandler {
@@ -59,10 +59,10 @@ class Filterbox extends Component {
         this.props.calculateProjection(arr, "search", true);
     }
 
-    //Customer your rendering item in auto complete
+    //customer your rendering item in auto complete
     customRenderCompletionItem(self, data, pick) {
-        var className = ` hint-value cm-${data.type}`;
-        return <div className={className}  >
+        var className = `hint-value cm-${data.type}`
+        return <div className={className} >
                     <span style={{ fontWeight: "bold" }}>{data.value}</span>
                     <span style={{color:"gray", fontSize:10}}> [{data.type}] </span>
                 </div>
@@ -96,8 +96,8 @@ class Filterbox extends Component {
       
 
     render() {
-        return <div className="main-container">
-
+        return (
+        <div className="main-container">
             <ReactFilterBox
                 autoCompleteHandler = {this.customAutoComplete}
                 customRenderCompletionItem = {this.customRenderCompletionItem.bind(this) }
@@ -115,6 +115,7 @@ class Filterbox extends Component {
             </ButtonGroup>
 
         </div>
+        )
     }
 }
 
