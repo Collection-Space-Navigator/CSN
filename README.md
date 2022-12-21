@@ -29,7 +29,8 @@ The CSN should be now accessible at `http://localhost:3000` in your browser.
 
 ## Development 
 
-For development only.
+For development only.   
+Important: `node 14.21.2` required!
 
 ```
 npm install
