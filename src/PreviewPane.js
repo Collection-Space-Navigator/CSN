@@ -5,29 +5,25 @@ class PreviewPane extends Component {
     super(props);
     this.state = {
       dimensions: {},
-      imgURL: null
+      imgURL: null,
+      previewImage: false,
+      timeoutId: null
     };
-    this.onImgLoad = this.onImgLoad.bind(this);
+    // this.onImgLoad = this.onImgLoad.bind(this);
   }
 
   componentDidMount() {
     this.props.setPreviewPaneCanvas(this.side_canvas);
   }
 
-  onImgLoad({target:img}) {
-    this.setState({dimensions:{height:img.offsetHeight,
-                               width:img.offsetWidth}});
-  }
-
-  componentWillUpdate(nextState) {
-    if( this.state.imgURL !== nextState.prevURL ) {
-      if(this.state.imgURL !== null){
-        this.setState({ imgURL: null });
-      }
-      if( this.textTimer ) clearTimeout(this.textTimer)
-      this.textTimer = setTimeout(() => {
-        this.setState({ imgURL: nextState.prevURL });
-      }, 10)
+  componentDidUpdate(prevProps) {
+    if (this.props.hover_index !== prevProps.hover_index) {
+      this.setState({ previewImage: false });
+      clearTimeout(this.state.timeoutId);
+      const timeoutId = setTimeout(() => {
+        this.setState({ previewImage: true });
+      }, 100);
+      this.setState({ timeoutId });
     }
   }
 
@@ -47,16 +43,9 @@ class PreviewPane extends Component {
       <div>
       <div style={{position: "absolute", width: previewPane_image_size, height: previewPane_image_size, textAlign: "center"}}>
         <span style={{display: "inline-block", height: "100%", verticalAlign: "middle"}}/>
-          <img
-            src={this.state.imgURL}
-            onLoad={this.onImgLoad}
-            alt=""
-            style={{
-            verticalAlign: "middle",
-            width: imgWidth,
-            height: imgHeight,
-          }}
-          />
+
+      {this.state.previewImage === true ? this.props.setPreviewImage() : null}
+      
       </div>
         <canvas 
           ref={side_canvas => {

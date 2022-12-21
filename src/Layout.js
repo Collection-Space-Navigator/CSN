@@ -31,11 +31,15 @@ class Layout extends Component {
       scaleMin: 14,
       scaleMax: 70,
       clusterTypeSelected:'-',
-      filterDataToExportCSV:[]
+      filterDataToExportCSV:[],
+      dimensions: {}
     }
     this.previewPane_ctx = null;
     this.setSize = _.debounce(this.setSize.bind(this), 200);
     this.setPreviewPaneCanvas = this.setPreviewPaneCanvas.bind(this);
+    this.setPreviewImage = this.setPreviewImage.bind(this);
+    // this.onImgLoad = this.onImgLoad.bind(this);
+
     this.selectAlgorithm = this.selectAlgorithm.bind(this);
     this.selectDataset = this.selectDataset.bind(this);
     this.refProjection = React.createRef();
@@ -124,7 +128,24 @@ class Layout extends Component {
     this.previewPane_ctx = ctx;
     console.log(ctx);
   }
-  
+
+  // onImgLoad({target:img}) {
+  //   this.setState({dimensions:{height:img.offsetHeight,
+  //                              width:img.offsetWidth}});
+  // }
+
+  setPreviewImage() {
+      return (
+      <img
+      src={ this.props.settings.url_prefix + this.props.metadata[this.state.hover_index].Filename }
+      // onLoad={this.onImgLoad}
+      alt="preview"
+      style={{
+        verticalAlign: "middle",
+      }}
+      />)
+  }
+
   setHoverIndex(hover_index) {
     if (hover_index){
       this.setState({ hover_index: hover_index });
@@ -355,7 +376,8 @@ class Layout extends Component {
                 <PreviewPane
                   previewPane_image_size={previewPane_image_size}
                   setPreviewPaneCanvas={this.setPreviewPaneCanvas}
-                  prevURL={settings.url_prefix + metadata[hover_index].URL}
+                  setPreviewImage={this.setPreviewImage}
+                  hover_index={hover_index}
                 />
               </SubMenu>
               <SubMenu title="Object Info" defaultOpen="True" >
