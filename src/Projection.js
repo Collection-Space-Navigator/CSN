@@ -459,8 +459,8 @@ class Projection extends Component {
       );
       points.geometry.attributes.color.needsUpdate = true;
     }
-    let point = this.scene.children[0].children[0]
-    console.log(point.geometry);
+    // let point = this.scene.children[0].children[0]
+    // console.log(point.geometry);
   }
 
   updateClusterColors=(clusterSelected)=>{
