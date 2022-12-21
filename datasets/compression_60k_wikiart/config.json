@@ -12,6 +12,10 @@
             "file": "tSNE.json"
         },
         {
+            "name": "PCA",
+            "file": "PC1_PC2.json"
+        },
+        {
             "name": "Year_PC1",
             "file": "Year_PC1.json"
         },
@@ -30,10 +34,6 @@
         {
             "name": "Colorfulness_FileSize",
             "file": "Colorfulness_FileSize.json"
-        },
-        {
-            "name": "PC1_PC2",
-            "file": "PC1_PC2.json"
         },
         {
             "name": "PC1_Colorfulness",
