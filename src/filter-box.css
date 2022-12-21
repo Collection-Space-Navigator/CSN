@@ -1,0 +1,54 @@
+.CodeMirror {
+    height: 125px;
+  }
+  .ReactCodeMirror {
+    height: 30px;
+  }
+  .cm-category {
+    color: #2196F3;
+  }
+  .cm-operator {
+    color: #9E9E9E;
+  }
+  .cm-value {
+    color: #E91E63;
+  }
+  
+  .CodeMirror-hints {
+    padding: 5px;
+    min-width: 100px;
+    z-index: 1000;
+  }
+  .CodeMirror-hints .CodeMirror-hint {
+    padding: 5px 5px;
+  }
+  li.CodeMirror-hint-active {
+    background: #2196F3;
+  }
+  li.CodeMirror-hint-active .hint-value {
+    color: white;
+  }
+
+  .react-filter-box {
+    /* overflow-y: hidden; */
+    /* overflow-x: hidden; */
+    width: 296px;
+    /* padding: 4px 6px; */
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #555555;
+    vertical-align: middle;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+  }
