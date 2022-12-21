@@ -22,8 +22,6 @@ class Projection extends Component {
     this.getScaleFromZ = this.getScaleFromZ.bind(this)
     this.getZFromScale = this.getZFromScale.bind(this)
     this.changeEmbeddings = this.changeEmbeddings.bind(this)
-
-   
   }
 
 
@@ -301,6 +299,8 @@ class Projection extends Component {
         texture: { value: this.textures[c] },
         repeat: { value: new THREE.Vector2(texture_subsize, texture_subsize) },
         size: { value: this.props.settings.sprite_image_size },
+        greyTransparency:{ value:0.1},
+        imageTransparency:{ value:1.0}
       };
 
       let vertex_shader = `
@@ -313,11 +313,18 @@ class Projection extends Component {
         attribute float color;
         varying float vColor;
         uniform float size;
+        uniform float greyTransparency;
+        varying float vGreyTransparency;
+        uniform float imageTransparency;
+        varying float vImageTransparency;
+
         void main() {
           vOffset = offset;
           vColor = color;
           vCluster = cluster;
           vClusterActive = clusterActive;
+          vGreyTransparency = greyTransparency;
+          vImageTransparency = imageTransparency;
           gl_PointSize = size;
           gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
         }`;
@@ -329,6 +336,8 @@ class Projection extends Component {
         varying vec3 vCluster;
         varying float vClusterActive;
         varying float vColor;
+        varying float vGreyTransparency;
+        varying float vImageTransparency;
         void main() {
           vec2 uv = vec2( gl_PointCoord.x, gl_PointCoord.y );
           vec4 tex = texture2D( texture, uv * repeat + vOffset );
@@ -342,13 +351,16 @@ class Projection extends Component {
             vec4 diff = tex - default_border_color;
             float equality = float(dot(diff,diff) < 0.99 && vClusterActive > 0.9);
             tex = mix( tex, replace_color, equality);
+           
           //}
+          // make transparent images
+          tex = mix( tex,  vec4(0.0,0.0,0.0,0.0), vImageTransparency);
 
           // Grey images filter our selection 
           //if ( vColor > 0.9 ){
           //  tex = vec4(0.3,0.3,0.3,0.1);
           //}
-          vec4 filterout_color = vec4(0.3,0.3,0.3,0.1);
+          vec4 filterout_color = vec4(0.3,0.3,0.3,vGreyTransparency);
           float filterout_equality = float(vColor > 0.9);
           tex = mix( tex, filterout_color, filterout_equality );
 
@@ -461,6 +473,24 @@ class Projection extends Component {
     }
     // let point = this.scene.children[0].children[0]
     // console.log(point.geometry);
+  }
+
+  updatePass2Shader=(num)=>{
+    for (let c = 0; c < this.props.settings.sprite_number; c++) {
+      let points = this.scene.children[0].children[c];
+      if(num==1){
+        points.material.uniforms.greyTransparency.value = 0.1;
+        points.material.uniforms.greyTransparency.needsUpdate = true;
+        points.material.uniforms.imageTransparency.value = 1.0;
+        points.material.uniforms.imageTransparency.needsUpdate = true;
+      }
+      if(num==2){
+        points.material.uniforms.greyTransparency.value = 0.0;
+        points.material.uniforms.greyTransparency.needsUpdate = true;
+        points.material.uniforms.imageTransparency.value = 0.0;
+        points.material.uniforms.imageTransparency.needsUpdate = true;
+      }
+    }
   }
 
   updateClusterColors=(clusterSelected)=>{
@@ -639,8 +669,9 @@ class Projection extends Component {
 
     this.camera = new THREE.PerspectiveCamera(vFOV, aspect, near, far);
 
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setClearColor(0x111111, 1);
+    this.renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true });
+    //this.renderer.setClearColor(0x111111, 1);
+    this.renderer.autoClear = false;
     this.renderer.setSize(width, height);
     this.mount.appendChild(this.renderer.domElement);
 
@@ -656,6 +687,12 @@ class Projection extends Component {
   animate() {
     requestAnimationFrame(this.animate);
     TWEEN.update();
+    this.renderer.clear()
+    // 1-Pass :: Render filtered images (grey semi-transparent images that create a shadow behind)
+    this.updatePass2Shader(1)
+    this.renderer.render(this.scene, this.camera);
+    // 2-Pass - Render all images
+    this.updatePass2Shader(2)
     this.renderer.render(this.scene, this.camera);
   }
 
