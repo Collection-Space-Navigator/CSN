@@ -111,5 +111,5 @@
             "type": "selection"
         }
     ],
-    "url_prefix": "http://cudan-data.tlu.ee/CSN/wikiart/"
+    "url_prefix": "https://cudan-data.tlu.ee/CSN/wikiart/"
 }
