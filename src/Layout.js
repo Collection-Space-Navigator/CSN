@@ -31,6 +31,7 @@ class Layout extends Component {
       scaleMin: 14,
       scaleMax: 70,
       clusterTypeSelected:'-',
+      greyRenderTypeSelected:0,
       filterDataToExportCSV:[],
       dimensions: {}
     }
@@ -70,10 +71,15 @@ class Layout extends Component {
 
   handleChangeCluster(e) {
     let value = e.target.value;
-    this.setState({ clusterTypeSelected: value})
+    this.setState({ clusterTypeSelected: parseInt(value)})
     try{
       this.refProjection.current.updateClusterColors(value)
     } catch(error) {console.log("error updateClusterColors")}
+  }
+
+  handleChangeGrey(e) {
+    let value = e.target.value;
+    this.setState({ greyRenderTypeSelected: value})
   }
 
   calculateProjection=(newArr,type, update)=>{
@@ -165,8 +171,7 @@ class Layout extends Component {
       dataset_options,
       metadata,
       settings,
-      barData,
-      clusterTypeSelected
+      barData
     } = this.props;
 
     let {
@@ -176,7 +181,9 @@ class Layout extends Component {
       algorithm_choice,
       currentProjection,
       allFilter,
-      filterDataToExportCSV
+      filterDataToExportCSV,
+      greyRenderTypeSelected,
+      clusterTypeSelected
     } = this.state;
 
     let previewPane_ctx = this.previewPane_ctx;
@@ -398,6 +405,7 @@ class Layout extends Component {
                   handleChangeScale = {this.handleChangeScale.bind(this)}
                   handleChangeZoom = {this.handleChangeZoom.bind(this)}
                   handleChangeCluster = {this.handleChangeCluster.bind(this)}
+                  handleChangeGrey = {this.handleChangeGrey.bind(this)}
                   total = {settings.total}
                 />
                 </MenuItem>
@@ -420,6 +428,7 @@ class Layout extends Component {
             algorithm_choice={algorithm_choice}
             datasetDir={this.props.datasetDir}
             clusterTypeSelected={clusterTypeSelected}
+            greyRenderTypeSelected={greyRenderTypeSelected}
             settings={settings}
             initPath={this.props.initPath}
             scaleMin={this.state.scaleMin}

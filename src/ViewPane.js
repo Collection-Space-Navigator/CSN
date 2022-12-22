@@ -16,6 +16,8 @@ class ViewPane extends Component {
 
     return (
       <Grid container spacing={1}>
+        
+          
           <Grid item xs={4}>
             clusters:
           </Grid>
@@ -57,6 +59,17 @@ class ViewPane extends Component {
           />
           </Box>
           </Grid>
+
+          <Grid item xs={4}>
+            Filtered out items:
+          </Grid>
+          <Grid item xs={8}>
+            <select onChange={this.props.handleChangeGrey}>
+              <option key="0" value="0">Grey in background</option>
+              <option key="1" value="1">Invisible (faster)</option>
+            </select> 
+          </Grid>
+
       </Grid>
     )
   }

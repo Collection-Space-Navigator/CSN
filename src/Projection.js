@@ -450,6 +450,7 @@ class Projection extends Component {
     this.scene.children[1].visible = false;
     this.scene.children[1].add(point);
   }
+
   // filter images - update color of images to get inactive (grey) or active images
   updateProjection=(ar)=>{
     this.filterAr = ar;
@@ -689,8 +690,12 @@ class Projection extends Component {
     TWEEN.update();
     this.renderer.clear()
     // 1-Pass :: Render filtered images (grey semi-transparent images that create a shadow behind)
-    this.updatePass2Shader(1)
-    this.renderer.render(this.scene, this.camera);
+    console.log(this.props.greyRenderTypeSelected)
+    if(parseInt(this.props.greyRenderTypeSelected)===0){
+      console.log("render grey")
+      this.updatePass2Shader(1)
+      this.renderer.render(this.scene, this.camera);
+    }
     // 2-Pass - Render all images
     this.updatePass2Shader(2)
     this.renderer.render(this.scene, this.camera);
