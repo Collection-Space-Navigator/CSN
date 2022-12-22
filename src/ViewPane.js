@@ -26,7 +26,7 @@ class ViewPane extends Component {
             <option key="0" value="0">-</option>
               {clusters['clusterList'].map((option, index) => (
               <option key={option} value={option}>
-                  {option}
+                  {option.toLowerCase()}
             </option>
               ))}
             </select> 
@@ -61,12 +61,12 @@ class ViewPane extends Component {
           </Grid>
 
           <Grid item xs={4}>
-            Filtered out items:
+          filtered:
           </Grid>
           <Grid item xs={8}>
             <select onChange={this.props.handleChangeGrey}>
-              <option key="0" value="0">Grey in background</option>
-              <option key="1" value="1">Invisible (faster)</option>
+              <option key="0" value="0">grey items in background</option>
+              <option key="1" value="1">items invisible (faster)</option>
             </select> 
           </Grid>
 
