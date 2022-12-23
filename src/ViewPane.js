@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
-import { Grid, Slider,Box } from "@material-ui/core";
+import { Grid, Slider, Box, Checkbox } from "@material-ui/core";
 
 class ViewPane extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      dimensions: {}
+      dimensions: {},
+      checked: this.props.filterGrey
     }
+  }
+
+  handleChange = () => {
+    this.setState(prevState => ({
+      checked: !prevState.checked
+    }));
+    this.props.handleChangeGrey(this.state.checked ? 1 : 0);
   }
 
   render() {
@@ -60,14 +68,14 @@ class ViewPane extends Component {
           </Box>
           </Grid>
 
-          <Grid item xs={4}>
-          filtered:
+          <Grid item xs={11}>
+          show filtered-out items (slower):
           </Grid>
-          <Grid item xs={8}>
-            <select onChange={this.props.handleChangeGrey}>
-              <option key="0" value="0">grey items in background</option>
-              <option key="1" value="1">items invisible (faster)</option>
-            </select> 
+          <Grid item xs={1}>
+            <input type="checkbox" 
+            checked={this.state.checked} 
+            onChange={this.handleChange}
+            />
           </Grid>
 
       </Grid>
