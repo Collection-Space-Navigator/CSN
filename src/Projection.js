@@ -681,7 +681,6 @@ class Projection extends Component {
     this.setupCamera();
     this.animate();
     this.handleMouse();
-
     this.changeEmbeddings(this.props.algorithm_choice);
   }
 
@@ -692,7 +691,6 @@ class Projection extends Component {
     // 1-Pass :: Render filtered images (grey semi-transparent images that create a shadow behind)
     console.log(this.props.greyRenderTypeSelected)
     if(parseInt(this.props.greyRenderTypeSelected)===0){
-      console.log("render grey")
       this.updatePass2Shader(1)
       this.renderer.render(this.scene, this.camera);
     }
