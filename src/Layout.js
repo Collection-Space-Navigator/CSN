@@ -30,6 +30,7 @@ class Layout extends Component {
       currentSearch: new Float32Array(total).fill(0),
       scaleMin: 14,
       scaleMax: 70,
+      filterGrey: true,
       clusterTypeSelected:'-',
       greyRenderTypeSelected:0,
       filterDataToExportCSV:[],
@@ -47,17 +48,17 @@ class Layout extends Component {
   }
 
   componentDidMount() {
+    this.setDefaults();
     this.selectAlgorithm(this.props.algorithm_name);
     this.setSize();
     window.addEventListener('resize', this.setSize);
-    this.calcDefaultScale();
   }
 
 
-  calcDefaultScale(){
-    if (this.props.settings["total"] < 10000) {
-      this.setState( { scaleMin: 15 } )} else {
-      this.setState( { scaleMin: 5 } )
+  setDefaults(){
+    if (this.props.settings["total"] < 20000) {
+      this.setState( { scaleMin: 15, filterGrey: true, greyRenderTypeSelected: 0 } )} else {
+      this.setState( { scaleMin: 5, filterGrey: false, greyRenderTypeSelected: 1 } )
       }
   }
 
@@ -77,8 +78,8 @@ class Layout extends Component {
     } catch(error) {console.log("error updateClusterColors")}
   }
 
-  handleChangeGrey(e) {
-    let value = e.target.value;
+  handleChangeGrey(value) {
+    // let value = e.target.value;
     this.setState({ greyRenderTypeSelected: value})
   }
 
@@ -402,6 +403,7 @@ class Layout extends Component {
                   clusters={settings.clusters}
                   scaleMin={this.state.scaleMin}
                   scaleMax={this.state.scaleMax}
+                  filterGrey={this.state.filterGrey}
                   handleChangeScale = {this.handleChangeScale.bind(this)}
                   handleChangeZoom = {this.handleChangeZoom.bind(this)}
                   handleChangeCluster = {this.handleChangeCluster.bind(this)}
