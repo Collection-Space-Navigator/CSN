@@ -461,13 +461,13 @@ class Projection extends Component {
   updatePass2Shader=(num)=>{
     for (let c = 0; c < this.props.settings.sprite_number; c++) {
       let points = this.scene.children[0].children[c];
-      if(num==1){
+      if(num===1){
         points.material.uniforms.greyTransparency.value = 0.1;
         points.material.uniforms.greyTransparency.needsUpdate = true;
         points.material.uniforms.imageTransparency.value = 1.0;
         points.material.uniforms.imageTransparency.needsUpdate = true;
       }
-      if(num==2){
+      if(num===2){
         points.material.uniforms.greyTransparency.value = 0.0;
         points.material.uniforms.greyTransparency.needsUpdate = true;
         points.material.uniforms.imageTransparency.value = 0.0;
@@ -487,7 +487,7 @@ class Projection extends Component {
     console.log(numVertices,clusterSelected !=="-",this.props.settings.total,clusterColors);
     
     let ranges = [];
-    let clustersActiveAr_sliced = [];
+    // let clustersActiveAr_sliced = [];
     let clustersAr_sliced = [];
 
     if( clusterSelected !=="disabled" ){
