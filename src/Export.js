@@ -27,7 +27,7 @@ render() {
       } = this.props;
 
     return (
-        <><div style={{ marginBottom: "6px" }}>
+        <><div style={{ marginBottom: "12px" }}>
         <CSVLink 
             data={this.state.filterDataToExportCSV} 
             filename={"CSN_filtered_metadata.csv"} 
@@ -45,7 +45,7 @@ render() {
             >
             <Button variant="contained" fullWidth >Download metadata CSV</Button>
             </CSVLink>
-        </div><div>
+            </div><div>
                 <Button variant="contained" fullWidth onClick={this.makePNG}>Download projection PNG</Button>
             </div></>
 
