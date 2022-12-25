@@ -233,24 +233,24 @@ class Projection extends Component {
 
       let numVertices = vertices.length;
       console.log("numVertices -->",numVertices)
-      let positions = new Float32Array(numVertices * 3);
-      let offsets = new Float32Array(numVertices * 2);
-      let clusters = new Float32Array(numVertices * 3);
-      let colors = new Float32Array(numVertices );
-      let clustersActive = new Float32Array(numVertices );
-      geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.addAttribute('offset', new THREE.BufferAttribute(offsets, 2));
-      geometry.addAttribute('color', new THREE.BufferAttribute(colors, 1));
-      geometry.addAttribute('cluster', new THREE.BufferAttribute(clusters, 3));
-      geometry.addAttribute('clusterActive', new THREE.BufferAttribute(clustersActive, 1));
+      let positionAr = new Float32Array(numVertices * 3);
+      let offsetAr = new Float32Array(numVertices * 2);
+      let clusterAr = new Float32Array(numVertices * 3);
+      let filterAr = new Float32Array(numVertices );
+      //let clustersActive = new Float32Array(numVertices );
+      geometry.addAttribute('position', new THREE.BufferAttribute(positionAr, 3));
+      geometry.addAttribute('offset', new THREE.BufferAttribute(offsetAr, 2));
+      geometry.addAttribute('filter', new THREE.BufferAttribute(filterAr, 1));
+      geometry.addAttribute('cluster', new THREE.BufferAttribute(clusterAr, 3));
+      //geometry.addAttribute('clusterActive', new THREE.BufferAttribute(clustersActive, 1));
 
       for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 3) {
         let x = echunk[i][0];
         let y = echunk[i][1];
         let z = 0;
-        positions[index] = x;
-        positions[index + 1] = y;
-        positions[index + 2] = z;
+        positionAr[index] = x;
+        positionAr[index + 1] = y;
+        positionAr[index + 2] = z;
       }
 
       // geometry.attributes.position.copyVector3sArray(vertices)
@@ -261,8 +261,8 @@ class Projection extends Component {
         let x = ((i % this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / this.props.settings.sprite_actual_size
         let y =
           (Math.floor(i / this.props.settings.sprite_side) * this.props.settings.sprite_image_size) / this.props.settings.sprite_actual_size
-        offsets[index] = x;
-        offsets[index + 1] = y;
+        offsetAr[index] = x;
+        offsetAr[index + 1] = y;
       }
       if (this.props.settings.clusters.clusterList) {
         // Todo: connect cluster the array
@@ -271,26 +271,21 @@ class Projection extends Component {
         console.log("clusterSelected",clusterSelected)
         for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
           // Images disable when are not visible
-          colors[index] = 0.0;// default value to show all images
+          filterAr[index] = 0.0;// default value to show all images
 
           // Clusters visualization
 
           if( clusterSelected !== "-" && this.props.settings.clusters.clusterList.includes(clusterSelected) ){ 
-            //try{
-              clustersActive[index] = 1.0;
               let clusterId = metadata[index][clusterSelected];
               if(clusterId >= clusterColors.length){
-                clusters[index*3] = 1.0;
-                clusters[index*3 + 1] = 1.0;
-                clusters[index*3 + 2] = 1.0;
+                clusterAr[index*3] = 1.0;
+                clusterAr[index*3 + 1] = 1.0;
+                clusterAr[index*3 + 2] = 1.0;
               }else{
-                clusters[index*3] = clusterColors[clusterId][0];
-                clusters[index*3 + 1] = clusterColors[clusterId][1];
-                clusters[index*3 + 2] = clusterColors[clusterId][2];
+                clusterAr[index*3] = clusterColors[clusterId][0];
+                clusterAr[index*3 + 1] = clusterColors[clusterId][1];
+                clusterAr[index*3 + 2] = clusterColors[clusterId][2];
               }
-            //}catch(err){clustersActive[index] = 0.0;}
-          }else{
-            clustersActive[index] = 0.0;
           }
       }
     }
@@ -300,7 +295,8 @@ class Projection extends Component {
         repeat: { value: new THREE.Vector2(texture_subsize, texture_subsize) },
         size: { value: this.props.settings.sprite_image_size },
         greyTransparency:{ value:0.1},
-        imageTransparency:{ value:1.0}
+        imageTransparency:{ value:1.0},
+        clusterActive:{ value:0.0}
       };
 
       let vertex_shader = `
@@ -308,10 +304,10 @@ class Projection extends Component {
         varying vec2 vOffset;
         attribute vec3 cluster;
         varying vec3 vCluster;
-        attribute float clusterActive;
+        attribute float filteredActive;
+        varying float vFilteredActive;
+        uniform float clusterActive;
         varying float vClusterActive;
-        attribute float color;
-        varying float vColor;
         uniform float size;
         uniform float greyTransparency;
         varying float vGreyTransparency;
@@ -320,7 +316,7 @@ class Projection extends Component {
 
         void main() {
           vOffset = offset;
-          vColor = color;
+          vFilteredActive = filteredActive;
           vCluster = cluster;
           vClusterActive = clusterActive;
           vGreyTransparency = greyTransparency;
@@ -335,7 +331,7 @@ class Projection extends Component {
         varying vec2 vOffset;
         varying vec3 vCluster;
         varying float vClusterActive;
-        varying float vColor;
+        varying float vFilteredActive;
         varying float vGreyTransparency;
         varying float vImageTransparency;
         void main() {
@@ -345,28 +341,19 @@ class Projection extends Component {
           if ( tex.a < 0.003 ) discard;
 
           // Display clusters
-          //if ( vClusterActive > 0.9 ){
-            vec4 replace_color = vec4(vCluster,1.0);
-            vec4 default_border_color = vec4(0.00392156863,0.00392156863,0.00392156863,0.00392156863);
-            vec4 diff = tex - default_border_color;
-            float equality = float(dot(diff,diff) < 0.99 && vClusterActive > 0.9);
-            tex = mix( tex, replace_color, equality);
+          vec4 replace_color = vec4(vCluster,1.0);
+          vec4 default_border_color = vec4(0.00392156863,0.00392156863,0.00392156863,0.00392156863);
+          vec4 diff = tex - default_border_color;
+          float equality = float(dot(diff,diff) < 0.99 && vClusterActive > 0.9);
+          tex = mix( tex, replace_color, equality);
            
-          //}
           // make transparent images
           tex = mix( tex,  vec4(0.0,0.0,0.0,0.0), vImageTransparency);
 
           // Grey images filter our selection 
-          //if ( vColor > 0.9 ){
-          //  tex = vec4(0.3,0.3,0.3,0.1);
-          //}
           vec4 filterout_color = vec4(0.3,0.3,0.3,vGreyTransparency);
-          float filterout_equality = float(vColor > 0.9);
+          float filterout_equality = float(vFilteredActive > 0.9);
           tex = mix( tex, filterout_color, filterout_equality );
-
-          //tex.r = 1.0;
-          //tex.g = 1.0;
-          //tex.b = 1.0;
           gl_FragColor = tex; //* vec4(vColor, 1.0);
         }`;
 
@@ -385,7 +372,6 @@ class Projection extends Component {
       // console.log("new points")
       point_group.add(point_cloud);
     }
-    //this.geometry = geometry;
     this.scene.add(point_group);
   }
 
@@ -397,10 +383,10 @@ class Projection extends Component {
     let vertices = [vert];
     let geometry = new THREE.BufferGeometry();
     let numVertices = vertices.length;
-    var positions = new Float32Array(numVertices * 3); // 3 coordinates per point
-    var offsets = new Float32Array(numVertices * 2); // 2 coordinates per point
-    geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.addAttribute('offset', new THREE.BufferAttribute(offsets, 2));
+    var positionAr = new Float32Array(numVertices * 3); // 3 coordinates per point
+    var offsetAr = new Float32Array(numVertices * 2); // 2 coordinates per point
+    geometry.addAttribute('position', new THREE.BufferAttribute(positionAr, 3));
+    geometry.addAttribute('offset', new THREE.BufferAttribute(offsetAr, 2));
 
     // all the attributes will be filled on hover
     let texture_subsize = 1 / this.props.settings.sprite_side;
@@ -429,10 +415,6 @@ class Projection extends Component {
         void main() {
           vec2 uv = vec2( gl_PointCoord.x, gl_PointCoord.y );
           vec4 tex = texture2D( texture, uv * repeat + vOffset );
-          //tex.a = tex.r;
-          //tex.r = 1.0;
-          //tex.g = 1.0;
-          //tex.b = 1.0;
           gl_FragColor = tex;
         }`;
 
@@ -466,11 +448,11 @@ class Projection extends Component {
     // 
     for (let c = 0; c < this.props.settings.sprite_number; c++) {
       let points = this.scene.children[0].children[c];
-      points.geometry.attributes.color = new THREE.BufferAttribute(
+      points.geometry.attributes.filteredActive = new THREE.BufferAttribute(
         ar_sliced[c],
         1
       );
-      points.geometry.attributes.color.needsUpdate = true;
+      points.geometry.attributes.filteredActive.needsUpdate = true;
     }
     // let point = this.scene.children[0].children[0]
     // console.log(point.geometry);
@@ -498,59 +480,57 @@ class Projection extends Component {
     console.log('updateClusterColors',clusterSelected);
     
     let numVertices =  this.props.metadata.length;//this.props.settings.sprite_number * this.sprite_size;
-    console.log("numVertices Update -->",numVertices, ' metadata.length:', this.props.metadata.length)
+    console.log("clusterSelected:",clusterSelected, "numVertices Update -->",numVertices, ' metadata.length:', this.props.metadata.length)
     let clusters = new Float32Array(numVertices * 3);
-    let clustersActive = new Float32Array(numVertices );
+    //let clustersActive = new Float32Array(numVertices );
     let clusterColors = this.props.settings.clusters.clusterColors;
     console.log(numVertices,clusterSelected !=="-",this.props.settings.total,clusterColors);
-    for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
-      if( clusterSelected !=="-" ){//&& i<this.props.settings.total){
-        clustersActive[index] = 1.0;
-        console.log(clustersActive[index]);
-        let clusterId = this.props.metadata[index][clusterSelected];
-        if(clusterId>=clusterColors.length){
-          clusters[index*3] = 1.0;
-          clusters[index*3 + 1] = 1.0;
-          clusters[index*3 + 2] = 1.0;
-        }else{
-          clusters[index*3] = clusterColors[clusterId][0];
-          clusters[index*3 + 1] = clusterColors[clusterId][1];
-          clusters[index*3 + 2] = clusterColors[clusterId][2];
-        }
-      }else{
-        clustersActive[index] = 0.0;
-        console.log(clustersActive[index]);
-      }
-    }
-
+    
     let ranges = [];
     let clustersActiveAr_sliced = [];
     let clustersAr_sliced = [];
-    for (let i = 0; i < this.props.settings.sprite_number; i++) {
-      let start = i * this.sprite_size;
-      let end = (i + 1) * this.sprite_size;
-      if (i === this.props.settings.sprite_number - 1) end = this.props.settings.sprite_number * this.sprite_size;
-      ranges.push([start, end]);
-      clustersActiveAr_sliced.push(clustersActive.slice(start, end));
-      clustersAr_sliced.push(clusters.slice(start, end*3));
+
+    if( clusterSelected !=="disabled" ){
+      for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
+          let clusterId = this.props.metadata[index][clusterSelected];
+          if(clusterId>=clusterColors.length){
+            clusters[index*3] = 1.0;
+            clusters[index*3 + 1] = 1.0;
+            clusters[index*3 + 2] = 1.0;
+          }else{
+            clusters[index*3] = clusterColors[clusterId][0];
+            clusters[index*3 + 1] = clusterColors[clusterId][1];
+            clusters[index*3 + 2] = clusterColors[clusterId][2];
+          }
+      }
+
+      for (let i = 0; i < this.props.settings.sprite_number; i++) {
+        let start = i * this.sprite_size;
+        let end = (i + 1) * this.sprite_size;
+        if (i === this.props.settings.sprite_number - 1) end = this.props.settings.sprite_number * this.sprite_size;
+        ranges.push([start, end]);
+        clustersAr_sliced.push(clusters.slice(start*3, end*3));
+      }
     }
     
     for (let c = 0; c < this.props.settings.sprite_number; c++) {
       let points = this.scene.children[0].children[c];
-      
-      points.geometry.attributes.clusters = new THREE.BufferAttribute(
-        clustersAr_sliced[c],
-        3
-      );
-      points.geometry.attributes.clusters.needsUpdate = true;
-      
-      points.geometry.attributes.clustersActive = new THREE.BufferAttribute(
-        clustersActiveAr_sliced[c],
-        1
-      );
-      points.geometry.attributes.clustersActive.needsUpdate = true;
+      if( clusterSelected !=="disabled" ){
+        points.geometry.attributes.cluster = new THREE.BufferAttribute(
+          clustersAr_sliced[c],
+          3
+        );
+        points.geometry.attributes.cluster.needsUpdate = true;
+        
+        points.material.uniforms.clusterActive.value = 1.0;
+        points.material.uniforms.clusterActive.needsUpdate = true;
+      }else{
+        points.material.uniforms.clusterActive.value = 0.0;
+        points.material.uniforms.clusterActive.needsUpdate = true;
+      }
     }
-    
+
+
   }
 
   highlightPoint(sprite_index, digit_index, full_index) {    
@@ -674,6 +654,7 @@ class Projection extends Component {
     //this.renderer.setClearColor(0x111111, 1);
     this.renderer.autoClear = false;
     this.renderer.setSize(width, height);
+    this.renderer.domElement.id = "threeCanvas";
     this.mount.appendChild(this.renderer.domElement);
 
     this.addPoints();
@@ -689,7 +670,6 @@ class Projection extends Component {
     TWEEN.update();
     this.renderer.clear()
     // 1-Pass :: Render filtered images (grey semi-transparent images that create a shadow behind)
-    console.log(this.props.greyRenderTypeSelected)
     if(parseInt(this.props.greyRenderTypeSelected)===0){
       this.updatePass2Shader(1)
       this.renderer.render(this.scene, this.camera);

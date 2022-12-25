@@ -11,6 +11,7 @@ import Projection from './Projection'
 import * as _ from 'lodash'
 import { CircularProgress } from "@material-ui/core";
 import { CSVLink } from "react-csv";
+import canvasToImage from 'canvas-to-image';
 
 class Layout extends Component {
   constructor(props) {
@@ -40,8 +41,6 @@ class Layout extends Component {
     this.setSize = _.debounce(this.setSize.bind(this), 200);
     this.setPreviewPaneCanvas = this.setPreviewPaneCanvas.bind(this);
     this.setPreviewImage = this.setPreviewImage.bind(this);
-    // this.onImgLoad = this.onImgLoad.bind(this);
-
     this.selectAlgorithm = this.selectAlgorithm.bind(this);
     this.selectDataset = this.selectDataset.bind(this);
     this.refProjection = React.createRef();
@@ -54,12 +53,16 @@ class Layout extends Component {
     window.addEventListener('resize', this.setSize);
   }
 
-
   setDefaults(){
     if (this.props.settings["total"] < 20000) {
-      this.setState( { scaleMin: 15, filterGrey: true, greyRenderTypeSelected: 0 } )} else {
+      this.setState( { scaleMin: 15, filterGrey: true, greyRenderTypeSelected: 0 } )
+    } else {
       this.setState( { scaleMin: 5, filterGrey: false, greyRenderTypeSelected: 1 } )
-      }
+    }
+  }
+
+  setRenderer(renderer){
+    this.setState( { renderer: renderer});
   }
 
   handleChangeScale(e,val) {
@@ -73,13 +76,13 @@ class Layout extends Component {
   handleChangeCluster(e) {
     let value = e.target.value;
     this.setState({ clusterTypeSelected: parseInt(value)})
+    console.log(e.target)
     try{
       this.refProjection.current.updateClusterColors(value)
     } catch(error) {console.log("error updateClusterColors")}
   }
 
   handleChangeGrey(value) {
-    // let value = e.target.value;
     this.setState({ greyRenderTypeSelected: value})
   }
 
@@ -136,21 +139,20 @@ class Layout extends Component {
     console.log(ctx);
   }
 
-  // onImgLoad({target:img}) {
-  //   this.setState({dimensions:{height:img.offsetHeight,
-  //                              width:img.offsetWidth}});
-  // }
-
   setPreviewImage() {
       return (
       <img
       src={ this.props.settings.url_prefix + this.props.metadata[this.state.hover_index].Filename }
-      // onLoad={this.onImgLoad}
       alt="preview"
       style={{
         verticalAlign: "middle",
       }}
       />)
+  }
+
+  handleDownload = async () => {
+    console.log('download image')
+    canvasToImage(document.getElementById("threeCanvas"));
   }
 
   setHoverIndex(hover_index) {
@@ -163,7 +165,6 @@ class Layout extends Component {
     window.removeEventListener('resize', this.setSize);
   }
   
-
   render() {
     let {
       embeddings_data,
@@ -195,6 +196,7 @@ class Layout extends Component {
       position: 'absolute',
       left: 0,
       top: 0,
+      width: 225,
       background: '#222',
       flexDirection: 'column',
       zIndex: 9
@@ -203,6 +205,8 @@ class Layout extends Component {
       position: 'absolute',
       right: 0,
       top: 0,
+      width: 350,
+      left:ww-350,
       height: 'auto',
       maxHeight: '100vh',
       overflow: 'auto',
@@ -215,57 +219,30 @@ class Layout extends Component {
       height: '100vh',
       background: '#111',
       overflow: 'hidden',
+      width: ww, 
+      height: wh
     };
 
     let previewPane_image_size;
-
+    previewPane_image_size = previewPane_style.width;
     let font_size = 16;
-    if (ww < 800) {
-      font_size = 14;
-      previewPane_style = {
-        ...previewPane_style,
-        flexDirection: 'row',
-        width: '100%',
-        top: 'auto',
-        height: 'auto',
-        bottom: 0,
-      };
-      main_style = { width: ww, height: wh };
-      previewPane_image_size = font_size * line_height * 3;
-    } else if (ww < 800 + 600) {
-      let scaler = 200 + (300 - 200) * ((ww - 800) / 600);
-      font_size = 14 + 2 * ((ww - 800) / 600);
-      previewPane_style = {
-        ...previewPane_style,
-        width: scaler,
-      };
-
-      previewPane_image_size = previewPane_style.width;
-      main_style = {
-        ...main_style,
-        width: ww,
-        height: wh,
-      };
-    } else {
+    
+    if (ww > 1400) {
       previewPane_style = {
         ...previewPane_style,
         width: 300,
       };
-      main_style = {
-        ...main_style,
-        width: ww,
-        height: wh,
-      };
       previewPane_image_size = previewPane_style.width;
+    }else{
+      font_size = 14;
     }
-
+    
     let grem = font_size * line_height;
 
     let general_style = {
       fontSize: font_size,
       lineHeight: line_height,
     };
-
 
     let displayNumb = 0;
     for(let i=0;i<settings.total;i++){
@@ -310,7 +287,7 @@ class Layout extends Component {
                 calculateProjection={this.calculateProjection}
                 currentProjection={currentProjection}
                 allFilter={allFilter}
-              />
+                />
                 </MenuItem>
                 </SubMenu>
                 <SubMenu title="Advanced Filters" style={{overflow:"visible"}}>
@@ -323,16 +300,15 @@ class Layout extends Component {
                     metadata={metadata}
                     currentProjection={currentProjection}
                     allFilter={allFilter}
-                    // filterDataToExportCSV={filterDataToExportCSV}
                   />
                 </MenuItem>
               </SubMenu>
               <MenuItem>
-            <CSVLink 
+              
+              <CSVLink 
                 data={this.state.filterDataToExportCSV} 
                 filename={"CSN_filtered_metadata.csv"} 
                 target="_blank"
-
                 onClick={() => {
                   let filteredMetadata = [];
                   for (let i=0;i<metadata.length;i++) {
@@ -344,13 +320,14 @@ class Layout extends Component {
                   this.setState({filterDataToExportCSV: filteredMetadata});
                   console.log(filterDataToExportCSV); 
                 }}                
-            >
-              <h3>Download filtered metadata as CSV</h3>
-              <div className='info'>showing {displayNumb} / {settings.total}</div>
-              {/* <Button variant="contained" size="small" >export as CSV</Button> */}
-            </CSVLink>
+              >
+                <h3>Download filtered metadata as CSV</h3>
+                <div className='info'>showing {displayNumb} / {settings.total}</div>
+              </CSVLink>
+              
             </MenuItem>
             <MenuItem>
+            <a variant="contained" size="small" onClick={()=>{this.handleDownload()}}><h3>Download projection image as JPG</h3></a>
             </MenuItem>
             </Menu>
           </ProSidebar>
@@ -367,7 +344,7 @@ class Layout extends Component {
             width={previewPane_image_size}>
             <Menu iconShape="square">
             <MenuItem>
-            <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer"><h3>Collection Space Navigator</h3></a>
+            <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer"><h3>Collection Space Navigator 1.0</h3></a>
             </MenuItem>
             <SubMenu title="About" 
               >

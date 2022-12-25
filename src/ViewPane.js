@@ -31,11 +31,11 @@ class ViewPane extends Component {
           </Grid>
           <Grid item xs={8}>
             <select onChange={this.props.handleChangeCluster}>
-            <option key="0" value="0">-</option>
+              <option key="0" value="disabled">-</option>
               {clusters['clusterList'].map((option, index) => (
               <option key={option} value={option}>
                   {option.toLowerCase()}
-            </option>
+              </option>
               ))}
             </select> 
           </Grid>

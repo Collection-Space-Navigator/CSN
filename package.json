@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@tweenjs/tween.js": "^17.2.0",
+    "canvas-to-image": "^2.2.5",
     "chart.js": "^3.5.1",
     "d3": "^5.7.0",
     "gh-pages": "^4.0.0",
