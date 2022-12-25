@@ -327,7 +327,7 @@ class Layout extends Component {
               
             </MenuItem>
             <MenuItem>
-            <a variant="contained" size="small" onClick={()=>{this.handleDownload()}}><h3>Download projection image as JPG</h3></a>
+            <a variant="contained" size="small" onClick={()=>{this.handleDownload()}}><h3>Download projection image as PNG</h3></a>
             </MenuItem>
             </Menu>
           </ProSidebar>
