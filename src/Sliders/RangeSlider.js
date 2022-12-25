@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, TextField } from "@material-ui/core";
+import { Grid, TextField, Tooltip, Button } from "@material-ui/core";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
 import { MuiRail, MuiHandle, MuiTrack } from "./components";
 import BarChart from "./BarChart";
@@ -118,7 +118,7 @@ class RangeSlider extends React.Component {
             >
               <Grid
                 item
-                xs={4}
+                xs={3}
                 style={{
                 textAlign: "right",
                 border: "solid 1px white",
@@ -129,11 +129,11 @@ class RangeSlider extends React.Component {
                 }}
               >
                 <TextField
-
                   fullWidth
                   variant="outlined"
                   label=""
                   size="small"
+                  width="8px"
                   value={inputValues[0]}
                   margin="none"
                   inputProps={{
@@ -154,24 +154,14 @@ class RangeSlider extends React.Component {
                 />
               </Grid>
               <Grid item xs={4} style={{ textAlign: "center",  marginTop:"6px"}}>
-              <div className="tooltip">
-              <button onClick={this.handleClick}>
-                <a href="#"
-                style={{
-                  color: "#00cc55",
-                  cursor: "help",
-                  textSize:"8px"
-                }}>
-                  {this.state.isToggleOn ? "close" : this.props.title}
-                </a>
-            </button>
-            {this.state.isToggleOn ? <span className="tooltiptext">{this.props.info}</span> : null}
-                
-              </div>
+
+              <Tooltip title={<h3>{this.props.info}</h3>}>
+              <h3 style={{cursor: "help"}}>{this.props.title}</h3>
+              </Tooltip>
               </Grid>
               <Grid
                 item
-                xs={4}
+                xs={3}
                 style={{
                 textAlign: "right",
                 border: "solid 1px white",
