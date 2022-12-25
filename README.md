@@ -10,7 +10,7 @@ The Collection Space Navigator (CSN) is an explorative visualization tool for re
 
 ## Demo
 
-[See WikiArt demo here](https://collection-space-navigator.github.io/CSN)
+[-> WikiArt demo](https://collection-space-navigator.github.io/CSN)
 
 ## Getting Started
 
@@ -28,30 +28,31 @@ The CSN should be now accessible at `http://localhost:3000` in your browser.
 
 
 ## Development 
+*For development only.*     
 
-For development only.   
-Important: `node 14.21.2` required!
-
+Important: `node 14.21.2` is required! We recommend using [NVM](https://github.com/nvm-sh/nvm) for node version managing:
+```
+nvm install v14.21.2
+```
+In the `CSN` directory, run:
 ```
 npm install
 ```
-Installs all neccessary packages. 
-
+To run the development server:
 ```
 npm start
-```
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```   
+Open [http://localhost:3000](http://localhost:3000) to view in your browser.
 
+For production, run:
 ```
 npm run build
 ```
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
+It bundles React in production mode and optimizes the build for the best performance.    
+    
+The build is minified and the filenames include the hashes.    
+Your app is ready to be deployed!    
+    
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Citation
@@ -71,15 +72,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Authors
 
-[Tillmann Ohm](https://tillmannohm.com/) [1][2]   
-[Mar Canet Solà](https://var-mar.info/) [1][2]   
-[Andres Karjus](https://andreskarjus.github.io/) [2]    
-[Maximilian Schich](https://cudan.tlu.ee/team/max/) [2]    
-
-[1] Software development  
-[2] Compression Ensables Demo
+[Tillmann Ohm](https://tillmannohm.com/)  
+[Mar Canet Solà](https://var-mar.info/)  
 
 ## Acknowledgements
-All mentioned authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
+Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. Tilmann Ohm, Mar Canet Solà, Anders Karjus, Mila Oiva, Maximilian Schich contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All mentioned authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
 
 
