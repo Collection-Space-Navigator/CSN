@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Slider, Box, Checkbox } from "@material-ui/core";
+import { Grid, Slider, Box } from "@material-ui/core";
 
 class ViewPane extends Component {
   constructor(props) {
