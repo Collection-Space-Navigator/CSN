@@ -5,13 +5,12 @@ import FilterPane from './FilterPane'
 import InfoPane from './InfoPane'
 import ViewPane from './ViewPane'
 import MappingsPane from './MappingsPane'
+import Export from './Export'
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import './scss/Menu.scss';
 import Projection from './Projection'
 import * as _ from 'lodash'
 import { CircularProgress } from "@material-ui/core";
-import { CSVLink } from "react-csv";
-import canvasToImage from 'canvas-to-image';
 
 class Layout extends Component {
   constructor(props) {
@@ -34,7 +33,6 @@ class Layout extends Component {
       filterGrey: true,
       clusterTypeSelected:'-',
       greyRenderTypeSelected:0,
-      filterDataToExportCSV:[],
       dimensions: {}
     }
     this.previewPane_ctx = null;
@@ -107,10 +105,7 @@ class Layout extends Component {
     try{
       this.refProjection.current.updateProjection(arr);
     } catch(error) {}
-    
-    // Release memory of export filter metadata
-    if(this.state.filterDataToExportCSV.length>0) this.setState({filterDataToExportCSV: []});
-  }
+    }
 
   selectAlgorithm(v) {
     let i = this.props.algorithm_options.indexOf(v);
@@ -150,10 +145,6 @@ class Layout extends Component {
       />)
   }
 
-  handleDownload = async () => {
-    console.log('download image')
-    canvasToImage(document.getElementById("threeCanvas"));
-  }
 
   setHoverIndex(hover_index) {
     if (hover_index){
@@ -183,7 +174,6 @@ class Layout extends Component {
       algorithm_choice,
       currentProjection,
       allFilter,
-      filterDataToExportCSV,
       greyRenderTypeSelected,
       clusterTypeSelected
     } = this.state;
@@ -216,7 +206,6 @@ class Layout extends Component {
 
     let main_style = {
       position: 'relative',
-      height: '100vh',
       background: '#111',
       overflow: 'hidden',
       width: ww, 
@@ -303,32 +292,14 @@ class Layout extends Component {
                   />
                 </MenuItem>
               </SubMenu>
+              <SubMenu title="Export Filtered Data">
               <MenuItem>
-              
-              <CSVLink 
-                data={this.state.filterDataToExportCSV} 
-                filename={"CSN_filtered_metadata.csv"} 
-                target="_blank"
-                onClick={() => {
-                  let filteredMetadata = [];
-                  for (let i=0;i<metadata.length;i++) {
-                    if(currentProjection[i]===0){
-                      var obj = metadata[i];
-                      filteredMetadata.push(obj)
-                    }
-                  }
-                  this.setState({filterDataToExportCSV: filteredMetadata});
-                  console.log(filterDataToExportCSV); 
-                }}                
-              >
-                <h3>Download filtered metadata as CSV</h3>
-                <div className='info'>showing {displayNumb} / {settings.total}</div>
-              </CSVLink>
-              
-            </MenuItem>
-            <MenuItem>
-            <a variant="contained" size="small" onClick={()=>{this.handleDownload()}}><h3>Download projection image as PNG</h3></a>
-            </MenuItem>
+                <Export
+                metadata = {metadata}
+                currentProjection = {currentProjection}
+                />
+              </MenuItem>
+            </SubMenu>
             </Menu>
           </ProSidebar>
           </div>
@@ -389,6 +360,9 @@ class Layout extends Component {
                 />
                 </MenuItem>
               </SubMenu>
+              <MenuItem>
+                <div className='info'>showing {displayNumb} / {settings.total}</div>
+              </MenuItem>
             </Menu>
           </ProSidebar>
           
@@ -419,7 +393,7 @@ class Layout extends Component {
       </div>
       
     ) : (
-      <div className="loading" ><CircularProgress color="inherit"/><div>loading layout...</div></div>
+      <div className="loading"><CircularProgress color="inherit"/><div>loading layout...</div></div>
     )
   }
 }
