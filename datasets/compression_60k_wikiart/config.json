@@ -53,42 +53,41 @@
     "sprite_number": 57,
     "sprite_image_size": 64,
     "sprite_actual_size": 2048,
-    "sliders": [
-        {
-            "id": "Year",
-            "title": "Year",
-            "info": "",
-            "typeNumber": "int",
-            "color": "#ffffff"
-        },
-        {
-            "id": "PC1",
-            "title": "PC1",
-            "info": "",
-            "typeNumber": "float",
-            "color": "#ed85fe"
-        },
-        {
-            "id": "PC2",
-            "title": "PC2",
-            "info": "",
-            "typeNumber": "float",
-            "color": "#86fc97"
-        },
-        {
-            "id": "Colorfulness",
-            "title": "Colorfulness",
-            "info": "",
-            "typeNumber": "float",
-            "color": "#f9c487"
-        },
-        {
-            "id": "FileSize",
-            "title": "FileSize",
-            "info": "",
-            "typeNumber": "int",
-            "color": "#9ccefb"
-        }
+    "sliders": [    {
+        "id": "Year",
+        "title": "Year",
+        "info": "Creation year of the artworks (WikiArt)",
+        "typeNumber": "int",
+        "color": "#ffffff"
+    },
+    {
+        "id": "PC1",
+        "title": "PC1",
+        "info": "First Principal Component",
+        "typeNumber": "float",
+        "color": "#ed85fe"
+    },
+    {
+        "id": "PC2",
+        "title": "PC2",
+        "info": "Second Principal Component",
+        "typeNumber": "float",
+        "color": "#86fc97"
+    },
+    {
+        "id": "Colorfulness",
+        "title": "Colorfulness",
+        "info": "RGB colorfulness. Cf. Hasler & Süsstrunk 2003",
+        "typeNumber": "float",
+        "color": "#f9c487"
+    },
+    {
+        "id": "FileSize",
+        "title": "FileSize",
+        "info": "File size of PNG images in bytes",
+        "typeNumber": "int",
+        "color": "#9ccefb"
+    }
     ],
     "info": [
         "Artist",

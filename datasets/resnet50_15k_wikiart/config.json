@@ -57,35 +57,35 @@
         {
             "id": "Year",
             "title": "Year",
-            "info": "",
+            "info": "Creation year of the artwork (WikiArt)",
             "typeNumber": "int",
             "color": "#ffffff"
         },
         {
             "id": "PC1",
             "title": "PC1",
-            "info": "",
+            "info": "First Principal Component",
             "typeNumber": "float",
             "color": "#ed85fe"
         },
         {
             "id": "PC2",
             "title": "PC2",
-            "info": "",
+            "info": "Second Principal Component",
             "typeNumber": "float",
             "color": "#86fc97"
         },
         {
             "id": "Colorfulness",
             "title": "Colorfulness",
-            "info": "",
+            "info": "RGB colorfulness. Cf. Hasler & Süsstrunk 2003 (doi:10.1117/12.477378)",
             "typeNumber": "float",
             "color": "#f9c487"
         },
         {
             "id": "FileSize",
             "title": "FileSize",
-            "info": "",
+            "info": "File size of PNG images in bytes",
             "typeNumber": "int",
             "color": "#9ccefb"
         }
