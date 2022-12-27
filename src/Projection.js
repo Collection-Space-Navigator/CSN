@@ -630,13 +630,16 @@ class Projection extends Component {
 
   handleMouse() {
     let view = d3.select(this.renderer.domElement);
-
     this.raycaster = new THREE.Raycaster();
 
     view.on('mousemove', () => {
       let [mouseX, mouseY] = d3.mouse(view.node());
       let mouse_position = [mouseX, mouseY];
       this.checkIntersects(mouse_position);
+    })
+    
+    view.on('dblclick', () => {
+      if(this.scene.children[1].visible) this.props.clickOnImage();
     })
   }
 

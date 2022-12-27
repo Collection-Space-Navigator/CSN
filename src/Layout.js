@@ -164,6 +164,13 @@ class Layout extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.setSize);
   }
+
+  clickOnImage(){
+    console.log("open image",this.state.hover_index);
+    try{
+      window.open(this.props.metadata[hover_index].link_URL, '_blank', 'noopener,noreferrer');
+    }catch(err){}
+  }
   
   render() {
     let {
@@ -413,6 +420,7 @@ class Layout extends Component {
             scaleMin={this.state.scaleMin}
             scaleMax={this.state.scaleMax}
             currentProjection={currentProjection}
+            clickOnImage={this.clickOnImage.bind(this)}
             // tiles={this.tiles}
           />
         </div>
