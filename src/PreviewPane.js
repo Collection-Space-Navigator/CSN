@@ -31,13 +31,13 @@ class PreviewPane extends Component {
     let {
       previewPane_image_size,
     } = this.props;
-    const {width, height} = this.state.dimensions;
-    var imgWidth = "auto";
-    var imgHeight = "100%";
-    if (width >= height) {
-      imgWidth = "100%";
-      imgHeight = "auto"
-    };
+    // const {width, height} = this.state.dimensions;
+    // var imgWidth = "auto";
+    // var imgHeight = "100%";
+    // if (width >= height) {
+    //   imgWidth = "100%";
+    //   imgHeight = "auto"
+    // };
 
     return (
       <div>
