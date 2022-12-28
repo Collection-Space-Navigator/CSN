@@ -24,7 +24,6 @@ class Projection extends Component {
     this.changeEmbeddings = this.changeEmbeddings.bind(this)
   }
 
-
   loadTiles(){ 
     this.sprite_size = this.props.settings.sprite_side * this.props.settings.sprite_side
     this.tile_locations = [...Array(this.props.settings.sprite_number)].map(
@@ -36,7 +35,6 @@ class Projection extends Component {
       return img
     })
   }
-
 
   //changeEmbeddings(prev_choice, new_choice) {
   changeEmbeddings(new_choice) {
@@ -252,7 +250,6 @@ class Projection extends Component {
         positionAr[index + 1] = y;
         positionAr[index + 2] = z;
       }
-
       // geometry.attributes.position.copyVector3sArray(vertices)
 
       let texture_subsize = 1 / this.props.settings.sprite_side;
@@ -653,8 +650,8 @@ class Projection extends Component {
 
     this.camera = new THREE.PerspectiveCamera(vFOV, aspect, near, far);
 
-    this.renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true });
-    //this.renderer.setClearColor(0x111111, 1);
+    this.renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true,alpha: true });
+    this.renderer.setClearColor(0xffffff, 0);
     this.renderer.autoClear = false;
     this.renderer.setSize(width, height);
     this.renderer.domElement.id = "threeCanvas";

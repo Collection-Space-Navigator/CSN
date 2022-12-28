@@ -159,7 +159,8 @@ class Layout extends Component {
   clickOnImage(){
     console.log("open image",this.state.hover_index);
     try{
-      window.open(this.props.metadata[hover_index].link_URL, '_blank', 'noopener,noreferrer');
+      let url = this.props.metadata[this.state.hover_index].link_URL
+      window.open(url, '_blank', 'noopener,noreferrer');
     }catch(err){}
   }
   
