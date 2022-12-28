@@ -122,3 +122,14 @@ button {
   text-align: center;
 }
 
+.collapseObj {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+}
+
+.collapseCon {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+}
