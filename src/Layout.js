@@ -11,6 +11,7 @@ import './scss/Menu.scss';
 import Projection from './Projection'
 import * as _ from 'lodash'
 import { CircularProgress } from "@material-ui/core";
+import { FaDatabase, FaSlidersH, FaSearch, FaCloudDownloadAlt, FaAngleDoubleLeft, FaAngleDoubleRight, FaRegImage, FaInfo, FaQuestion, FaEye } from "react-icons/fa";
 
 class Layout extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class Layout extends Component {
       filterGrey: true,
       clusterTypeSelected:'-',
       greyRenderTypeSelected:0,
-      dimensions: {}
+      dimensions: {},
+      collapsedControl: false,
+      collapsedObject: false
     }
     this.previewPane_ctx = null;
     this.setSize = _.debounce(this.setSize.bind(this), 200);
@@ -41,6 +44,7 @@ class Layout extends Component {
     this.setPreviewImage = this.setPreviewImage.bind(this);
     this.selectAlgorithm = this.selectAlgorithm.bind(this);
     this.selectDataset = this.selectDataset.bind(this);
+    this.toggleControl = this.toggleControl.bind(this);
     this.refProjection = React.createRef();
   }
 
@@ -123,8 +127,13 @@ class Layout extends Component {
     this.setState({ ww: window.innerWidth, wh: window.innerHeight });
     let previewPane_height = this.previewPane_mount.offsetHeight;
     this.setState({ previewPane_height: previewPane_height });
-
     if (this.previewPane_ctx) this.previewPane_ctx.imageSmoothingEnabled = false;
+    if ( window.innerWidth < 900) {
+      this.setState({ collapsedControl: true, collapsedObject: true })
+    } else {
+      this.setState({ collapsedControl: false, collapsedObject: false })
+
+    }
   }
 
   setPreviewPaneCanvas(canvas) {
@@ -163,7 +172,16 @@ class Layout extends Component {
       window.open(url, '_blank', 'noopener,noreferrer');
     }catch(err){}
   }
+
+  toggleControl = () => {
+    this.setState({ collapsedControl: !this.state.collapsedControl 
+  })}
   
+  toggleObject = () => {
+    this.setState({ collapsedObject: !this.state.collapsedObject 
+  })}
+
+
   render() {
     let {
       embeddings_data,
@@ -183,7 +201,9 @@ class Layout extends Component {
       currentProjection,
       allFilter,
       greyRenderTypeSelected,
-      clusterTypeSelected
+      clusterTypeSelected,
+      collapsedControl,
+      collapsedObject
     } = this.state;
 
     let previewPane_ctx = this.previewPane_ctx;
@@ -194,22 +214,24 @@ class Layout extends Component {
       position: 'absolute',
       left: 0,
       top: 0,
-      width: 225,
+      // width: 320,
+      height: 'auto',
+      maxHeight: '100vh',
+      overflow: 'auto',
       background: '#222',
-      flexDirection: 'column',
-      zIndex: 9
+      zIndex: 8
     };
     let controlMenu_style = {
       position: 'absolute',
       right: 0,
       top: 0,
-      width: 350,
-      left:ww-350,
+      // width: 300,
+      // left:ww-350,
       height: 'auto',
       maxHeight: '100vh',
       overflow: 'auto',
       background: '#222',
-      zIndex: 9
+      zIndex: 8
     };
 
     let main_style = {
@@ -220,20 +242,9 @@ class Layout extends Component {
       height: wh
     };
 
-    let previewPane_image_size;
-    previewPane_image_size = previewPane_style.width;
+    let previewPane_image_size = '320px';
     let font_size = 16;
-    
-    if (ww > 1400) {
-      previewPane_style = {
-        ...previewPane_style,
-        width: 300,
-      };
-      previewPane_image_size = previewPane_style.width;
-    }else{
-      font_size = 14;
-    }
-    
+
     let grem = font_size * line_height;
 
     let general_style = {
@@ -248,6 +259,7 @@ class Layout extends Component {
       }
     }
 
+
     return ww !== null ? (
       <div style={general_style}>
         <div
@@ -257,9 +269,17 @@ class Layout extends Component {
           }}
         >
           <div>
-          <ProSidebar>
-            <Menu iconShape="square">
-              <SubMenu title="Data & Projections" defaultOpen="True">
+          <ProSidebar collapsed={collapsedControl}>
+            <Menu iconShape='square'>
+            <MenuItem>
+            <h3></h3>
+            <a className="collapseCon" onClick={this.toggleControl}>{collapsedControl ? < FaAngleDoubleLeft />  : < FaAngleDoubleRight /> }</a>
+            </MenuItem>
+
+              <SubMenu defaultOpen
+              title={collapsedControl ? null : "Data & Projections"}  
+              icon={collapsedControl ? < FaDatabase />  : null }
+              >
               <MenuItem>
               <MappingsPane
                 grem={grem}
@@ -273,7 +293,12 @@ class Layout extends Component {
               />
               </MenuItem>
               </SubMenu>
-              <SubMenu title="Dimension Filters" defaultOpen="True">
+              <SubMenu defaultOpen
+              title={collapsedControl ? null : "Dimension Filters"}  
+              icon={collapsedControl ? <FaSlidersH />  : null }
+              >
+
+
                 <MenuItem>
                 <SliderPane
                 grem={grem}
@@ -287,7 +312,12 @@ class Layout extends Component {
                 />
                 </MenuItem>
                 </SubMenu>
-                <SubMenu title="Advanced Filters" style={{overflow:"visible"}}>
+
+                <SubMenu
+                title={collapsedControl ? null : "Advanced Filters"}  
+                icon={collapsedControl ? < FaSearch />  : null }
+                >
+
                 <MenuItem>
                   <FilterPane
                     grem={grem}
@@ -300,7 +330,11 @@ class Layout extends Component {
                   />
                 </MenuItem>
               </SubMenu>
-              <SubMenu title="Export Filtered Data">
+              <SubMenu
+                title={collapsedControl ? null : "Export Filtered Data"}  
+                icon={collapsedControl ? <FaCloudDownloadAlt />  : null }
+                >
+
               <MenuItem>
                 <Export
                 metadata = {metadata}
@@ -319,24 +353,18 @@ class Layout extends Component {
             this.previewPane_mount = previewPane_mount
           }}
         >
-          <ProSidebar
-            width={previewPane_image_size}>
-            <Menu iconShape="square">
+
+        <div>
+          <ProSidebar collapsed={collapsedObject}>
+            <Menu iconShape='square'>   
             <MenuItem>
-            <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer"><h3>Collection Space Navigator 1.0</h3></a>
+            {collapsedObject ? <h3></h3> : <h3>Collection Space Navigator</h3> }
+            <a className='collapseObj' onClick={this.toggleObject}>{collapsedObject ? < FaAngleDoubleRight />  : < FaAngleDoubleLeft /> }</a>
             </MenuItem>
-            <SubMenu title="About" 
-              >
-              <div className='about'>
-                The Collection Space Navigator (CSN) is an <strong>interactive visualization interface for multidimensional datasets</strong>.
-                It functions as an explorative visualization tool for researching collections and their multidimensional representations. 
-                We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. 
-                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer" ><strong>[more on GitHub...]</strong></a>
-                
-              </div>
-              </SubMenu>
-              <SubMenu title="Object Preview" defaultOpen="True" 
-              >
+              <SubMenu defaultOpen
+                title={collapsedObject ? null : "Object Preview"}  
+                icon={collapsedObject ? <FaRegImage />  : null }
+                >  
                 <PreviewPane
                   previewPane_image_size={previewPane_image_size}
                   setPreviewPaneCanvas={this.setPreviewPaneCanvas}
@@ -344,7 +372,10 @@ class Layout extends Component {
                   hover_index={hover_index}
                 />
               </SubMenu>
-              <SubMenu title="Object Info" defaultOpen="True" >
+              <SubMenu defaultOpen
+                title={collapsedObject ? null : "Object Info"}  
+                icon={collapsedObject ? <FaInfo />  : null }
+                >  
                 <MenuItem>
                 <InfoPane
                   hover_index={hover_index}
@@ -353,7 +384,11 @@ class Layout extends Component {
                 />
                 </MenuItem>
               </SubMenu>
-              <SubMenu title="Object View Settings" >
+
+              <SubMenu
+                title={collapsedObject ? null : "Object Appearance"}  
+                icon={collapsedObject ? <FaEye />  : null }
+                > 
                 <MenuItem>
                 <ViewPane
                   clusters={settings.clusters}
@@ -367,13 +402,25 @@ class Layout extends Component {
                   total = {settings.total}
                 />
                 </MenuItem>
-              </SubMenu>
-              <MenuItem>
+                <MenuItem>
                 <div className='info'>showing {displayNumb} / {settings.total}</div>
               </MenuItem>
+              </SubMenu>
+
+            <SubMenu
+              title={collapsedObject ? null : 'About'}  
+              icon={collapsedObject ? <FaQuestion />  : null }
+              >         
+              <div className='about'>
+                The Collection Space Navigator (CSN) is an <strong>interactive visualization interface for multidimensional datasets</strong>.
+                It functions as an explorative visualization tool for researching collections and their multidimensional representations. 
+                We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. 
+                CSN can be used with any image collection and can be customized for specific research needs. <a href="https://github.com/Collection-Space-Navigator/CSN" target="_blank" rel="noreferrer" ><strong>[more on GitHub...]</strong></a>
+              </div>
+              </SubMenu>
             </Menu>
           </ProSidebar>
-          
+          </div>
         </div>
         <div style={main_style}>
           <Projection
