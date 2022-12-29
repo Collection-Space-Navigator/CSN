@@ -75,7 +75,7 @@
         position: relative;
         // display: flex;
         align-items: center;
-        padding: 8px 35px 8px 22px;
+        padding: 8px 35px 8px 6px;
         // cursor: default;
 
         &:focus {
@@ -268,6 +268,7 @@
               background-color: transparent;
               max-height: 100%;
               padding-left: 3px;
+              z-index: 9;
               &.has-arrow {
                 padding-left: 10px;
               }
