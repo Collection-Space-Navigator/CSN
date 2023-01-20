@@ -3,7 +3,7 @@ Interactive Visualization Interface for Multidimensional Datasets
 
 [Project Page: https://github.com/Collection-Space-Navigator/CSN](https://github.com/Collection-Space-Navigator/CSN)  
 
-![CSN: Collection Space Navigation](./screenshot.png) 
+![CSN: Collection Space Navigation](./figure1.png) 
 
 The Collection Space Navigator (CSN) is an explorative visualization tool for researching collections and their multidimensional representations. We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. CSN can be used with any image collection and can be customized for specific research needs (see Jupyter Notebbok How-To guide).
 
@@ -76,6 +76,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 [Mar Canet Solà](https://var-mar.info/)  
 
 ## Acknowledgements
-Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. Tilmann Ohm, Mar Canet Solà, Anders Karjus, Mila Oiva, Maximilian Schich contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All mentioned authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
-
-
+Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. Tilmann Ohm, Mar Canet Solà, Anders Karjus, Mila Oiva, Maximilian Schich contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
