@@ -4,5 +4,4 @@ node/
 .DS_Store
 public/datasets/
 .ipynb_checkpoints/CSN_setup-checkpoint.ipynb
-build/
 
