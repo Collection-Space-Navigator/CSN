@@ -146,7 +146,7 @@ class Layout extends Component {
   setPreviewImage() {
       return (
       <img
-      src={ this.props.settings.url_prefix + this.props.metadata[this.state.hover_index].Filename }
+      src={ this.props.settings.url_prefix + this.props.metadata[this.state.hover_index].filename }
       alt="preview"
       style={{
         verticalAlign: "middle",
