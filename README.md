@@ -61,7 +61,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     author = {Ohm, Tillmann
               and Canet Sola, Mar
               and Karjus, Andres
-              and Oiva, Mila
               and Schich, Maximilian 
               },
     title = {Collection Space Navigator: Interactive Visualization Interface for Multidimensional Datasets},
