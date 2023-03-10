@@ -61,7 +61,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     author = {Ohm, Tillmann
               and Canet Sola, Mar
               and Karjus, Andres
-              and Oiva, Mila
               and Schich, Maximilian 
               },
     title = {Collection Space Navigator: Interactive Visualization Interface for Multidimensional Datasets},
@@ -76,4 +75,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 [Mar Canet Solà](https://var-mar.info/)  
 
 ## Acknowledgements
-Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. Tilmann Ohm, Mar Canet Solà, Anders Karjus, Mila Oiva, Maximilian Schich contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
+Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. Tilmann Ohm, Mar Canet Solà, Anders Karjus, Maximilian Schich contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All authors are supported by ERA Chair for [Cultural Data Analytics](https://cudan.tlu.ee/), funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
