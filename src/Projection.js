@@ -27,7 +27,7 @@ class Projection extends Component {
   loadTiles(){ 
     this.sprite_size = this.props.settings.sprite_side * this.props.settings.sprite_side
     this.tile_locations = [...Array(this.props.settings.sprite_number)].map(
-      (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.props.datasetDir}/tile_${i}.png`
+      (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.props.datasetDir}/tile_${i}.webp`
     )  
     this.datasetIMG = this.tile_locations.map(src => {
       let img = document.createElement('img')

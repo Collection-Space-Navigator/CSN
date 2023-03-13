@@ -88,7 +88,7 @@ class Data extends Component {
 
   // loadTiles(){ 
   //   const tile_locations = [...Array(this.state.settings.sprite_number)].map(
-  //     (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.state.datasetDir}/tile_${i}.png`
+  //     (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.state.datasetDir}/tile_${i}.webp`
   //   )
   //   let loader = new THREE.TextureLoader();
   //   this.tiles = tile_locations.map(l => {
