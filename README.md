@@ -30,6 +30,8 @@ The CSN should be now accessible at `http://localhost:3000` in your browser.
 ## Development 
 *For development only.*     
 
+Required: [node.js](https://nodejs.org/en/download)
+
 Important: `node 14.21.2` is required! We recommend using [NVM](https://github.com/nvm-sh/nvm) for node version managing:
 ```
 nvm install v14.21.2
