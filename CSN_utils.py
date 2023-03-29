@@ -4,13 +4,6 @@ from tqdm import tqdm
 import json
 import numpy as np
 
-from PIL import Image
-from sklearn.decomposition import PCA
-import umap.umap_ as umap
-from sklearn.manifold import TSNE
-from sklearn.preprocessing import StandardScaler
-
-
 class Utils:
     def __init__(self, minScale=-25, maxScale=25):
         self.minScale = minScale
@@ -93,16 +86,21 @@ class ImageTileGenerator:
         self.squareSize = int(tileSize / tileRows)
         self.imgPerTile = tileRows * tileRows
 
-    def resizeImgTile(self, image):
-        (w, h) = image.size
-        max_dim = max(w, h)
-        new_w = int(w / max_dim * self.squareSize)
-        new_h = int(h / max_dim * self.squareSize)
-        x_dif = int((self.squareSize - new_w) / 2)
-        y_dif = int((self.squareSize - new_h) / 2)
-        return image.resize((new_w - 8, new_h - 8), Image.ANTIALIAS), new_w, new_h, x_dif, y_dif
-
     def generate(self):
+        try:
+            from PIL import Image
+        except ImportError:
+            print("Pillow is not installed. Please run: !pip install Pillow")
+
+        def resizeImgTile(image):
+            (w, h) = image.size
+            max_dim = max(w, h)
+            new_w = int(w / max_dim * self.squareSize)
+            new_h = int(h / max_dim * self.squareSize)
+            x_dif = int((self.squareSize - new_w) / 2)
+            y_dif = int((self.squareSize - new_h) / 2)
+            return image.resize((new_w - 8, new_h - 8), Image.ANTIALIAS), new_w, new_h, x_dif, y_dif
+
         imgPerTile = self.tileRows*self.tileRows
         self.numbTiles = math.ceil(len(self.files)/imgPerTile)
         
@@ -118,7 +116,7 @@ class ImageTileGenerator:
                 except:
                     print(f"Skipping invalid image file: {entry}")
                     continue
-                resizedImage,w,h,x_dif,y_dif = self.resizeImgTile(image)
+                resizedImage,w,h,x_dif,y_dif = resizeImgTile(image)
                 r_result = Image.new("RGBA", (w, h), (1, 1, 1, 1))   # produces an almost transparent border to indicate clusters in the tool
                 r_result.paste(resizedImage, (4,4))
                 x = i % self.tileRows * self.squareSize + x_dif
@@ -129,7 +127,6 @@ class ImageTileGenerator:
             result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
             result.save(f'{self.directory}/tile_{tileNum}.png', "PNG", optimize=True)  
             self.add_to_config()
-
 
     def add_to_config(self):
         try:
@@ -167,7 +164,6 @@ class SimplePlot:
         print(f"saved {self.filename}.json")
         self.add_to_config()
 
-
     def add_to_config(self):
         try:
             with open(f'{self.directory}/config.json', 'r') as f:
@@ -194,6 +190,12 @@ class PCAGenerator:
         self.scale = scale
 
     def generate(self):
+        try:
+            from sklearn.decomposition import PCA
+            from sklearn.preprocessing import StandardScaler
+        except ImportError:
+            print("sklearn is not installed. Please run: !pip install sklearn")
+
         print("Performing PCA...")
         x = StandardScaler().fit_transform(self.data)
         pca = PCA(n_components=self.components)
@@ -212,7 +214,6 @@ class PCAGenerator:
         print(f"saved PCA.json")
         self.add_to_config()
         return centeredEmbedding
-
 
     def add_to_config(self):
         try:
@@ -238,6 +239,12 @@ class UMAPGenerator:
         self.verbose = verbose
 
     def generate(self):
+        try:
+            import umap
+            from sklearn.preprocessing import StandardScaler
+        except ImportError:
+            print("umap is not installed. Please run: !pip install umap-learn")
+
         print("Generating UMAP...")
         scaled_penguin_data = StandardScaler().fit_transform(self.data)
         reducer = umap.UMAP(n_neighbors=self.n_neighbors,
@@ -278,6 +285,12 @@ class TSNEGenerator:
         self.random_state = random_state
 
     def generate(self):
+        try:
+            from sklearn.manifold import TSNE
+            from sklearn.preprocessing import StandardScaler
+        except ImportError:
+            print("sklearn is not installed. Please run: !pip install sklearn")
+            
         print("Generating t-SNE...")
         x = StandardScaler().fit_transform(self.data)
         tsne = TSNE(n_components=self.n_components, verbose=self.verbose, random_state=self.random_state)
