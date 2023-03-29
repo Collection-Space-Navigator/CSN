@@ -14,7 +14,7 @@ The Collection Space Navigator (CSN) is an explorative visualization tool for re
 
 ## Getting Started
 
-We recommend using our colab (`CSN_setup.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Collection-Space-Navigator/CSN/blob/main/CSN_setup.ipynb)) to prepare datasets and build a customized version of the Collection Space Navigator. 
+We recommend using our colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Collection-Space-Navigator/CSN/blob/main/CSN_colab.ipynb)) to prepare datasets and build a customized version of the Collection Space Navigator. For Jupyter Notebook, please use the CSN_notebook.ipynb
 
 ## Using the Collection Space Navigator
 
