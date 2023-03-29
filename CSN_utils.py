@@ -169,7 +169,7 @@ class SimplePlot:
             with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
-            configData = Utils().create_config()
+            configData = Utils.create_config()
 
         if "embeddings" not in configData:
             configData["embeddings"] = []
@@ -217,10 +217,10 @@ class PCAGenerator:
 
     def add_to_config(self):
         try:
-            with open(f'{self.directory}/config.json', 'r') as f:
+            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
-            configData = Utils().create_config()
+            configData = Utils.create_config()
 
         mappings = configData["embeddings"]
         mappings.append({"name": "PCA", "file": "PCA.json"})
@@ -267,7 +267,7 @@ class UMAPGenerator:
             with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
-            configData = Utils().create_config()
+            configData = Utils.create_config()
 
         mappings = configData["embeddings"]
         mappings.append({"name": "UMAP", "file": "UMAP.json"})
@@ -310,7 +310,7 @@ class TSNEGenerator:
             with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
-            configData = Utils().create_config()
+            configData = Utils.create_config()
 
         mappings = configData["embeddings"]
         mappings.append({"name": "TSNE", "file": "TSNE.json"})
