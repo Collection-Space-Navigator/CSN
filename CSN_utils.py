@@ -36,12 +36,12 @@ class Utils:
         metadata.reset_index(inplace=True)
         # save metadata file
         result = metadata.to_json(orient="records")
-        with open(f'{directory}/metadata.json', "w") as f:
+        with open(f'build/datasets/{directory}/metadata.json', "w") as f:
             f.write(result)
         print("saved metadata.json")
 
     def write_config(directory, title=None, description='', clusters=None, total=0, sliderSetting=None, infoColumns=None, searchFields=None, imageWebLocation=None):
-        with open(f'{directory}/config.json', 'r') as f:
+        with open(f'build/datasets/{directory}/config.json', 'r') as f:
             configData = json.load(f)
         
         configData["title"]: title
@@ -58,7 +58,7 @@ class Utils:
         else:
             configData["url_prefix"] = imageWebLocation + "/"
 
-        with open(f'{directory}/config.json', 'w') as f:
+        with open(f'build/datasets/{directory}/config.json', 'w') as f:
             json.dump(configData, f, indent=4, cls=NumpyEncoder)
         print("saved config.json")
 
@@ -125,7 +125,7 @@ class ImageTileGenerator:
             result = result.resize((self.tileSize, self.tileSize), Image.ANTIALIAS)
             # convert to 256 colors for faster loading online
             result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
-            result.save(f'{self.directory}/tile_{tileNum}.png', "PNG", optimize=True)  
+            result.save(f'build/datasets/{self.directory}/tile_{tileNum}.png', "PNG", optimize=True)  
             self.add_to_config()
 
     def add_to_config(self):
@@ -140,7 +140,7 @@ class ImageTileGenerator:
         configData["sprite_image_size"] = self.tileSize
         configData["sprite_actual_size"] = self.squareSize
 
-        with open(f'{self.directory}/config.json', 'w') as f:
+        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
             
 
@@ -157,7 +157,7 @@ class SimplePlot:
         print("centered embedding")
         self.filename = (A + "_" + B).replace(" ","")
         # save file
-        with open(f'{self.directory}/{self.filename}.json', "w") as out_file:
+        with open(f'build/datasets/{self.directory}/{self.filename}.json', "w") as out_file:
             out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
             out_file.write(out)
 
@@ -166,7 +166,7 @@ class SimplePlot:
 
     def add_to_config(self):
         try:
-            with open(f'{self.directory}/config.json', 'r') as f:
+            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
             configData = Utils().create_config()
@@ -177,7 +177,7 @@ class SimplePlot:
             mappings = configData["embeddings"]
         mappings.append({"name": self.filename, "file": self.filename + ".json"})
 
-        with open(f'{self.directory}/config.json', 'w') as f:
+        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
 
 
@@ -208,7 +208,7 @@ class PCAGenerator:
         print("...done")
         PCMap = centeredEmbedding.reshape(-1,2)
         # save file
-        with open(f'{self.directory}/PCA.json', "w") as out_file:
+        with open(f'build/datasets/{self.directory}/PCA.json', "w") as out_file:
             out = json.dumps(PCMap, cls=NumpyEncoder)
             out_file.write(out)
         print(f"saved PCA.json")
@@ -225,7 +225,7 @@ class PCAGenerator:
         mappings = configData["embeddings"]
         mappings.append({"name": "PCA", "file": "PCA.json"})
 
-        with open(f'{self.directory}/config.json', 'w') as f:
+        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
 
 
@@ -256,7 +256,7 @@ class UMAPGenerator:
         centeredEmbedding = Utils().center(normalized)
         print("...done")
         # save file
-        with open(f'{self.directory}/UMAP.json', "w") as out_file:
+        with open(f'build/datasets/{self.directory}/UMAP.json', "w") as out_file:
             out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
             out_file.write(out)
         print(f"saved UMAP.json")
@@ -264,7 +264,7 @@ class UMAPGenerator:
 
     def add_to_config(self):
         try:
-            with open(f'{self.directory}/config.json', 'r') as f:
+            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
             configData = Utils().create_config()
@@ -272,7 +272,7 @@ class UMAPGenerator:
         mappings = configData["embeddings"]
         mappings.append({"name": "UMAP", "file": "UMAP.json"})
 
-        with open(f'{self.directory}/config.json', 'w') as f:
+        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
 
 
@@ -299,7 +299,7 @@ class TSNEGenerator:
         centeredEmbedding = Utils().center(normalized)
         print("...done")
         # save file
-        with open(f'{self.directory}/TSNE.json', "w") as out_file:
+        with open(f'build/datasets/{self.directory}/TSNE.json', "w") as out_file:
             out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
             out_file.write(out)
         print(f"saved TSNE.json")
@@ -307,7 +307,7 @@ class TSNEGenerator:
 
     def add_to_config(self):
         try:
-            with open(f'{self.directory}/config.json', 'r') as f:
+            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
                 configData = json.load(f)
         except:
             configData = Utils().create_config()
@@ -315,7 +315,7 @@ class TSNEGenerator:
         mappings = configData["embeddings"]
         mappings.append({"name": "TSNE", "file": "TSNE.json"})
 
-        with open(f'{self.directory}/config.json', 'w') as f:
+        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
     
 
@@ -353,6 +353,6 @@ class HistogramGenerator:
             bucketData[element] = {str(element):{"histogram":[], "selections":[]}}
             bucketData[element] = self.prepareBuckets(self.data[element].min(), self.data[element].max(), self.data[element].values.tolist())
         
-        with open(f'{self.directory}/barData.json', "w") as f:
+        with open(f'build/datasets/{self.directory}/barData.json', "w") as f:
             json.dump(bucketData , f)
         print(f'saved barData.json')
