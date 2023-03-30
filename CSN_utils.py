@@ -1,6 +1,5 @@
 import os
 import math
-from tqdm import tqdm
 import json
 import numpy as np
 
@@ -89,8 +88,12 @@ class ImageTileGenerator:
     def generate(self):
         try:
             from PIL import Image
+            from tqdm import tqdm
         except ImportError:
-            print("Pillow is not installed. Please run: !pip install Pillow")
+            print("Pillow or tqdm not installed. Installing Pillow tqdm via Pip...")
+            !pip install Pillow tqdm --quiet
+            from PIL import Image
+            from tqdm import tqdm
 
         def resizeImgTile(image):
             (w, h) = image.size
@@ -194,7 +197,10 @@ class PCAGenerator:
             from sklearn.decomposition import PCA
             from sklearn.preprocessing import StandardScaler
         except ImportError:
-            print("sklearn is not installed. Please run: !pip install sklearn")
+            print("sklearn is not installed. Installing sklearn via Pip...")
+            !pip install sklearn --quiet
+            from sklearn.decomposition import PCA
+            from sklearn.preprocessing import StandardScaler
 
         print("Performing PCA...")
         x = StandardScaler().fit_transform(self.data)
@@ -243,7 +249,10 @@ class UMAPGenerator:
             import umap
             from sklearn.preprocessing import StandardScaler
         except ImportError:
-            print("umap is not installed. Please run: !pip install umap-learn")
+            print("umap-learn is not installed. Installing umap-learn via Pip...")
+            !pip install umap-learn --quiet
+            import umap
+            from sklearn.preprocessing import StandardScaler
 
         print("Generating UMAP...")
         scaled_penguin_data = StandardScaler().fit_transform(self.data)
@@ -289,7 +298,10 @@ class TSNEGenerator:
             from sklearn.manifold import TSNE
             from sklearn.preprocessing import StandardScaler
         except ImportError:
-            print("sklearn is not installed. Please run: !pip install sklearn")
+            print("sklearn is not installed. Installing sklearn via Pip...")
+            !pip install sklearn --quiet
+            from sklearn.manifold import TSNE
+            from sklearn.preprocessing import StandardScaler
             
         print("Generating t-SNE...")
         x = StandardScaler().fit_transform(self.data)
