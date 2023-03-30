@@ -32,9 +32,12 @@ The CSN should be now accessible at `http://localhost:3000` in your browser.
 
 Required: [node.js](https://nodejs.org/en/download)
 
-Important: `node 14.21.2` is required! We recommend using [NVM](https://github.com/nvm-sh/nvm) for node version managing:
+Important: `node 16.16.0` is required! We recommend using [NVM](https://github.com/nvm-sh/nvm) for node version managing:
 ```
-nvm install v14.21.2
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm install v16.16.0
 ```
 In the `CSN` directory, run:
 ```
@@ -59,7 +62,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Citation
 ```
-@article{csn2022,
+@article{csn2023,
     author = {Ohm, Tillmann
               and Canet Sola, Mar
               and Karjus, Andres
@@ -67,7 +70,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
               },
     title = {Collection Space Navigator: Interactive Visualization Interface for Multidimensional Datasets},
     journal = {arXiv preprint arXiv:},
-    year  = {2022}
+    year  = {2023}
 }
 ```
 
