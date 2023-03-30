@@ -137,8 +137,8 @@ class ImageTileGenerator:
 
         configData["sprite_side"] = self.tileRows
         configData["sprite_number"] = self.numbTiles
-        configData["sprite_image_size"] = self.tileSize
-        configData["sprite_actual_size"] = self.squareSize
+        configData["sprite_image_size"] = self.squareSize
+        configData["sprite_actual_size"] = self.tileSize
 
         with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
