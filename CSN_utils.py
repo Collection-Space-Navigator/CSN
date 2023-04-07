@@ -274,7 +274,52 @@ class UMAPGenerator:
 
         with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
             json.dump(configData, f)
+            
+class UMATO:    
+    def __init__(self, directory, data=None, n_neighbors=15, min_dist=0.18, metric="euclidean", verbose=True):
+        self.directory = directory
+        self.data = data
+        self.n_neighbors = n_neighbors
+        self.min_dist = min_dist
+        self.metric = metric
+        self.verbose = verbose
 
+    def generate(self):
+        try:
+            import umato
+            from sklearn.preprocessing import StandardScaler
+        except ImportError:
+            print("umato is not installed. Please run: !pip install umato")
+
+        print("Generating UMATO...")
+        scaled_penguin_data = StandardScaler().fit_transform(self.data)
+        reducer = umato.UMATO(n_neighbors=self.n_neighbors,
+                            min_dist=self.min_dist,
+                            metric=self.metric,
+                            verbose=self.verbose)
+        embedding = reducer.fit_transform(scaled_penguin_data)
+        normalized = Utils().normalize(embedding)
+        centeredEmbedding = Utils().center(normalized)
+        print("...done")
+        # save file
+        with open(f'build/datasets/{self.directory}/UMATO.json', "w") as out_file:
+            out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
+            out_file.write(out)
+        print(f"saved UMATO.json")
+        self.add_to_config()
+
+    def add_to_config(self):
+        try:
+            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
+                configData = json.load(f)
+        except:
+            configData = Utils.create_config()
+
+        mappings = configData["embeddings"]
+        mappings.append({"name": "UMATO", "file": "UMATO.json"})
+
+        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
+            json.dump(configData, f)
 
 class TSNEGenerator:
     def __init__(self, directory, data=None, n_components=2, verbose=1, random_state=123):
