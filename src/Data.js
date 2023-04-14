@@ -123,7 +123,7 @@ class Data extends Component {
   }
 
   changeDataset(choice){
-    this.addToUrl('dataset',choice);
+    // this.addToUrl('dataset',choice);
     let k = this.state.dataset_options.indexOf(choice);
     let newDataset = this.state.dataset_dirs[k]
     this.setState({ 
@@ -152,7 +152,7 @@ class Data extends Component {
         // Select dataset folder from defined in URL parameters
         if(this.state.selectedDataset===null){
           this.setState({ selectedDataset: init.data[init.default].name,  datasetDir: init.data[init.default].directory});
-          this.addToUrl('dataset',init.data[init.default].name);
+          // this.addToUrl('dataset',init.data[init.default].name);
         }else{
           let foundInitDataset = false;
           for (let i in init.data) {
@@ -222,7 +222,7 @@ class Data extends Component {
 
       <Layout
         {...this.state}
-        addToUrl={this.addToUrl.bind(this)}
+        // addToUrl={this.addToUrl.bind(this)}
         algorithm_name={this.state.algorithm_name}
         algorithm_options={this.state.algorithm_options}
         dataset_options={this.state.dataset_options}
