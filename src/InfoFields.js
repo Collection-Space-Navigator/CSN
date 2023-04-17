@@ -21,7 +21,7 @@ class InfoFields extends Component {
                     {info}:
                 </Grid>
                 <Grid key={uuid()} item xs={8}>   
-                    {(metadata[hover_index][info].length>4 && metadata[hover_index][info].substring(0, 4)==='http')  ? <a href={{metadata[hover_index][info]}} target="_blank" rel="noreferrer">{{metadata[hover_index][info]}}</a>: metadata[hover_index][info]}
+                    {( typeof  metadata[hover_index][info] === 'string' && metadata[hover_index][info].length>4 && metadata[hover_index][info].substring(0, 4)==='http')  ? <a href={{metadata[hover_index][info]}} target="_blank" rel="noreferrer">{{metadata[hover_index][info]}}</a>: metadata[hover_index][info]}
                 </Grid>
             </Fragment>
         )
