@@ -81,7 +81,6 @@
         ]
     },
     "total": 1000,
-    "sprite_dir": "testset",
     "sprite_side": 32,
     "sprite_number": 1,
     "sprite_image_size": 64,
