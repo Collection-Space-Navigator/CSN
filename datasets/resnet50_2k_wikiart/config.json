@@ -1,5 +1,5 @@
 {
-    "title": "ResNet50 2k WikiArt",
+    "title": "ResNet 2k WikiArt",
     "datasetInfo": "2k subset of WikiArt using ResNet50 for feature extraction (cf. He et al. 2015, Deep Residual Learning for Image Recognition, arxiv:1512.03385)",
     "metadata": "metadata.json",
     "embeddings": [
@@ -8,106 +8,123 @@
             "file": "UMAP.json"
         },
         {
-            "name": "t-SNE",
-            "file": "tSNE.json"
+            "name": "TSNE",
+            "file": "TSNE.json"
         },
         {
             "name": "PCA",
-            "file": "PC1_PC2.json"
+            "file": "PCA.json"
         },
         {
-            "name": "Year_PC1",
-            "file": "Year_PC1.json"
-        },
-        {
-            "name": "Year_PC2",
-            "file": "Year_PC2.json"
-        },
-        {
-            "name": "Year_Colorfulness",
-            "file": "Year_Colorfulness.json"
-        },
-        {
-            "name": "Year_FileSize",
-            "file": "Year_FileSize.json"
-        },
-        {
-            "name": "Colorfulness_FileSize",
-            "file": "Colorfulness_FileSize.json"
-        },
-        {
-            "name": "PC1_Colorfulness",
-            "file": "PC1_Colorfulness.json"
-        },
-        {
-            "name": "PC1_FileSize",
-            "file": "PC1_FileSize.json"
+            "name": "Year-PC1",
+            "file": "year_PC1.json"
         }
     ],
-    "clusters": {
-        "clusterList": [],
-        "clusterColors": []
-    },
-    "total": 2048,
+    "sprite_dir": "compression_2k_wikiart",
     "sprite_side": 32,
     "sprite_number": 2,
     "sprite_image_size": 64,
     "sprite_actual_size": 2048,
+    "clusters": {
+        "clusterList": [
+            "genre",
+            "style"
+        ],
+        "clusterColors": [
+            "#00ff00",
+            "#ff00ff",
+            "#0080ff",
+            "#ff8000",
+            "#80bf80",
+            "#912c69",
+            "#0403b5",
+            "#ad71fd",
+            "#3a8002",
+            "#cdff01",
+            "#ff0000",
+            "#00ffff",
+            "#1a6880",
+            "#00ff80",
+            "#faa6a5",
+            "#7e0cf6",
+            "#80ffff",
+            "#800000",
+            "#fd3d80",
+            "#ffff80",
+            "#1bb7b3",
+            "#a16318",
+            "#61fb38",
+            "#9bb60b",
+            "#5356d5",
+            "#2a1f56",
+            "#1abe41",
+            "#83b6e0",
+            "#ebc545",
+            "#ad7f74",
+            "#c10ab5",
+            "#f446f5",
+            "#bbeab9",
+            "#4efdaf",
+            "#e1015c",
+            "#543f05",
+            "#0737f5",
+            "#035225",
+            "#5a8f53",
+            "#d6befd",
+            "#dd3c2c",
+            "#5b03b0"
+        ]
+    },
+    "total": 2000,
     "sliders": [
         {
-            "id": "Year",
+            "id": "year",
             "title": "Year",
             "info": "Creation year of the artworks (WikiArt)",
             "typeNumber": "int",
-            "color": "#ffffff"
+            "color": "#619eff"
         },
         {
             "id": "PC1",
             "title": "PC1",
-            "info": "First Principal Component",
+            "info": "First Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#ed85fe"
+            "color": "#fd8181"
         },
         {
             "id": "PC2",
             "title": "PC2",
-            "info": "Second Principal Component",
+            "info": "Second Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#86fc97"
+            "color": "#a1fc80"
         },
         {
-            "id": "Colorfulness",
-            "title": "Colorfulness",
-            "info": "RGB colorfulness. Cf. Hasler & Süsstrunk 2003",
+            "id": "PC3",
+            "title": "PC3",
+            "info": "Third Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#f9c487"
-        },
-        {
-            "id": "FileSize",
-            "title": "FileSize",
-            "info": "File size of PNG images in bytes",
-            "typeNumber": "int",
-            "color": "#9ccefb"
+            "color": "#fdff85"
         }
     ],
     "info": [
-        "Artist",
-        "Title",
-        "Date",
-        "Genre",
-        "Style"
+        "artist",
+        "title",
+        "date",
+        "genre",
+        "style",
+        "source"
     ],
     "search": [
         {
-            "columnField": "Artist",
+            "columnField": "artist",
             "type": "selection"
         },
         {
-            "columnField": "Genre",
+            "columnField": "genre",
             "type": "selection"
         },
         {
-            "columnField": "Style",
+            "columnField": "style",
             "type": "selection"
         }
     ],

@@ -1,30 +1,22 @@
 {
     "default": 0,
     "data": [
+
         {
-            "name": "2k WikiArt Compression",
+            "name": "Compression 2k WikiArt",
             "directory": "compression_2k_wikiart"
         },
         {
-            "name": "2k WikiArt ResNet50",
+            "name": "ResNet50 2k WikiArt",
             "directory": "resnet50_2k_wikiart"
         },
         {
-            "name": "15k WikiArt Compression",
-            "directory": "compression_15k_wikiart"
+            "name": "Compression 27k WikiArt",
+            "directory": "compression_27k_wikiart"
         },
         {
-            "name": "15k WikiArt ResNet50",
-            "directory": "resnet50_15k_wikiart"
-        },
-        {
-            "name": "60k WikiArt Compression",
-            "directory": "compression_60k_wikiart"
-        },
-        {
-            "name": "60k WikiArt ResNet50",
-            "directory": "resnet50_60k_wikiart"
+            "name": "ResNet50 27k WikiArt",
+            "directory": "resnet50_27k_wikiart"
         }
-
     ]
 }

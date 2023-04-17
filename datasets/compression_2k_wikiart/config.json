@@ -8,106 +8,123 @@
             "file": "UMAP.json"
         },
         {
-            "name": "t-SNE",
-            "file": "tSNE.json"
+            "name": "TSNE",
+            "file": "TSNE.json"
         },
         {
             "name": "PCA",
-            "file": "PC1_PC2.json"
+            "file": "PCA.json"
         },
         {
-            "name": "Year_PC1",
-            "file": "Year_PC1.json"
-        },
-        {
-            "name": "Year_PC2",
-            "file": "Year_PC2.json"
-        },
-        {
-            "name": "Year_Colorfulness",
-            "file": "Year_Colorfulness.json"
-        },
-        {
-            "name": "Year_FileSize",
-            "file": "Year_FileSize.json"
-        },
-        {
-            "name": "Colorfulness_FileSize",
-            "file": "Colorfulness_FileSize.json"
-        },
-        {
-            "name": "PC1_Colorfulness",
-            "file": "PC1_Colorfulness.json"
-        },
-        {
-            "name": "PC1_FileSize",
-            "file": "PC1_FileSize.json"
+            "name": "Year-PC1",
+            "file": "year_PC1.json"
         }
     ],
-    "clusters": {
-        "clusterList": [],
-        "clusterColors": []
-    },
-    "total": 2048,
+    "sprite_dir": "compression_2k_wikiart",
     "sprite_side": 32,
     "sprite_number": 2,
     "sprite_image_size": 64,
     "sprite_actual_size": 2048,
+    "clusters": {
+        "clusterList": [
+            "genre",
+            "style"
+        ],
+        "clusterColors": [
+            "#00ff00",
+            "#ff00ff",
+            "#0080ff",
+            "#ff8000",
+            "#80bf80",
+            "#4601af",
+            "#b1072e",
+            "#037834",
+            "#3ffcff",
+            "#ffff00",
+            "#fe80de",
+            "#00ff80",
+            "#935999",
+            "#7a9d02",
+            "#80ff00",
+            "#79a1fe",
+            "#f9cf82",
+            "#fc2c7a",
+            "#216b9e",
+            "#503748",
+            "#0323fc",
+            "#920df9",
+            "#adfeb7",
+            "#27c1bc",
+            "#a25512",
+            "#5750e5",
+            "#f67b6e",
+            "#2ec12e",
+            "#ff0000",
+            "#c2c52b",
+            "#a60d99",
+            "#ca44e4",
+            "#010b66",
+            "#c6c8f4",
+            "#5d8461",
+            "#51fa51",
+            "#bc97a5",
+            "#4dfead",
+            "#5c0605",
+            "#4b5b04",
+            "#0530ac",
+            "#084b64"
+        ]
+    },
+    "total": 2000,
     "sliders": [
         {
-            "id": "Year",
+            "id": "year",
             "title": "Year",
             "info": "Creation year of the artworks (WikiArt)",
             "typeNumber": "int",
-            "color": "#ffffff"
+            "color": "#619eff"
         },
         {
             "id": "PC1",
             "title": "PC1",
-            "info": "First Principal Component",
+            "info": "First Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#ed85fe"
+            "color": "#fd8181"
         },
         {
             "id": "PC2",
             "title": "PC2",
-            "info": "Second Principal Component",
+            "info": "Second Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#86fc97"
+            "color": "#a1fc80"
         },
         {
-            "id": "Colorfulness",
-            "title": "Colorfulness",
-            "info": "RGB colorfulness. Cf. Hasler & Süsstrunk 2003",
+            "id": "PC3",
+            "title": "PC3",
+            "info": "Third Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#f9c487"
-        },
-        {
-            "id": "FileSize",
-            "title": "FileSize",
-            "info": "File size of PNG images in bytes",
-            "typeNumber": "int",
-            "color": "#9ccefb"
+            "color": "#fdff85"
         }
     ],
     "info": [
-        "Artist",
-        "Title",
-        "Date",
-        "Genre",
-        "Style"
+        "artist",
+        "title",
+        "date",
+        "genre",
+        "style",
+        "source"
     ],
     "search": [
         {
-            "columnField": "Artist",
+            "columnField": "artist",
             "type": "selection"
         },
         {
-            "columnField": "Genre",
+            "columnField": "genre",
             "type": "selection"
         },
         {
-            "columnField": "Style",
+            "columnField": "style",
             "type": "selection"
         }
     ],
