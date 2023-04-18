@@ -5,13 +5,13 @@ import ReactFilterBox, {SimpleResultProcessing, GridDataAutoCompleteHandler} fro
 import "./filter-box.css";
 
 //Extend this class to add your custom operator
-class CustomAutoComplete extends GridDataAutoCompleteHandler {
-    // Override this method to add new your operator
-    needOperators(parsedCategory) {
-        var result = super.needOperators(parsedCategory);
-        return result.concat(["startsWith"]);
-    }
-}
+// class CustomAutoComplete extends GridDataAutoCompleteHandler {
+//     // Override this method to add new your operator
+//     needOperators(parsedCategory) {
+//         var result = super.needOperators(parsedCategory);
+//         return result.concat(["startsWith"]);
+//     }
+// }
 
 class CustomResultProcessing extends SimpleResultProcessing {
     // Override this method to add your handler for startsWith operator
@@ -22,7 +22,7 @@ class CustomResultProcessing extends SimpleResultProcessing {
             case "!=": return row[field] !== value;
             case "contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) >=0;
             case "!contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) <0;
-            case "startsWith": return  _.startsWith(row[field].toLowerCase(), value.toLowerCase() ) ;
+            // case "startsWith": return  _.startsWith(row[field].toLowerCase(), value.toLowerCase() ) ;
             default: return false;
         }
     }
@@ -38,7 +38,7 @@ class Filterbox extends Component {
         this.applyFilter = this.applyFilter.bind(this);
         this.resetFilter = this.resetFilter.bind(this);
         this.options = this.props.settings.search;
-        this.customAutoComplete = new CustomAutoComplete(this.props.metadata,this.options);
+        // this.customAutoComplete = new CustomAutoComplete(this.props.metadata,this.options);
         // this.editorConfig = {
         //     direction: "rtl"
         // };
@@ -99,7 +99,7 @@ class Filterbox extends Component {
         return (
         <div className="main-container">
             <ReactFilterBox
-                autoCompleteHandler = {this.customAutoComplete}
+                // autoCompleteHandler = {this.customAutoComplete}
                 customRenderCompletionItem = {this.customRenderCompletionItem.bind(this) }
                 query={this.state.query}
                 data={this.props.metadata}
