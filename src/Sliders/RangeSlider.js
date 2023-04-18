@@ -36,7 +36,7 @@ class RangeSlider extends React.Component {
 
   changeSlider(values) {
     this.currentValues = values;
-    this.props.onChangeSlider(this.props.title, values);
+    this.props.onChangeSlider(this.props.id, values);
   }
 
 
@@ -62,7 +62,7 @@ class RangeSlider extends React.Component {
             
             <Slider
               mode={3}
-              step={typeNumber === "int"?1:0.01}
+              step={typeNumber === "int" ? 1 : 0.01}
               domain={domain}
               color={color}
               rootStyle={{

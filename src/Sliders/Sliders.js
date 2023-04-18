@@ -67,6 +67,7 @@ class Sliders extends Component {
         ref={this.refSliders[slider['id']]}
         datafilter={this.state.datafilter[slider['id']]}
         title={slider['title']}
+        id={slider['id']}
         info={slider['info']}
         typeNumber={slider['typeNumber']}
         color={slider['color']}
