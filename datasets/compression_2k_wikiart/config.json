@@ -1,6 +1,6 @@
 {
     "title": "Compression 2k WikiArt",
-    "datasetInfo": "2k subset of WikiArt using Compression Ensembles (cf. Karjus et al 2022, Compression ensembles quantify aesthetic complexity and the evolution of visual art, arXiv:2205.10271)",
+    "datasetInfo": "2k public domain subset of WikiArt using Compression Ensembles (cf. Karjus et al 2022, Compression ensembles quantify aesthetic complexity and the evolution of visual art, arXiv:2205.10271)",
     "metadata": "metadata.json",
     "embeddings": [
         {

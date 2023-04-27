@@ -1,6 +1,6 @@
 {
     "title": "ResNet 2k WikiArt",
-    "datasetInfo": "2k subset of WikiArt using ResNet50 for feature extraction (cf. He et al. 2015, Deep Residual Learning for Image Recognition, arxiv:1512.03385)",
+    "datasetInfo": "2k public domain subset of WikiArt using ResNet50 for feature extraction (cf. He et al. 2015, Deep Residual Learning for Image Recognition, arxiv:1512.03385)",
     "metadata": "metadata.json",
     "embeddings": [
         {
