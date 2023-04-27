@@ -339,7 +339,7 @@ class Projection extends Component {
 
           // Display clusters
           vec4 replace_color = vec4(vCluster,1.0);
-          vec4 default_border_color = vec4(0.00392156863,0.00392156863,0.00392156863,0.00392156863);
+          vec4 default_border_color = vec4(0.00392156863,0.00392156863,0.00392156863,0.0);
           vec4 diff = tex - default_border_color;
           float equality = float(dot(diff,diff) < 0.99 && vClusterActive > 0.9);
           tex = mix( tex, replace_color, equality);
@@ -488,17 +488,26 @@ class Projection extends Component {
     let clustersAr_sliced = [];
 
     if( clusterSelected !=="disabled" ){
+      let cluster_unique = [];
       for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
           let clusterId = this.props.metadata[index][clusterSelected];
-          if(clusterId>=clusterColors.length){
-            clusters[index*3] = 1.0;
-            clusters[index*3 + 1] = 1.0;
-            clusters[index*3 + 2] = 1.0;
-          }else{
-            clusters[index*3] = clusterColors[clusterId][0];
-            clusters[index*3 + 1] = clusterColors[clusterId][1];
-            clusters[index*3 + 2] = clusterColors[clusterId][2];
+          // check if clusterId is in cluster_unique
+          if(cluster_unique.indexOf(clusterId) === -1){
+            cluster_unique.push(clusterId);
           }
+          // get the index of the clusterId in cluster_unique
+          let cluster_int = cluster_unique.indexOf(clusterId);
+          if(cluster_int>=clusterColors.length){
+            // make a random color
+            clusters[index*3] = Math.random();
+            clusters[index*3 + 1] = Math.random();
+            clusters[index*3 + 2] = Math.random();
+          }else{
+            clusters[index*3] = clusterColors[cluster_int][0];
+            clusters[index*3 + 1] = clusterColors[cluster_int][1];
+            clusters[index*3 + 2] = clusterColors[cluster_int][2];
+          }
+          
       }
 
       for (let i = 0; i < this.props.settings.sprite_number; i++) {
