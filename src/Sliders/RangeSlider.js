@@ -45,7 +45,7 @@ class RangeSlider extends React.Component {
     return (
       <Grid container>
         <Grid item xs={12}>
-          <div style={{ height: "90px", width: "270px", marginTop: "12px"}}>
+          <div style={{ height: "90px", width: "270px", marginTop: "22px"}}>
             <BarChart
               update={update}
               domain={domain}
@@ -125,7 +125,7 @@ class RangeSlider extends React.Component {
                 height:"20px",
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                marginTop: 10,
+                // marginTop: '-12px',
                 }}
               >
                 <TextField
@@ -153,7 +153,7 @@ class RangeSlider extends React.Component {
                   }}
                 />
               </Grid>
-              <Grid item xs={4} style={{ textAlign: "center",  marginTop:"6px"}}>
+              <Grid item xs={4} style={{ textAlign: "center",  marginTop: '-6px',}}>
 
               <Tooltip title={<h3>{this.props.info}</h3>}>
               <h3 style={{cursor: "help"}}>{this.props.title}</h3>
@@ -168,7 +168,7 @@ class RangeSlider extends React.Component {
                 height:"20px",
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                marginTop: 10,
+                // marginTop: '-12px',
                 }}
               >
                 <TextField
