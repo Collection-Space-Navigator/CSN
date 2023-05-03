@@ -17,6 +17,15 @@
         {
             "name": "ResNet50 27k WikiArt",
             "directory": "resnet50_27k_wikiart"
+        },
+        {
+            "name": "Basic Concepts Stable Diffusion",
+            "directory": "testset"
+        }
+        ,
+        {
+            "name": "Soviet Newsreels 1967-1972",
+            "directory": "soviet_newsreels"
         }
     ]
 }

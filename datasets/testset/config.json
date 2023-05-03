@@ -1,0 +1,131 @@
+{
+    "title": "Testset",
+    "datasetInfo": "This testset is a subset of 1k generated imaged using Stable Diffusion v1.5 and basic concepts. Feature Extraction with ResNet50.",
+    "metadata": "metadata.json",
+    "url_prefix": "https://github.com/Collection-Space-Navigator/CSN/raw/main/example_data/testset_images/",
+    "embeddings": [
+        {
+            "name": "UMAP",
+            "file": "UMAP.json"
+        },
+        {
+            "name": "PCA",
+            "file": "PCA.json"
+        },
+        {
+            "name": "t-SNE",
+            "file": "tSNE.json"
+        },
+        {
+            "name": "Colorfulness_Colors",
+            "file": "Colorfulness_Colors.json"
+        },
+        {
+            "name": "Colors_FileSize",
+            "file": "Colors_FileSize.json"
+        }
+    ],
+    "clusters": {
+        "clusterList": [
+            "Class"
+        ],
+        "clusterColors": [
+            "#00ff00",
+            "#ff00ff",
+            "#0080ff",
+            "#ff8000",
+            "#80bf80",
+            "#6e2390",
+            "#ca7ffb",
+            "#38fefb",
+            "#d40005",
+            "#656d08",
+            "#0000ff",
+            "#ffff00",
+            "#00ff80",
+            "#008080",
+            "#e04c7a",
+            "#82f711",
+            "#fcbf93",
+            "#8000ff",
+            "#000080",
+            "#6557e8",
+            "#01a523",
+            "#a2f8ca",
+            "#6a0629",
+            "#c8be2f",
+            "#164040",
+            "#61b0f5",
+            "#02c2c5",
+            "#ff0080",
+            "#866b68",
+            "#c0471a",
+            "#bbf96a",
+            "#bd1ec7",
+            "#0642ae",
+            "#64b625",
+            "#4ff1ab",
+            "#fb4dde",
+            "#27bd75",
+            "#4983ae",
+            "#b60f5d",
+            "#cb888e",
+            "#c4c5f7",
+            "#3af239",
+            "#431cd3",
+            "#b58a01",
+            "#b35abc",
+            "#f82939",
+            "#046007",
+            "#3e864c"
+        ]
+    },
+    "sprite_dir": "testset",
+    "total": 1000,
+    "sprite_side": 32,
+    "sprite_number": 1,
+    "sprite_image_size": 64,
+    "sprite_actual_size": 2048,
+    "sliders": [
+        {
+            "id": "Colorfulness",
+            "title": "Colorfulness",
+            "info": "Hasler & S\u00fcsstrunk -> hasler2003measuring: https://doi.org/10.1117/12.477378",
+            "typeNumber": "float",
+            "color": "#f0e570"
+        },
+        {
+            "id": "Colors",
+            "title": "Colors",
+            "info": "Number of unique colors",
+            "typeNumber": "integer",
+            "color": "#4d6aff"
+        },
+        {
+            "id": "Contrast",
+            "title": "Contrast",
+            "info": "RMS Contrast -> https://en.wikipedia.org/wiki/Contrast_(vision)#RMS_contrast",
+            "typeNumber": "float",
+            "color": "#f780ff"
+        },
+        {
+            "id": "File Size",
+            "title": "File Size",
+            "info": "File size of PNG image in bytes",
+            "typeNumber": "integer",
+            "color": "#65e295"
+        }
+    ],
+    "info": [
+        "Prompt",
+        "Colors",
+        "Contrast",
+        "File Size"
+    ],
+    "search": [
+        {
+            "columnField": "Prompt",
+            "type": "selection"
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "title": "Soviet Newsreels 1967-1972",
+    "datasetInfo": "32k subset (1967-1972) of the Daily News newsreel series produced by the Central Documentary Film Studios in Moscow. Feature extraction with ResNet50 for encoding visual resemblance.",
+    "metadata": "metadata.json",
+    "embeddings": [
+        {
+            "name": "UMAP",
+            "file": "UMAP.json"
+        },
+        {
+            "name": "TSNE",
+            "file": "TSNE.json"
+        },
+        {
+            "name": "PCA",
+            "file": "PCA.json"
+        },
+        {
+            "name": "Shot_PC1",
+            "file": "Shot_PC1.json"
+        },
+        {
+            "name": "Shot_Length",
+            "file": "Shot_Length.json"
+        }
+    ],
+    "sprite_dir": "soviet_newsreels",
+    "sprite_side": 32,
+    "sprite_number": 33,
+    "sprite_image_size": 64,
+    "sprite_actual_size": 2048,
+    "clusters": {
+        "clusterList": [
+            "Year",
+            "Issue",
+            "Shot"
+        ],
+        "clusterColors": [
+            "#e100ff",
+            "#00ff00",
+            "#0080ff",
+            "#ff8000",
+            "#ff0000",
+            "#fff700"
+        ]
+    },
+    "total": 32905,
+    "sliders": [
+        {
+            "id": "Year",
+            "title": "Year",
+            "info": "",
+            "typeNumber": "int",
+            "color": "#ff7a88"
+        },
+        {
+            "id": "Issue",
+            "title": "Issue",
+            "info": "",
+            "typeNumber": "int",
+            "color": "#869efd"
+        },
+        {
+            "id": "Shot",
+            "title": "Shot",
+            "info": "",
+            "typeNumber": "int",
+            "color": "#91fd98"
+        }
+    ],
+    "info": [
+        "Year",
+        "Issue",
+        "Title",
+        "Shot"
+    ],
+    "search": [
+        {
+            "columnField": "Video File",
+            "type": "selection"
+        }
+    ],
+    "url_prefix": "https://cudan-data.tlu.ee/CSN/newsreels/"
+}
