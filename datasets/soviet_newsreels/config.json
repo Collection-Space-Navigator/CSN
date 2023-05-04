@@ -8,8 +8,8 @@
             "file": "UMAP.json"
         },
         {
-            "name": "TSNE",
-            "file": "TSNE.json"
+            "name": "t-SNE",
+            "file": "tSNE.json"
         },
         {
             "name": "PCA",
@@ -17,11 +17,15 @@
         },
         {
             "name": "Shot_PC1",
-            "file": "Shot_PC1.json"
+            "file": "Scene_PC1.json"
+        },
+        {
+            "name": "Shot_PC2",
+            "file": "Scene_PC2.json"
         },
         {
             "name": "Shot_Length",
-            "file": "Shot_Length.json"
+            "file": "Scene_Length(seconds).json"
         }
     ],
     "sprite_dir": "soviet_newsreels",
@@ -36,12 +40,12 @@
             "Shot"
         ],
         "clusterColors": [
-            "#e100ff",
             "#00ff00",
+            "#ff00ff",
             "#0080ff",
             "#ff8000",
-            "#ff0000",
-            "#fff700"
+            "#80bf80",
+            "#6d259a"
         ]
     },
     "total": 32905,
