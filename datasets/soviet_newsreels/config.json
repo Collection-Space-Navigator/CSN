@@ -9,7 +9,7 @@
         },
         {
             "name": "t-SNE",
-            "file": "tSNE.json"
+            "file": "TSNE.json"
         },
         {
             "name": "PCA",
