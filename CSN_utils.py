@@ -69,7 +69,7 @@ class Utils:
             # count files in sprite directory
             spriteNumb = 0
             for file in os.listdir(f'build/datasets/{configData["sprite_dir"]}'):
-                if file.startswith("sprite_"):
+                if file.startswith("tile_"):
                     spriteNumb += 1
         configData["sprite_number"] = spriteNumb
         configData["sprite_image_size"] = spriteSize
@@ -142,7 +142,7 @@ class ImageSpriteGenerator:
             result = result.resize((self.spriteSize, self.spriteSize), Image.ANTIALIAS)
             # convert to 256 colors for faster loading online
             result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
-            result.save(f'build/datasets/{self.directory}/sprite_{spriteNum}.png', "PNG", optimize=True)  
+            result.save(f'build/datasets/{self.directory}/tile_{spriteNum}.png', "PNG", optimize=True)  
 
 class SimplePlot:
     def __init__(self, directory, A=None ,B=None, metadata=None):
