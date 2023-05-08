@@ -16,7 +16,6 @@ class Data extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // tilesLoaded: 0,
       algorithm_options: null,
       dataset_options: null,
       dataset_dirs: null,
@@ -85,24 +84,6 @@ class Data extends Component {
         })
   }
 }
-
-  // loadTiles(){ 
-  //   const tile_locations = [...Array(this.state.settings.sprite_number)].map(
-  //     (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.state.datasetDir}/tile_${i}.png`
-  //   )
-  //   let loader = new THREE.TextureLoader();
-  //   this.tiles = tile_locations.map(l => {
-  //     let t = loader.load(l,
-  //       function ( texture ) {
-  //         this.setState({ tilesLoaded: this.state.tilesLoaded+1 });
-  //       }.bind(this)
-  //     )
-  //     t.flipY = false
-  //     t.magFilter = THREE.NearestFilter
-  //     return t
-  //   })    
-  // }
-
 
   addToUrl(paramName,value){
     const queryString = window.location.search;
@@ -192,8 +173,6 @@ class Data extends Component {
       this.prepareMappings(0))
       .then(()=> 
       this.loadDataset(0))
-      // .then(()=> 
-      // this.loadTiles())
   }
 
   loadMetadata(file){
@@ -230,7 +209,6 @@ class Data extends Component {
         changeDataset={this.changeDataset.bind(this)}
         selectedDataset={this.state.selectedDataset}
         datasetDir={this.state.datasetDir}
-        // tiles={this.tiles}
       />
 
     ) : (
