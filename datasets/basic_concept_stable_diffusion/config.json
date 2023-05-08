@@ -1,0 +1,140 @@
+{
+    "title": "Basic Concept Stable Diffusion",
+    "datasetInfo": "1k text-to-image generated image collection with Stable Diffusion 1.5 using the basic word list of the Automated Similarity Judgement Program as prompts. Feature Extraction with ResNet50.",
+    "embeddings": [
+        {
+            "name": "PCA",
+            "file": "PCA.json"
+        },
+        {
+            "name": "UMAP",
+            "file": "UMAP.json"
+        },
+        {
+            "name": "t-SNE",
+            "file": "TSNE.json"
+        },
+        {
+            "name": "Colorfulness_PC1",
+            "file": "Colorfulness_PC1.json"
+        }
+    ],
+    "clusters": {
+        "clusterList": [
+            "Class"
+        ],
+        "clusterColors": [
+            "#00ff00",
+            "#ff00ff",
+            "#0080ff",
+            "#ff8000",
+            "#80bf80",
+            "#5609a1",
+            "#bd0211",
+            "#f97cc0",
+            "#fdfd3d",
+            "#347910",
+            "#0afedd",
+            "#008080",
+            "#a6506d",
+            "#905dfa",
+            "#8afe04",
+            "#0000ff",
+            "#8be7ff",
+            "#ff0080",
+            "#0be56a",
+            "#9e9b1a",
+            "#9703f3",
+            "#253b50",
+            "#d2cbbb",
+            "#8e4f06",
+            "#5559a8",
+            "#eab258",
+            "#5d9fd3",
+            "#42c616",
+            "#f33b39",
+            "#d836c1",
+            "#72094b",
+            "#000080",
+            "#0abdb3",
+            "#3141f3",
+            "#ac88b5",
+            "#a9fa65",
+            "#5af9b7",
+            "#57815a",
+            "#ccd317",
+            "#3f3506",
+            "#b00091",
+            "#06a440",
+            "#a1a7fc",
+            "#0529b7",
+            "#4efd3e",
+            "#23c5fb",
+            "#f0fd93",
+            "#df7551"
+        ]
+    },
+    "total": 1000,
+    "sliders": [
+        {
+            "id": "Colorfulness",
+            "title": "Colorfulness",
+            "info": "",
+            "typeNumber": "float",
+            "color": "#a9ff8a"
+        },
+        {
+            "id": "Colors",
+            "title": "Colors",
+            "info": "",
+            "typeNumber": "int",
+            "color": "#f59eff"
+        },
+        {
+            "id": "Contrast",
+            "title": "Contrast",
+            "info": "",
+            "typeNumber": "float",
+            "color": "#8ac6ff"
+        },
+        {
+            "id": "File Size",
+            "title": "File Size",
+            "info": "",
+            "typeNumber": "int",
+            "color": "#fd9191"
+        },
+        {
+            "id": "PC1",
+            "title": "PC1",
+            "info": "",
+            "typeNumber": "float",
+            "color": "#fdf981"
+        },
+        {
+            "id": "PC2",
+            "title": "PC2",
+            "info": "",
+            "typeNumber": "float",
+            "color": "#7affe9"
+        }
+    ],
+    "info": [
+        "Prompt",
+        "Colors",
+        "Contrast",
+        "File Size"
+    ],
+    "search": [
+        {
+            "columnField": "Prompt",
+            "type": "selection"
+        }
+    ],
+    "url_prefix": "https://github.com/Collection-Space-Navigator/CSN/raw/main/example_data/testset_images/",
+    "sprite_side": 32,
+    "sprite_dir": "basic_concept_stable_diffusion",
+    "sprite_number": 1,
+    "sprite_image_size": 64,
+    "sprite_actual_size": 2048
+}
