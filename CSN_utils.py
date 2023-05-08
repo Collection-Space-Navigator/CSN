@@ -4,6 +4,7 @@ from tqdm import tqdm
 import json
 import numpy as np
 
+
 class Utils:
     def __init__(self, minScale=-25, maxScale=25):
         self.minScale = minScale
@@ -28,9 +29,7 @@ class Utils:
             embeddings[index][1] = embeddings[index][1] - offsetB
         return embeddings
     
-    def create_config():
-        configData = {"title": "", "datasetInfo": "", "metadata": "metadata.json", "embeddings": []}
-        return configData
+
     
     def write_metadata(directory, metadata):
         metadata.reset_index(inplace=True)
@@ -40,13 +39,13 @@ class Utils:
             f.write(result)
         print("saved metadata.json")
 
-    def write_config(directory, title=None, description='', clusters=None, total=0, sliderSetting=None, infoColumns=None, searchFields=None, imageWebLocation=None):
-        with open(f'build/datasets/{directory}/config.json', 'r') as f:
-            configData = json.load(f)
+    def write_config(directory, title=None, description='', mappings=None, clusters=None, total=0, sliderSetting=None, infoColumns=None, searchFields=None, imageWebLocation=None, spriteRows=32, spriteNumb=None, squareSize=2048, spriteSize=64, spriteDir=None):
+        configData = {}
         
-        configData["title"]: title
-        configData["datasetInfo"]: description
-    
+        configData["title"] = title
+        configData["datasetInfo"] = description
+
+        configData["embeddings"] = mappings
         configData["clusters"] = clusters
         configData["total"] = total
         configData["sliders"] = sliderSetting
@@ -57,6 +56,24 @@ class Utils:
             configData["url_prefix"] = imageWebLocation
         else:
             configData["url_prefix"] = imageWebLocation + "/"
+
+        configData["sprite_side"] = spriteRows
+        if spriteDir:
+            configData["sprite_dir"] = spriteDir
+        else: 
+            configData["sprite_dir"] = directory
+
+        if spriteNumb:
+            configData["sprite_number"] = spriteNumb
+        else:
+            # count files in sprite directory
+            spriteNumb = 0
+            for file in os.listdir(f'build/datasets/{configData["sprite_dir"]}'):
+                if file.startswith("sprite_"):
+                    spriteNumb += 1
+        configData["sprite_number"] = spriteNumb
+        configData["sprite_image_size"] = spriteSize
+        configData["sprite_actual_size"] = squareSize 
 
         with open(f'build/datasets/{directory}/config.json', 'w') as f:
             json.dump(configData, f, indent=4, cls=NumpyEncoder)
@@ -75,16 +92,16 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
     
 
-class ImageTileGenerator:
-    def __init__(self, directory, tileSize=2048, tileRows=32, imageFolder=None, files=None):
+class ImageSpriteGenerator:
+    def __init__(self, directory, spriteSize=2048, spriteRows=32, imageFolder=None, files=None):
         self.directory = directory
         self.imageFolder = imageFolder
         self.files = files
-        self.tileSize = tileSize
-        self.tileRows = tileRows
-        self.columns = tileRows
-        self.squareSize = int(tileSize / tileRows)
-        self.imgPerTile = tileRows * tileRows
+        self.spriteSize = spriteSize
+        self.spriteRows = spriteRows
+        self.columns = spriteRows
+        self.squareSize = int(spriteSize / spriteRows)
+        self.imgPerSprite = spriteRows * spriteRows
 
     def generate(self):
         try:
@@ -92,7 +109,7 @@ class ImageTileGenerator:
         except ImportError:
             print("Pillow is not installed. Please run: !pip install Pillow")
 
-        def resizeImgTile(image):
+        def resizeImgSprite(image):
             (w, h) = image.size
             max_dim = max(w, h)
             new_w = int(w / max_dim * self.squareSize)
@@ -101,13 +118,13 @@ class ImageTileGenerator:
             y_dif = int((self.squareSize - new_h) / 2)
             return image.resize((new_w - 8, new_h - 8), Image.ANTIALIAS), new_w, new_h, x_dif, y_dif
 
-        imgPerTile = self.tileRows*self.tileRows
-        self.numbTiles = math.ceil(len(self.files)/imgPerTile)
+        imgPerSprite = self.spriteRows*self.spriteRows
+        self.numbSprites = math.ceil(len(self.files)/imgPerSprite)
         
-        for tileNum in tqdm(range(self.numbTiles), desc = "Generating tiles"):
-            result = Image.new("RGBA", (self.tileSize, self.tileSize), (255, 0, 0, 0))
-            for i in range(imgPerTile):
-                img_idx = i+(tileNum*imgPerTile)
+        for spriteNum in tqdm(range(self.numbSprites), desc = "Generating sprites"):
+            result = Image.new("RGBA", (self.spriteSize, self.spriteSize), (255, 0, 0, 0))
+            for i in range(imgPerSprite):
+                img_idx = i+(spriteNum*imgPerSprite)
                 if img_idx >= len(self.files):
                     break
                 entry = self.files[img_idx]
@@ -116,33 +133,16 @@ class ImageTileGenerator:
                 except:
                     print(f"Skipping invalid image file: {entry}")
                     continue
-                resizedImage,w,h,x_dif,y_dif = resizeImgTile(image)
+                resizedImage,w,h,x_dif,y_dif = resizeImgSprite(image)
                 r_result = Image.new("RGBA", (w, h), (1, 1, 1, 1))   # produces an almost transparent border to indicate clusters in the tool
                 r_result.paste(resizedImage, (4,4))
-                x = i % self.tileRows * self.squareSize + x_dif
-                y = i // self.tileRows * self.squareSize + y_dif
+                x = i % self.spriteRows * self.squareSize + x_dif
+                y = i // self.spriteRows * self.squareSize + y_dif
                 result.paste(r_result, (x, y, x + w, y + h))
-            result = result.resize((self.tileSize, self.tileSize), Image.ANTIALIAS)
+            result = result.resize((self.spriteSize, self.spriteSize), Image.ANTIALIAS)
             # convert to 256 colors for faster loading online
             result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
-            result.save(f'build/datasets/{self.directory}/tile_{tileNum}.png', "PNG", optimize=True)  
-            self.add_to_config()
-
-    def add_to_config(self):
-        try:
-            with open(f'{self.directory}/config.json', 'r') as f:
-                configData = json.load(f)
-        except:
-            configData = Utils.create_config()
-
-        configData["sprite_side"] = self.tileRows
-        configData["sprite_number"] = self.numbTiles
-        configData["sprite_image_size"] = self.squareSize
-        configData["sprite_actual_size"] = self.tileSize
-
-        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
-            json.dump(configData, f)
-            
+            result.save(f'build/datasets/{self.directory}/sprite_{spriteNum}.png', "PNG", optimize=True)  
 
 class SimplePlot:
     def __init__(self, directory, A=None ,B=None, metadata=None):
@@ -162,24 +162,7 @@ class SimplePlot:
             out_file.write(out)
 
         print(f"saved {self.filename}.json")
-        self.add_to_config()
-
-    def add_to_config(self):
-        try:
-            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
-                configData = json.load(f)
-        except:
-            configData = Utils.create_config()
-
-        if "embeddings" not in configData:
-            configData["embeddings"] = []
-        else:
-            mappings = configData["embeddings"]
-        mappings.append({"name": self.filename, "file": self.filename + ".json"})
-
-        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
-            json.dump(configData, f)
-
+        return {"name": self.filename, "file": self.filename + ".json"}
 
 class PCAGenerator:
     # See PCA documentation: https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.eA.html
@@ -212,21 +195,7 @@ class PCAGenerator:
             out = json.dumps(PCMap, cls=NumpyEncoder)
             out_file.write(out)
         print(f"saved PCA.json")
-        self.add_to_config()
         return centeredEmbedding
-
-    def add_to_config(self):
-        try:
-            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
-                configData = json.load(f)
-        except:
-            configData = Utils.create_config()
-
-        mappings = configData["embeddings"]
-        mappings.append({"name": "PCA", "file": "PCA.json"})
-
-        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
-            json.dump(configData, f)
 
 
 class UMAPGenerator:    
@@ -260,66 +229,6 @@ class UMAPGenerator:
             out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
             out_file.write(out)
         print(f"saved UMAP.json")
-        self.add_to_config()
-
-    def add_to_config(self):
-        try:
-            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
-                configData = json.load(f)
-        except:
-            configData = Utils.create_config()
-
-        mappings = configData["embeddings"]
-        mappings.append({"name": "UMAP", "file": "UMAP.json"})
-
-        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
-            json.dump(configData, f)
-            
-class UMATO:    
-    def __init__(self, directory, data=None, n_neighbors=15, min_dist=0.18, metric="euclidean", verbose=True):
-        self.directory = directory
-        self.data = data
-        self.n_neighbors = n_neighbors
-        self.min_dist = min_dist
-        self.metric = metric
-        self.verbose = verbose
-
-    def generate(self):
-        try:
-            import umato
-            from sklearn.preprocessing import StandardScaler
-        except ImportError:
-            print("umato is not installed. Please run: !pip install umato")
-
-        print("Generating UMATO...")
-        scaled_penguin_data = StandardScaler().fit_transform(self.data)
-        reducer = umato.UMATO(n_neighbors=self.n_neighbors,
-                            min_dist=self.min_dist,
-                            metric=self.metric,
-                            verbose=self.verbose)
-        embedding = reducer.fit_transform(scaled_penguin_data)
-        normalized = Utils().normalize(embedding)
-        centeredEmbedding = Utils().center(normalized)
-        print("...done")
-        # save file
-        with open(f'build/datasets/{self.directory}/UMATO.json', "w") as out_file:
-            out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
-            out_file.write(out)
-        print(f"saved UMATO.json")
-        self.add_to_config()
-
-    def add_to_config(self):
-        try:
-            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
-                configData = json.load(f)
-        except:
-            configData = Utils.create_config()
-
-        mappings = configData["embeddings"]
-        mappings.append({"name": "UMATO", "file": "UMATO.json"})
-
-        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
-            json.dump(configData, f)
 
 class TSNEGenerator:
     def __init__(self, directory, data=None, n_components=2, verbose=1, random_state=123):
@@ -348,20 +257,6 @@ class TSNEGenerator:
             out = json.dumps(centeredEmbedding, cls=NumpyEncoder)
             out_file.write(out)
         print(f"saved TSNE.json")
-        self.add_to_config()
-
-    def add_to_config(self):
-        try:
-            with open(f'build/datasets/{self.directory}/config.json', 'r') as f:
-                configData = json.load(f)
-        except:
-            configData = Utils.create_config()
-
-        mappings = configData["embeddings"]
-        mappings.append({"name": "TSNE", "file": "TSNE.json"})
-
-        with open(f'build/datasets/{self.directory}/config.json', 'w') as f:
-            json.dump(configData, f)
     
 
 class HistogramGenerator:
