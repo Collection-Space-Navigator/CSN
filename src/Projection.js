@@ -8,9 +8,9 @@ import { CircularProgress } from "@material-ui/core";
 class Projection extends Component {
   constructor(props) {
     super(props)
-    this.loadSprites()
+    this.loadTiles()
     this.state = {
-      spritesLoaded: 0,
+      tilesLoaded: 0,
       view: null
     }
     this.init = this.init.bind(this)
@@ -24,12 +24,12 @@ class Projection extends Component {
     this.changeEmbeddings = this.changeEmbeddings.bind(this)
   }
 
-  loadSprites(){ 
+  loadTiles(){ 
     this.sprite_size = this.props.settings.sprite_side * this.props.settings.sprite_side
-    this.sprite_locations = [...Array(this.props.settings.sprite_number)].map(
-      (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.props.settings.sprite_dir}/sprite_${i}.png`
+    this.tile_locations = [...Array(this.props.settings.sprite_number)].map(
+      (n, i) => `${process.env.PUBLIC_URL}/datasets/${this.props.settings.sprite_dir}/tile_${i}.png`
     )  
-    this.datasetIMG = this.sprite_locations.map(src => {
+    this.datasetIMG = this.tile_locations.map(src => {
       let img = document.createElement('img')
       img.src = src
       return img
@@ -204,10 +204,10 @@ class Projection extends Component {
 
     // load the textures
     let loader = new THREE.TextureLoader();
-    this.textures = this.sprite_locations.map(l => {
+    this.textures = this.tile_locations.map(l => {
       let t = loader.load(l,
         function ( w ) {
-          this.setState({ spritesLoaded: this.state.spritesLoaded+1 });
+          this.setState({ tilesLoaded: this.state.tilesLoaded+1 });
         }.bind(this)
       )
       t.flipY = false
@@ -716,12 +716,12 @@ class Projection extends Component {
 
   render() {
     let { width, height } = this.props;
-    const spriteProgress = this.state.spritesLoaded;
-    const allSprites = this.props.settings.sprite_number;
+    const tileProgress = this.state.tilesLoaded;
+    const allTiles = this.props.settings.sprite_number;
     return (
       <><div>
-        {spriteProgress < 1 ? <div className="loading"><CircularProgress color="inherit"/><div>loading sprites...</div></div> : 
-        spriteProgress < allSprites-1 ? <div className="loading-small"><CircularProgress color="inherit"/><div>loading...</div></div> : 
+        {tileProgress < 1 ? <div className="loading"><CircularProgress color="inherit"/><div>loading tiles...</div></div> : 
+        tileProgress < allTiles-1 ? <div className="loading-small"><CircularProgress color="inherit"/><div>loading...</div></div> : 
         ''
       }
       </div><div
