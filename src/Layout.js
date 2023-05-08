@@ -443,7 +443,6 @@ class Layout extends Component {
             scaleMax={this.state.scaleMax}
             currentProjection={currentProjection}
             clickOnImage={this.clickOnImage.bind(this)}
-            // tiles={this.tiles}
           />
         </div>
       </div>
