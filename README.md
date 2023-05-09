@@ -76,7 +76,7 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 
 ## Authors
 
-<a href="https://tillmannohm.com/" target="_blank">Tillmann Ohm</a>
+<a href="https://tillmannohm.com/" target="_blank">Tillmann Ohm</a> , 
 <a href="https://var-mar.info/" target="_blank">Mar Canet Solà</a>
 
 ## Acknowledgements
