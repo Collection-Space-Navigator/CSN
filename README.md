@@ -76,8 +76,8 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 
 ## Authors
 
-<a href="https://tillmannohm.com/" target="_blank">Tillmann Ohm</a>
+<a href="https://tillmannohm.com/" target="_blank">Tillmann Ohm</a>, 
 <a href="https://var-mar.info/" target="_blank">Mar Canet Solà</a>
 
 ## Acknowledgements
-Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. Tilmann Ohm, Mar Canet Solà, Anders Karjus, Maximilian Schich contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All authors are supported by ERA Chair for <a href="https://cudan.tlu.ee/" target="_blank">Cultural Data Analytics</a>, funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
+Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collection Space Navigator (CSN) software. <a href="https://tillmannohm.com/" target="_blank">Tilmann Ohm</a>, <a href="https://var-mar.info/" target="_blank">Mar Canet Solà</a>, <a href="https://andreskarjus.github.io"  target="_blank">Anders Karjus</a>, <a href="https://www.schich.info/"  target="_blank">Maximilian Schich</a> contributed to the broader research design, including initial applications of the CSN. The authors further thank the members of the CUDAN Research Group for useful discussions. All authors are supported by ERA Chair for <a href="https://cudan.tlu.ee/" target="_blank">Cultural Data Analytics</a>, funded through the European Union’s Horizon 2020 research and innovation program (Grant No.810961).
