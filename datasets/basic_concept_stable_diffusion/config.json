@@ -79,44 +79,56 @@
         {
             "id": "Colorfulness",
             "title": "Colorfulness",
-            "info": "",
+            "info": "Hasler & S\u00fcsstrunk -> hasler2003measuring: https://doi.org/10.1117/12.477378",
             "typeNumber": "float",
-            "color": "#a9ff8a"
+            "color": "#a9ff8a",
+            "min": 0.3,
+            "max": 147.5
         },
         {
             "id": "Colors",
             "title": "Colors",
-            "info": "",
+            "info": "Number of unique colors",
             "typeNumber": "int",
-            "color": "#f59eff"
+            "color": "#f59eff",
+            "min": 258,
+            "max": 83515
         },
         {
             "id": "Contrast",
             "title": "Contrast",
-            "info": "",
+            "info": "RMS Contrast -> https://en.wikipedia.org/wiki/Contrast_(vision)#RMS_contrast",
             "typeNumber": "float",
-            "color": "#8ac6ff"
+            "color": "#8ac6ff",
+            "min": 2.9,
+            "max": 101.6
         },
         {
             "id": "File Size",
             "title": "File Size",
-            "info": "",
+            "info": "File size of PNG image in bytes",
             "typeNumber": "int",
-            "color": "#fd9191"
+            "color": "#fd9191",
+            "min": 4673,
+            "max": 48466
         },
         {
             "id": "PC1",
             "title": "PC1",
-            "info": "",
+            "info": "First Principal Component of the ResNet50 embeddings",
             "typeNumber": "float",
-            "color": "#fdf981"
+            "color": "#fdf981",
+            "min": -25.5,
+            "max": 25.5
         },
         {
             "id": "PC2",
             "title": "PC2",
-            "info": "",
+            "info": "Second Principal Component of the ResNet50 embeddings",
             "typeNumber": "float",
-            "color": "#7affe9"
+            "color": "#7affe9",
+            "min": -25.5,
+            "max": 25.5
         }
     ],
     "info": [

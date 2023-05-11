@@ -88,28 +88,36 @@
             "title": "Year",
             "info": "Creation year of the artworks (WikiArt)",
             "typeNumber": "int",
-            "color": "#619eff"
+            "color": "#619eff",
+            "min": 1430,
+            "max": 1947
         },
         {
             "id": "PC1",
             "title": "PC1",
             "info": "First Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#fd8181"
+            "color": "#fd8181",
+            "min": -25.5,
+            "max": 25.5
         },
         {
             "id": "PC2",
             "title": "PC2",
             "info": "Second Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#a1fc80"
+            "color": "#a1fc80",
+            "min": -25.5,
+            "max": 25.5
         },
         {
             "id": "PC3",
             "title": "PC3",
             "info": "Third Principal Component of Compression Ensemble",
             "typeNumber": "float",
-            "color": "#fdff85"
+            "color": "#fdff85",
+            "min": -7.7,
+            "max": 30.6
         }
     ],
     "info": [

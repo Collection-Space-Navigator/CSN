@@ -215,21 +215,27 @@
             "title": "Year",
             "info": "",
             "typeNumber": "int",
-            "color": "#ff7a88"
+            "color": "#ff7a88",
+            "min": 1967,
+            "max": 1972
         },
         {
             "id": "Issue",
             "title": "Issue",
             "info": "",
             "typeNumber": "int",
-            "color": "#869efd"
+            "color": "#869efd",
+            "min": 1,
+            "max": 52
         },
         {
             "id": "Shot",
             "title": "Shot",
             "info": "",
             "typeNumber": "int",
-            "color": "#91fd98"
+            "color": "#91fd98",
+            "min": 1,
+            "max": 166
         }
     ],
     "info": [
