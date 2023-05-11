@@ -1,5 +1,6 @@
 # Node and React specific files
 node_modules/
+package-lock.json
 /dist/
 /.cache/
 /.pnp.js
