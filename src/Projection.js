@@ -230,7 +230,7 @@ class Projection extends Component {
       geometry = new THREE.BufferGeometry();
 
       let numVertices = vertices.length;
-      console.log("numVertices -->",numVertices)
+      // console.log("numVertices -->",numVertices)
       let positionAr = new Float32Array(numVertices * 3);
       let offsetAr = new Float32Array(numVertices * 2);
       let clusterAr = new Float32Array(numVertices * 3);
@@ -265,7 +265,7 @@ class Projection extends Component {
         // Todo: connect cluster the array
         let clusterSelected = this.props.clusterTypeSelected;
         let clusterColors = this.props.settings.clusters.clusterColors;
-        console.log("clusterSelected",clusterSelected)
+        // console.log("clusterSelected",clusterSelected)
         for (let i = 0, index = 0, l = numVertices; i < l; i++, index += 1) {
           // Images disable when are not visible
           filterAr[index] = 0.0;// default value to show all images
