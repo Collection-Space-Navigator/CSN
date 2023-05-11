@@ -33,7 +33,7 @@ class Sliders extends Component {
   }
 
   changeSlider(componentName, values) {
-    console.log(componentName, values);
+    // console.log(componentName, values);
     let {
       metadata,
     } = this.props
@@ -79,6 +79,7 @@ class Sliders extends Component {
         settings={settings}
         sliderID={slider['id']}
         metadata={this.props.metadata}
+        range={[slider['min'],slider['max']]}
         />
       </Grid>
     )
