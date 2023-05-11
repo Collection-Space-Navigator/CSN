@@ -1,51 +1,38 @@
 import React from "react";
-import { Grid, TextField, Tooltip, Button } from "@material-ui/core";
+import { Grid, TextField, Tooltip } from "@material-ui/core";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
 import { MuiRail, MuiHandle, MuiTrack } from "./components";
 import BarChart from "./BarChart";
 
-
 class RangeSlider extends React.Component {
-  constructor(props) {
-    super(props);
-    let data = props.datafilter;//.filter(() => true);
-    const range = [Math.min.apply(null, data),Math.max.apply(null, data)];
-    this.state = {
-      domain: range,
-      update: range,
-      values: range,
-      inputValues: range,
-      typeNumber: this.props.typeNumber,
-      step:props.step,
-      color:props.color,
-      hover_index: this.props.hover_index,
-      isToggleOn: false,
-    };
+  state = {
+    domain: this.props.range,
+    update: this.props.range,
+    values: this.props.range,
+    inputValues: this.props.range,
+    typeNumber: this.props.typeNumber,
+    step: this.props.step,
+    color: this.props.color,
+    hover_index: this.props.hover_index,
+    isToggleOn: false,
+  };
 
-    this.changeSlider = this.changeSlider.bind(this);
-    this.currentValues = range;
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
+  handleClick = (e) => {
+    this.setState((prevState) => ({ isToggleOn: !prevState.isToggleOn }));
     e.stopPropagation();
-  }
+  };
 
-  changeSlider(values) {
-    this.currentValues = values;
+  changeSlider = (values) => {
     this.props.onChangeSlider(this.props.id, values);
-  }
-
+  };
 
   render() {
     const { domain, values, update, inputValues, color, typeNumber } = this.state;
+
     return (
       <Grid container>
         <Grid item xs={12}>
-          <div style={{ height: "90px", width: "270px", marginTop: "22px"}}>
+          <div style={{ height: "90px", width: "270px", marginTop: "22px" }}>
             <BarChart
               update={update}
               domain={domain}
@@ -57,9 +44,8 @@ class RangeSlider extends React.Component {
               sliderID={this.props.sliderID}
               metadata={this.props.metadata}
               selected={this.props.metadata[this.props.hover_index][this.props.sliderID]}
-
             />
-            
+
             <Slider
               mode={3}
               step={typeNumber === "int" ? 1 : 0.01}
@@ -67,7 +53,7 @@ class RangeSlider extends React.Component {
               color={color}
               rootStyle={{
                 position: "relative",
-                width: "100%"
+                width: "100%",
               }}
               onUpdate={(update) => {
                 this.setState({ update, inputValues: update });
