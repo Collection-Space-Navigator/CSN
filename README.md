@@ -60,7 +60,7 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 
 ## Citation
 ```
-**@article{csn2023,
+@article{csn2023,
     author = {Ohm, Tillmann
               and Canet Sola, Mar
               and Karjus, Andres
@@ -69,7 +69,7 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
     title = {Collection Space Navigator: Interactive Visualization Interface for Multidimensional Datasets},
     journal = {arXiv preprint arXiv:},
     year  = {2023}
-}**
+}
 ```
 
 ## Authors
