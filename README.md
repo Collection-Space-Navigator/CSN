@@ -7,7 +7,7 @@ An Interactive Visualization Interface for Multidimensional Datasets
 The Collection Space Navigator (CSN) is an explorative visualization tool for researching collections and their multidimensional representations. We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. CSN can be used with any image collection and can be customized for specific research needs (see Jupyter Notebbok How-To guide).
 
 # Demo and Paper
-[-> interactive CSN Demo](https://collection-space-navigator.github.io/CSN)
+[-> interactive CSN Demo](https://collection-space-navigator.github.io/CSN)   
 [-> CSN Paper on arxiv.org](http://arxiv.org/abs/2305.06809)
 
 
