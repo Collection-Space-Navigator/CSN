@@ -1,5 +1,5 @@
 # CSN - Collection Space Navigator: 
-An Interactive Visualization Interface for Multidimensional Datasets
+An Interactive Visualization Interface for Multidimensional Datasets   
 [Repository: https://github.com/Collection-Space-Navigator/CSN](https://github.com/Collection-Space-Navigator/CSN)  
 
 ![CSN: Collection Space Navigation](./fig1_web.png) 
