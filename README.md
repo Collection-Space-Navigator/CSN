@@ -62,15 +62,13 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 
 ## Citation
 ```
-@article{csn2023,
-    author = {Ohm, Tillmann
-              and Canet Sola, Mar
-              and Karjus, Andres
-              and Schich, Maximilian 
-              },
-    title = {Collection Space Navigator: Interactive Visualization Interface for Multidimensional Datasets},
-    journal = {arXiv preprint arXiv:},
-    year  = {2023}
+@misc{ohm2023collection,
+      title={Collection Space Navigator: An Interactive Visualization Interface for Multidimensional Datasets}, 
+      author={Tillmann Ohm and Mar Canet Solà and Andres Karjus and Maximilian Schich},
+      year={2023},
+      eprint={2305.06809},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
 }
 ```
 
