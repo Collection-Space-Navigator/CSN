@@ -9,9 +9,9 @@ The Collection Space Navigator (CSN) is an explorative visualization tool for re
 The code is forked from [umap-explorer](https://github.com/GrantCuster/umap-explorer) by [GrantCuster](https://github.com/GrantCuster), which was used as the basis for further development.
 
 # Links
-[🖥️ Online demos](https://collection-space-navigator.github.io/CSN)   
-[📄 Paper on arxiv.org](http://arxiv.org/abs/2305.06809)
-[🌐 Project website](https://collection-space-navigator.github.io)
+[🖥️ Online demos](https://collection-space-navigator.github.io/CSN)    
+[📄 Paper on arxiv.org](http://arxiv.org/abs/2305.06809)  
+[🌐 Project website](https://collection-space-navigator.github.io)  
 
 
 ## Getting Started
