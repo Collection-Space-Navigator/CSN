@@ -4,11 +4,14 @@ An Interactive Visualization Interface for Multidimensional Datasets
 
 ![CSN: Collection Space Navigation](./fig1_web.png) 
 
-The Collection Space Navigator (CSN) is an explorative visualization tool for researching collections and their multidimensional representations. We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. CSN can be used with any image collection and can be customized for specific research needs (see Jupyter Notebbok How-To guide). The code is partly based on the [umap-explorer](https://github.com/GrantCuster/umap-explorer) by [GrantCuster](https://github.com/GrantCuster).
+The Collection Space Navigator (CSN) is an explorative visualization tool for researching collections and their multidimensional representations. We designed this tool to better understand multidimensional data, its methods, and semantic qualities through spatial navigation and filtering. CSN can be used with any image collection and can be customized for specific research needs (see Jupyter Notebook or Google Colab).
 
-# Demo and Paper
-[-> interactive CSN Demo](https://collection-space-navigator.github.io/CSN)   
-[-> CSN Paper on arxiv.org](http://arxiv.org/abs/2305.06809)
+The CSN code is partly based on the [umap-explorer](https://github.com/GrantCuster/umap-explorer) by [GrantCuster](https://github.com/GrantCuster).
+
+# Project Links
+[🖥️ Online demo](https://collection-space-navigator.github.io/CSN)    
+[📄 Paper on arxiv.org](http://arxiv.org/abs/2305.06809)  
+[🌐 Project website](https://collection-space-navigator.github.io)  
 
 
 ## Getting Started
@@ -60,15 +63,13 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 
 ## Citation
 ```
-@article{csn2023,
-    author = {Ohm, Tillmann
-              and Canet Sola, Mar
-              and Karjus, Andres
-              and Schich, Maximilian 
-              },
-    title = {Collection Space Navigator: Interactive Visualization Interface for Multidimensional Datasets},
-    journal = {arXiv preprint arXiv:},
-    year  = {2023}
+@misc{ohm2023collection,
+      title={Collection Space Navigator: An Interactive Visualization Interface for Multidimensional Datasets}, 
+      author={Tillmann Ohm and Mar Canet Solà and Andres Karjus and Maximilian Schich},
+      year={2023},
+      eprint={2305.06809},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
 }
 ```
 
