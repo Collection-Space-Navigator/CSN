@@ -31,7 +31,9 @@ class Utils:
     
 
     
-    def write_metadata(directory, metadata):
+    def write_metadata(directory, metadata, imageFileColumn):
+        # rename metadata.imageFileColumn to metadata.filename
+        metadata.rename(columns={imageFileColumn: "filename"}, inplace=True)
         metadata.reset_index(inplace=True)
         # save metadata file
         result = metadata.to_json(orient="records")
