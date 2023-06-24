@@ -16,16 +16,8 @@
             "file": "PCA.json"
         },
         {
-            "name": "Shot_PC1",
-            "file": "Scene_PC1.json"
-        },
-        {
-            "name": "Shot_PC2",
-            "file": "Scene_PC2.json"
-        },
-        {
-            "name": "Shot_Length",
-            "file": "Scene_Length(seconds).json"
+            "name": "Storyboard: shots per reel",
+            "file": "Shot_chrono.json"
         }
     ],
     "sprite_dir": "soviet_newsreels",
@@ -36,7 +28,7 @@
     "clusters": {
         "clusterList": [
             "Year",
-            "Issue",
+            "Video File",
             "Shot"
         ],
         "clusterColors": [
@@ -213,7 +205,7 @@
         {
             "id": "Year",
             "title": "Year",
-            "info": "",
+            "info": "Production year of the newsreel issue",
             "typeNumber": "int",
             "color": "#ff7a88",
             "min": 1967,
@@ -222,7 +214,7 @@
         {
             "id": "Issue",
             "title": "Issue",
-            "info": "",
+            "info": "The issue number of the year",
             "typeNumber": "int",
             "color": "#869efd",
             "min": 1,
@@ -231,7 +223,7 @@
         {
             "id": "Shot",
             "title": "Shot",
-            "info": "",
+            "info": "The shot number of the issue video",
             "typeNumber": "int",
             "color": "#91fd98",
             "min": 1,
@@ -242,6 +234,7 @@
         "Year",
         "Issue",
         "Title",
+        "Video File",
         "Shot"
     ],
     "search": [
