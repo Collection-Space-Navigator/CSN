@@ -392,7 +392,7 @@ class Projection extends Component {
     let uniforms = {
       texture: { value: this.textures[0] },
       repeat: { value: new THREE.Vector2(texture_subsize, texture_subsize) },
-      size: { value: 84.0 }, //56
+      size: { value: 120.0 }, //56
     };
 
     let vertex_shader = `
