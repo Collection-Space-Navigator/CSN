@@ -20,13 +20,12 @@ class CustomResultProcessing extends SimpleResultProcessing {
         switch(operator){
             case "==": return row[field] === value;
             case "!=": return row[field] !== value;
-            case "contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) >=0;
-            case "!contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) <0;
-            // case "startsWith": return  _.startsWith(row[field].toLowerCase(), value.toLowerCase() ) ;
+            case "contains": return row[field] && row[field].toLowerCase().indexOf(value.toLowerCase()) >=0;
+            case "!contains": return row[field] && row[field].toLowerCase().indexOf(value.toLowerCase()) <0;
             default: return false;
         }
     }
-}
+    }
 
 class Filterbox extends Component {
     constructor(props) {
