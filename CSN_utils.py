@@ -118,7 +118,9 @@ class ImageSpriteGenerator:
             new_h = int(h / max_dim * self.squareSize)
             x_dif = int((self.squareSize - new_w) / 2)
             y_dif = int((self.squareSize - new_h) / 2)
-            return image.resize((new_w - 8, new_h - 8), Image.ANTIALIAS), new_w, new_h, x_dif, y_dif
+            new_w = max(5, new_w)
+            new_h = max(5, new_h)
+            return image.resize((new_w-4, new_h-4),Image.LANCZOS), new_w, new_h, x_dif, y_dif
 
         imgPerSprite = self.spriteRows*self.spriteRows
         self.numbSprites = math.ceil(len(self.files)/imgPerSprite)
@@ -141,11 +143,12 @@ class ImageSpriteGenerator:
                 x = i % self.spriteRows * self.squareSize + x_dif
                 y = i // self.spriteRows * self.squareSize + y_dif
                 result.paste(r_result, (x, y, x + w, y + h))
-            result = result.resize((self.spriteSize, self.spriteSize), Image.ANTIALIAS)
+            result = result.resize((self.spriteSize, self.spriteSize))  # Use LANCZOS filter for better image quality
+            
             # convert to 256 colors for faster loading online
-            result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
-            result.save(f'build/datasets/{self.directory}/tile_{spriteNum}.png', "PNG", optimize=True)  
-
+            # result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
+            result.save(f'build/datasets/{self.directory}/tile_{spriteNum}.png', "PNG", optimize=True) 
+            
 class SimplePlot:
     def __init__(self, directory, A=None ,B=None, metadata=None):
         self.directory = directory
