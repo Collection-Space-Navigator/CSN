@@ -156,7 +156,7 @@ class Layout extends Component {
 
 
   setHoverIndex(hover_index) {
-    if (hover_index){
+    if (hover_index != null){
       this.setState({ hover_index: hover_index });
     }
   }
