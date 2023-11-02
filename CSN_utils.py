@@ -54,11 +54,7 @@ class Utils:
         if infoColumns:
             configData["info"] = infoColumns
         configData["search"] = searchFields
-        if imageWebLocation.endswith("/"):
-            configData["url_prefix"] = imageWebLocation
-        else:
-            configData["url_prefix"] = imageWebLocation + "/"
-
+        configData["url_prefix"] = imageWebLocation
         configData["sprite_side"] = spriteRows
         if spriteDir:
             configData["sprite_dir"] = spriteDir
@@ -93,7 +89,7 @@ class NumpyEncoder(json.JSONEncoder):
             return obj.tolist()
         return json.JSONEncoder.default(self, obj)
     
-
+    
 class ImageSpriteGenerator:
     def __init__(self, directory, spriteSize=2048, spriteRows=32, imageFolder=None, files=None):
         self.directory = directory
@@ -118,9 +114,9 @@ class ImageSpriteGenerator:
             new_h = int(h / max_dim * self.squareSize)
             x_dif = int((self.squareSize - new_w) / 2)
             y_dif = int((self.squareSize - new_h) / 2)
-            new_w = max(5, new_w)
-            new_h = max(5, new_h)
-            return image.resize((new_w-4, new_h-4),Image.LANCZOS), new_w, new_h, x_dif, y_dif
+            new_w = max(9, new_w)
+            new_h = max(9, new_h)
+            return image.resize((new_w-8, new_h-8),Image.LANCZOS), new_w, new_h, x_dif, y_dif
 
         imgPerSprite = self.spriteRows*self.spriteRows
         self.numbSprites = math.ceil(len(self.files)/imgPerSprite)
@@ -138,17 +134,20 @@ class ImageSpriteGenerator:
                     print(f"Skipping invalid image file: {entry}")
                     continue
                 resizedImage,w,h,x_dif,y_dif = resizeImgSprite(image)
-                r_result = Image.new("RGBA", (w, h), (1, 1, 1, 1))   # produces an almost transparent border to indicate clusters in the tool
+                r_result = Image.new("RGBA", (w, h), (255, 0, 0, 0))
+                r_inner = Image.new("RGBA", (w-4, h-4), (1, 1, 1, 1))   # produces an almost transparent border to indicate clusters in the tool
+                r_result.paste(r_inner, (2,2))
                 r_result.paste(resizedImage, (4,4))
                 x = i % self.spriteRows * self.squareSize + x_dif
                 y = i // self.spriteRows * self.squareSize + y_dif
                 result.paste(r_result, (x, y, x + w, y + h))
-            result = result.resize((self.spriteSize, self.spriteSize))  # Use LANCZOS filter for better image quality
+            result = result.resize((self.spriteSize, self.spriteSize), Image.LANCZOS)  # Use LANCZOS filter for better image quality
             
             # convert to 256 colors for faster loading online
-            # result = result.convert("P", palette=Image.ADAPTIVE, colors=256)
+            result = result.convert("P", palette=Image.WEB, dither=Image.FLOYDSTEINBERG)           
             result.save(f'build/datasets/{self.directory}/tile_{spriteNum}.png', "PNG", optimize=True) 
             
+             
 class SimplePlot:
     def __init__(self, directory, A=None ,B=None, metadata=None):
         self.directory = directory
@@ -285,10 +284,13 @@ class HistogramGenerator:
         for index, e in enumerate(data):
             if (e == MAX):
                 targetBucket = self.bucketCount-1
-            elif e != 'NaN':
+            try:
                 targetBucket = math.floor((e - MIN) / stepSize)
-            buckets[targetBucket].append(index)
-            bucketsSize[targetBucket]+=1
+                buckets[targetBucket].append(index)
+                bucketsSize[targetBucket]+=1
+            except:
+                pass
+                
         return {"histogram":list(bucketsSize.values()), "selections":list(buckets.values()), "range":[int(MIN),int(MAX)]}
 
     def generate(self):
