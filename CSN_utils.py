@@ -91,10 +91,11 @@ class NumpyEncoder(json.JSONEncoder):
     
     
 class ImageSpriteGenerator:
-    def __init__(self, directory, spriteSize=2048, spriteRows=32, imageFolder=None, files=None):
+    def __init__(self, directory, spriteSize=2048, spriteRows=32, imageFolder=None, files=None, reduced_colors=False):
         self.directory = directory
         self.imageFolder = imageFolder
         self.files = files
+        self.reduced_colors = reduced_colors
         self.spriteSize = spriteSize
         self.spriteRows = spriteRows
         self.columns = spriteRows
@@ -143,8 +144,9 @@ class ImageSpriteGenerator:
                 result.paste(r_result, (x, y, x + w, y + h))
             result = result.resize((self.spriteSize, self.spriteSize), Image.LANCZOS)  # Use LANCZOS filter for better image quality
             
-            # convert to 256 colors for faster loading online
-            result = result.convert("P", palette=Image.WEB, dither=Image.FLOYDSTEINBERG)           
+            if self.reduced_colors == True:
+                # convert to 256 colors for faster loading online
+                result = result.convert("P", palette=Image.WEB, dither=Image.FLOYDSTEINBERG)           
             result.save(f'build/datasets/{self.directory}/tile_{spriteNum}.png', "PNG", optimize=True) 
             
              
