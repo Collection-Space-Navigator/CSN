@@ -78,7 +78,7 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 <a href="https://var-mar.info/" target="_blank">Mar Canet Solà</a>
 
 ## Gallery examples using CSN
-* The Kinokroonika CSN: <a href="https://csn.kinokroonika.ee/" target="_blank">https://csn.kinokroonika.ee/</a>
+* Kinokroonika project CSN - Visualizing Estonian newsreels in the 20th century: <a href="https://csn.kinokroonika.ee/" target="_blank">https://csn.kinokroonika.ee/</a>
 
 If you have used CSN it in your project, email us, and we will publish it here.
 
