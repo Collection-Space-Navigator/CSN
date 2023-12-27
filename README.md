@@ -85,5 +85,6 @@ Tillmann Ohm and Mar Canet Solà designed, co-authored, and developed the Collec
 ## CSN Gallery
 List of projects using this tool:
 * Kinokroonika project CSN - Visualizing Estonian newsreels in the 20th century: <a href="https://csn.kinokroonika.ee/" target="_blank">https://csn.kinokroonika.ee/</a>
+* Datalab CSN, an interactive visualization interface that allows visitors to explore the collections of Badisches Landesmuseum Karlsruhe and Allard Pierson Amsterdam: <a href="https://datalab.landesmuseum.de/CSN/" target="_blank">https://datalab.landesmuseum.de/CSN/</a>
 
 If you have used CSN it in your project, email us, and we will publish it here.
