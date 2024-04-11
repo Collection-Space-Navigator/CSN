@@ -10,6 +10,7 @@ The CSN code is partly based on the [umap-explorer](https://github.com/GrantCust
 
 # Project Links
 [🖥️ Online demo](https://collection-space-navigator.github.io/CSN)    
+[📄 Paper published VINCI '23](https://doi.org/10.1145/3615522.3615546)  
 [📄 Paper on arxiv.org](http://arxiv.org/abs/2305.06809)  
 [🌐 Project website](https://collection-space-navigator.github.io)  
 
