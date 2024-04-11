@@ -63,6 +63,16 @@ See the section about <a href="https://facebook.github.io/create-react-app/docs/
 
 ## Citation
 ```
+@inproceedings{ohm2023collection,
+  title={Collection space navigator: an interactive visualization interface for multidimensional datasets},
+  author={Ohm, Tillmann and Canet Sola, Mar and Karjus, Andres and Schich, Maximilian},
+  booktitle={Proceedings of the 16th International Symposium on Visual Information Communication and Interaction},
+  pages={1--5},
+  year={2023}
+}
+```
+
+```
 @misc{ohm2023collection,
       title={Collection Space Navigator: An Interactive Visualization Interface for Multidimensional Datasets}, 
       author={Tillmann Ohm and Mar Canet Solà and Andres Karjus and Maximilian Schich},
