@@ -8,11 +8,16 @@ The Collection Space Navigator (CSN) is an explorative visualization tool for re
 
 The CSN code is partly based on the [umap-explorer](https://github.com/GrantCuster/umap-explorer) by [GrantCuster](https://github.com/GrantCuster).
 
-# Project Links
-[🖥️ Online demo](https://collection-space-navigator.github.io/CSN)    
-[📄 Paper published VINCI '23](https://doi.org/10.1145/3615522.3615546)  
-[📄 Paper on arxiv.org](http://arxiv.org/abs/2305.06809)  
 [🌐 Project website](https://collection-space-navigator.github.io)  
+
+# Online Demos
+[🖥️ WikiArt & Co: CSN demo](https://collection-space-navigator.github.io/CSN)    
+[🖥️ Esonian Newsreels: Kinokroonika CSN](https://csn.kinokroonika.ee/)    
+[🖥️ Museum Collections: Datalab CSN](https://datalab.landesmuseum.de/CSN)    
+
+# Papers
+[📄 VINCI '23](https://doi.org/10.1145/3615522.3615546)  
+[📄 arxiv.org](http://arxiv.org/abs/2305.06809)  
 
 
 ## Getting Started
