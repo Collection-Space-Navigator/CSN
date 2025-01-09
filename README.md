@@ -12,7 +12,7 @@ The CSN code is partly based on the [umap-explorer](https://github.com/GrantCust
 
 # Online Demos
 [🖥️ WikiArt & Co: CSN demo](https://collection-space-navigator.github.io/CSN)    
-[🖥️ Esonian Newsreels: Kinokroonika CSN](https://csn.kinokroonika.ee/)    
+[🖥️ Estonian Newsreels: Kinokroonika CSN](https://csn.kinokroonika.ee/)    
 [🖥️ Museum Collections: Datalab CSN](https://datalab.landesmuseum.de/CSN)    
 
 # Papers
