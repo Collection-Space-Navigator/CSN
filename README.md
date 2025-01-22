@@ -13,7 +13,7 @@ The CSN code is partly based on the [umap-explorer](https://github.com/GrantCust
 # Online Demos
 [🖥️ WikiArt & Co: CSN demo](https://collection-space-navigator.github.io/CSN)    
 [🖥️ Estonian Newsreels: Kinokroonika CSN](https://csn.kinokroonika.ee/)    
-[🖥️ Museum Collections: Datalab CSN](https://datalab.landesmuseum.de/CSN) 
+[🖥️ Museum Collections: Datalab CSN](https://datalab.landesmuseum.de/CSN)  
 [🖥️ Dashboard of the paper "Expertise elevates AI usage: experimental evidence comparing laypeople and professional artists"](https://artistlaypeopleaiexperiment.github.io/)
 
 # Papers
