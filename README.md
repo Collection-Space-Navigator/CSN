@@ -66,7 +66,7 @@ It bundles React in production mode and optimizes the build for the best perform
 The build is minified and the filenames include the hashes.    
 Your app is ready to be deployed!    
     
-See the section about <a href="https://facebook.github.io/create-react-app/docs/deployment" target="_blank">deployment</a> for more information.
+See the section about <a href="https://facebook.github.io/create-react-app/docs/deployment" target="_blank">deployment</a> for more information. Note: it is important to add a URL to "homepage" in package.json and change the Route path in src/App.js if necessary!
 
 ## Citation
 ```
